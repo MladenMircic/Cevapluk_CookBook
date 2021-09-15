@@ -1,20 +1,20 @@
 $(document).ready(function () {
 
-    let appetizer = []
-    let main_course = []
-    let dessert = []
-    let snack = []
+    let appetizer = [];
+    let main_course = [];
+    let dessert = [];
+    let snack = [];
 
     initializeStorage();
 
-    function find_recipe(type_of_food, name) {
-        let found = false;
+    function find_recipes(type_of_food, name) {
+        let found = [];
         switch (type_of_food) {
             case 'Appetizer': {
                 appetizer.forEach(food => {
+                    alert(JSON.stringify(food));
                     if (food.head.toLowerCase().includes(name.toLowerCase())) {
-                        localStorage.setItem("food-to-show", JSON.stringify(food));
-                        found = true;
+                        found.push(food);
                         return;
                     }
                 });
@@ -23,8 +23,7 @@ $(document).ready(function () {
             case 'Main course': {
                 main_course.forEach(food => {
                     if (food.head.toLowerCase().includes(name.toLowerCase())) {
-                        localStorage.setItem("food-to-show", JSON.stringify(food));
-                        found = true;
+                        found.push(food);
                         return;
                     }
                 });
@@ -33,7 +32,7 @@ $(document).ready(function () {
             case 'Dessert': {
                 dessert.forEach(food => {
                     if (food.head.toLowerCase().includes(name.toLowerCase())) {
-                        localStorage.setItem("food-to-show", JSON.stringify(food));
+                        found.push(food);
                         return;
                     }
                 });
@@ -42,7 +41,7 @@ $(document).ready(function () {
             case 'Snack': {
                 snack.forEach(food => {
                     if (food.head.toLowerCase().includes(name.toLowerCase())) {
-                        localStorage.setItem("food-to-show", JSON.stringify(food));
+                        found.push(food);
                         return;
                     }
                 });
@@ -61,8 +60,12 @@ $(document).ready(function () {
             return;
         }
 
-        if (!find_recipe(type_of_food, name))
+        let found_recipes = find_recipes(type_of_food, name);
+
+        if (found_recipes.length == 0)
             localStorage.setItem("error-msg", "No results!");
+        else
+            localStorage.setItem("recipes-found", JSON.stringify(found_recipes));
         
     });
 
@@ -75,9 +78,63 @@ $(document).ready(function () {
         else
             $(".error-text").html('');
 
-        if (localStorage.getItem("food-to-show") != null) {
-            let recipe = JSON.parse(localStorage.getItem("food-to-show"));
-            $("#head").html(recipe.head);
+        if (localStorage.getItem("recipes-found") != null) {
+            let recipes = JSON.parse(localStorage.getItem("recipes-found"));
+
+            recipes.forEach(recipe => {
+                let container_image = $("<div></div>").addClass("container");
+                let row_image = $("<div></div>").addClass("row");
+                let col_image = $("<div></div>").addClass("col-12");
+                let recipe_image = $("<img>").attr("src", "img/bg-img/bg5.jpg").attr("alt", "");
+
+                col_image.append(recipe_image);
+                row_image.append(col_image);
+                container_image.append(row_image);
+
+                let recipe_content = $("<div></div>").addClass("receipe-content-area");
+                let container_recipe = $("<div></div>").addClass("container");
+                let row_recipe = $("<div></div>").addClass("row");
+                let col_recipe_heading_div = $("<div></div>").addClass("col-12 col-md-8");
+
+                let recipe_heading = $("<div></div>").addClass("receipe-headline my-5");
+                let date = $("<span></span>").html("January 05, 2021");
+                let heading = $("<h2></h2>").html(recipe.head);
+                let recipe_duration = $("<div></div>").addClass("receipe-duration");
+                let prep_time = $("<h6></h6>").html("Prep: " + recipe.prep);
+                let cook_time = $("<h6></h6>").html("Cook: " + recipe.cook);
+                let portions = $("<h6></h6>").html("Yields: " + recipe.portions);
+
+                let rating_div = $("<div></div>").addClass("col-12 col-md-4");
+                let recipe_rating = $("<div></div>").addClass("receipe-ratings text-right my-5");
+                let stars = $("<div></div>").addClass("ratings");
+
+                let recipe_stars = recipe.stars;
+                for (let i = 0; i < 5; i++) {
+                    let star = "";
+                    if (recipe_stars > 0)
+                        star = $("<i></i>").addClass("fa fa-star").attr("aria-hidden", "true");
+                    else
+                        star = $("<i></i>").addClass("fa fa-star-o").attr("aria-hidden", "true");
+                    recipe_stars--;
+                    stars.append(star);
+                }
+
+                recipe_rating.append(stars);
+                rating_div.append(recipe_rating);
+
+                recipe_duration.append(prep_time).append(cook_time).append(portions);
+                recipe_heading.append(date).append(heading).append(recipe_duration);
+                col_recipe_heading_div.append(recipe_heading);
+                row_recipe.append(col_recipe_heading_div).append(rating_div);
+                container_recipe.append(row_recipe);
+                recipe_content.append(container_recipe);
+
+                $("#recipes").append(container_image).append(recipe_content);
+            });
+
+            localStorage.removeItem("recipes-found");
+
+            /*$("#head").html(recipe.head);
             $("#prep").html("Prep: " + recipe.prep);
             $("#cook").html("Cook: " + recipe.cook);
             $("#portions").html("Yields: " + recipe.portions);
@@ -105,7 +162,7 @@ $(document).ready(function () {
                 $(".ingredients").append(whole_ingredient);
             });
 
-            localStorage.removeItem("food-to-show");
+            localStorage.removeItem("food-to-show");*/
         }
 
 
@@ -130,7 +187,28 @@ $(document).ready(function () {
                         "qhuehroqenfip",
                         "poomefpwn",
                         "iwnoginweg"
-                    ]
+                    ],
+                    stars: 3
+                },
+                {
+                    head: "Pork n Beef",
+                    prep: "sgbsgfb",
+                    cook: "sfgbsfgb",
+                    portions: "sfgnsfgn",
+                    steps: [
+                        "ergergerg",
+                        "ergergerg",
+                        "irngiobpeitpbn",
+                        "oijeoqof"
+                    ],
+                    ingredients: [
+                        "jnr gberugj",
+                        "ihweiohfwoijeg",
+                        "qhuehroqenfip",
+                        "poomefpwn",
+                        "iwnoginweg"
+                    ],
+                    stars: 5
                 }
             ];
 
