@@ -16,8 +16,28 @@
     margin-top: 2%;
 }
 
+@keyframes fade {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
+}
+
 .flag {
     width: 50px;
     height: 50px;
     cursor: pointer;
+}
+
+.flag:hover {
+    animation-name: fade;
+    animation-duration: 500ms;
+    opacity: 0.5;
+}
+
+.recipe-img {
+    width: 400px;
+    height: 400px;
 }
