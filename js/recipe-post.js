@@ -5,7 +5,7 @@ $(document).ready(function () {
     let dessert = [];
     let snack = [];
 
-    initializeStorage();
+    initializeStorageAndPage();
 
     function find_recipes(type_of_food, name) {
         let found = [];
@@ -119,7 +119,7 @@ $(document).ready(function () {
         }
     });
 
-    function initializeStorage() {
+    function initializeStorageAndPage() {
 
         if (localStorage.getItem("error-msg") != null) {
             $(".error-text").html(localStorage.getItem("error-msg"));
@@ -134,8 +134,8 @@ $(document).ready(function () {
             recipes.forEach(recipe => {
                 let container_image = $("<div></div>").addClass("container");
                 let row_image = $("<div></div>").addClass("row");
-                let col_image = $("<div></div>").addClass("col-12");
-                let recipe_image = $("<img>").attr("src", "img/bg-img/bg5.jpg").attr("alt", "");
+                let col_image = $("<div></div>").addClass("col-12 recipe-image");
+                let recipe_image = $("<img>").attr("src", "img/" + recipe.head + ".jpg").attr("alt", "");
 
                 col_image.append(recipe_image);
                 row_image.append(col_image);
@@ -185,36 +185,6 @@ $(document).ready(function () {
             });
 
             localStorage.removeItem("recipes-found");
-
-            /*$("#head").html(recipe.head);
-            $("#prep").html("Prep: " + recipe.prep);
-            $("#cook").html("Cook: " + recipe.cook);
-            $("#portions").html("Yields: " + recipe.portions);
-
-            $("#preparation").html('');
-            let counter = 1;
-            recipe.steps.forEach(step => {
-                let whole_step = $("<div></div>").addClass("single-preparation-step d-flex");
-                let number = $("<h4></h4>").html("0" + counter + ".");
-                counter++;
-                let cooking_step = $("<p></p>").html(step);
-                whole_step.append(number).append(cooking_step);
-                $("#preparation").append(whole_step);
-            });
-
-            counter = 1;
-            $(".ingredients").html($("<h4></h4>").html("Ingredients"));
-            recipe.ingredients.forEach(ingredient => {
-                let whole_ingredient = $("<div></div>").addClass("custom-control custom-checkbox");
-                let input_checkbox = $("<input>").addClass("custom-control-input").attr("type", "checkbox").attr("id", "customCheck" + counter);
-                let ingredient_label = $("<label></label>").addClass("custom-control-label").attr("for", "customCheck" + counter).html(ingredient);
-                counter++;
-
-                whole_ingredient.append(input_checkbox).append(ingredient_label);
-                $(".ingredients").append(whole_ingredient);
-            });
-
-            localStorage.removeItem("food-to-show");*/
         }
 
         if (localStorage.getItem("recipe-to-show") != null) {
@@ -274,12 +244,9 @@ $(document).ready(function () {
             let counter = 1;
             recipe.steps.forEach(step => {
                 let whole_step = $("<div></div>").addClass("single-preparation-step d-flex");
-                
+
                 let number_step = "";
-                if (counter < 10)
-                    number_step = "0" + counter + ".";
-                else
-                    number_step = counter + ".";
+                number_step = (counter < 10 ? "0" : "") + counter + ".";
 
                 let number = $("<h4></h4>").html(number_step);
                 counter++;
@@ -445,7 +412,7 @@ $(document).ready(function () {
                     stars: 2
                 }, 
                 {
-                    head: "Karadjordje’s Steak",
+                    head: "Karadjordje Steak",
                     prep: "1 hr",
                     cook: "15 mins",
                     portions: "4 Servings",

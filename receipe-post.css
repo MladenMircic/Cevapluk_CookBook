@@ -19,3 +19,7 @@
     color: green;
 
 }
+
+.recipe-image img {
+    width: 100%;
+}
