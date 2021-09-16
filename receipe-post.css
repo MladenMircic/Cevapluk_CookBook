@@ -3,3 +3,23 @@
     text-align: center;
     margin-bottom: 20px;
 }
+
+@keyframes color-change {
+    from {
+        color: currentColor;
+    }
+    to {
+        color: green;
+    }
+}
+
+.recipe-link:hover {
+    animation-name: color-change;
+    animation-duration: 500ms;
+    color: green;
+
+}
+
+.recipe-image img {
+    width: 100%;
+}
