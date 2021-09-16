@@ -5,13 +5,44 @@ $(document).ready(function () {
     let dessert = [];
     let snack = [];
 
-    initializeStorageAndPage();
+    initializePage();
 
     function find_recipes(type_of_food, name) {
         let found = [];
-        switch (type_of_food) {
+        if (type_of_food == 'All recipes categories') {
+            
+            appetizer.forEach(food => {
+                if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
+                    found.push(food);
+            });
+
+            main_course.forEach(food => {
+                if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
+                    found.push(food);
+            });
+
+            dessert.forEach(food => {
+                if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
+                    found.push(food);
+            });
+
+            snack.forEach(food => {
+                if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
+                    found.push(food);
+            });
+
+            for (let i = found.length - 1; i > 0; i--) {
+                let change_ind = Math.floor(Math.random() * (i + 1));
+                let temp = found[i];
+                found[i] = found[change_ind];
+                found[change_ind] = temp;
+            }
+
+            return found;
+        }
+
+        switch (type_of_food != '' ? type_of_food : localStorage.getItem("food-type")) {
             case 'Appetizer': {
-                localStorage.setItem("food-type", "Appetizer");
                 appetizer.forEach(food => {
                     if (food.head.toLowerCase().includes(name.toLowerCase())) {
                         found.push(food);
@@ -21,7 +52,6 @@ $(document).ready(function () {
                 break;
             }
             case 'Main course': {
-                localStorage.setItem("food-type", "Main course");
                 main_course.forEach(food => {
                     if (food.head.toLowerCase().includes(name.toLowerCase())) {
                         found.push(food);
@@ -31,7 +61,6 @@ $(document).ready(function () {
                 break;
             }
             case 'Dessert': {
-                localStorage.setItem("food-type", "Dessert");
                 dessert.forEach(food => {
                     if (food.head.toLowerCase().includes(name.toLowerCase())) {
                         found.push(food);
@@ -41,7 +70,6 @@ $(document).ready(function () {
                 break;
             }
             case 'Snack': {
-                localStorage.setItem("food-type", "Snack");
                 snack.forEach(food => {
                     if (food.head.toLowerCase().includes(name.toLowerCase())) {
                         found.push(food);
@@ -58,8 +86,7 @@ $(document).ready(function () {
         let type_of_food = $($(".list").children(".selected")).html();
         let name = $("#food-name").val();
 
-        if (type_of_food == 'All recipes categories' || name == '') {
-            localStorage.setItem("error-msg", 'You have to fill both fields!');
+        if (type_of_food == 'All recipes categories' && name == '') {
             return;
         }
 
@@ -74,126 +101,61 @@ $(document).ready(function () {
 
     $(".recipe-link").click(function() {
         let recipe_name = $(this).html();
-        let food_type = localStorage.getItem("food-type");
+        let found = false;
+        appetizer.forEach(food => {
+            localStorage.setItem("food-type", "Appetizer");
+            if (food.head == recipe_name) {
+                localStorage.setItem("recipe-to-show", JSON.stringify(food));
+                found = true;
+                return;
+            }
+        });
 
-        switch (food_type) {
-            case 'Appetizer': {
-                appetizer.forEach(food => {
-                    if (food.head == recipe_name) {
-                        localStorage.setItem("recipe-to-show", JSON.stringify(food));
-                        return;
-                    }
-                });
-                break;
+        if (found)
+            return;
+
+        main_course.forEach(food => {
+            localStorage.setItem("food-type", "Main course");
+            if (food.head == recipe_name) {
+                localStorage.setItem("recipe-to-show", JSON.stringify(food));
+                found = true;
+                return;
             }
-            case 'Main course': {
-                localStorage.setItem("food-type", "Main course");
-                main_course.forEach(food => {
-                    if (food.head == recipe_name) {
-                        localStorage.setItem("recipe-to-show", JSON.stringify(food));
-                        return;
-                    }
-                });
-                break;
+        });
+
+        if (found)
+            return;
+
+        dessert.forEach(food => {
+            localStorage.setItem("food-type", "Dessert");
+            if (food.head == recipe_name) {
+                localStorage.setItem("recipe-to-show", JSON.stringify(food));
+                found = true;
+                return;
             }
-            case 'Dessert': {
-                localStorage.setItem("food-type", "Dessert");
-                dessert.forEach(food => {
-                    if (food.head == recipe_name) {
-                        localStorage.setItem("recipe-to-show", JSON.stringify(food));
-                        return;
-                    }
-                });
-                break;
+        });
+
+        if (found)
+            return;
+
+        snack.forEach(food => {
+            localStorage.setItem("food-type", "Snack");
+            if (food.head == recipe_name) {
+                localStorage.setItem("recipe-to-show", JSON.stringify(food));
+                found = true;
+                return;
             }
-            case 'Snack': {
-                localStorage.setItem("food-type", "Snack");
-                snack.forEach(food => {
-                    if (food.head == recipe_name) {
-                        localStorage.setItem("recipe-to-show", JSON.stringify(food));
-                        return;
-                    }
-                });
-                break;
-            }
-        }
+        });
+
     });
 
-    function initializeStorageAndPage() {
+    function append_recipes(recipes) {
 
-        if (localStorage.getItem("error-msg") != null) {
-            $(".error-text").html(localStorage.getItem("error-msg"));
-            localStorage.removeItem("error-msg");
-        }
-        else
-            $(".error-text").html('');
-
-        if (localStorage.getItem("recipes-found") != null) {
-            let recipes = JSON.parse(localStorage.getItem("recipes-found"));
-
-            recipes.forEach(recipe => {
-                let container_image = $("<div></div>").addClass("container");
-                let row_image = $("<div></div>").addClass("row");
-                let col_image = $("<div></div>").addClass("col-12 recipe-image");
-                let recipe_image = $("<img>").attr("src", "img/" + recipe.head + ".jpg").attr("alt", "");
-
-                col_image.append(recipe_image);
-                row_image.append(col_image);
-                container_image.append(row_image);
-
-                let recipe_content = $("<div></div>").addClass("receipe-content-area");
-                let container_recipe = $("<div></div>").addClass("container");
-                let row_recipe = $("<div></div>").addClass("row");
-                let col_recipe_heading_div = $("<div></div>").addClass("col-12 col-md-8");
-
-                let recipe_heading = $("<div></div>").addClass("receipe-headline my-5");
-                let date = $("<span></span>").html("January 05, 2021");
-                let heading_link = $("<a></a>").attr("href", "receipe-post.html");
-                let heading = $("<h2></h2>").html(recipe.head).addClass("recipe-link");
-                let recipe_duration = $("<div></div>").addClass("receipe-duration");
-                let prep_time = $("<h6></h6>").html("Prep: " + recipe.prep);
-                let cook_time = $("<h6></h6>").html("Cook: " + recipe.cook);
-                let portions = $("<h6></h6>").html("Yields: " + recipe.portions);
-
-                let rating_div = $("<div></div>").addClass("col-12 col-md-4");
-                let recipe_rating = $("<div></div>").addClass("receipe-ratings text-right my-5");
-                let stars = $("<div></div>").addClass("ratings");
-
-                let recipe_stars = recipe.stars;
-                for (let i = 0; i < 5; i++) {
-                    let star = "";
-                    if (recipe_stars > 0)
-                        star = $("<i></i>").addClass("fa fa-star").attr("aria-hidden", "true");
-                    else
-                        star = $("<i></i>").addClass("fa fa-star-o").attr("aria-hidden", "true");
-                    recipe_stars--;
-                    stars.append(star);
-                }
-
-                recipe_rating.append(stars);
-                rating_div.append(recipe_rating);
-
-                heading_link.append(heading)
-                recipe_duration.append(prep_time).append(cook_time).append(portions);
-                recipe_heading.append(date).append(heading_link).append(recipe_duration);
-                col_recipe_heading_div.append(recipe_heading);
-                row_recipe.append(col_recipe_heading_div).append(rating_div);
-                container_recipe.append(row_recipe);
-                recipe_content.append(container_recipe);
-
-                $("#recipes").append(container_image).append(recipe_content);
-            });
-
-            localStorage.removeItem("recipes-found");
-        }
-
-        if (localStorage.getItem("recipe-to-show") != null) {
-            let recipe = JSON.parse(localStorage.getItem("recipe-to-show"));
-
+        recipes.forEach(recipe => {
             let container_image = $("<div></div>").addClass("container");
             let row_image = $("<div></div>").addClass("row");
-            let col_image = $("<div></div>").addClass("col-12");
-            let recipe_image = $("<img>").attr("src", "img/bg-img/bg5.jpg").attr("alt", "");
+            let col_image = $("<div></div>").addClass("col-12 recipe-image");
+            let recipe_image = $("<img>").attr("src", "img/" + recipe.head + ".jpg").attr("alt", "");
 
             col_image.append(recipe_image);
             row_image.append(col_image);
@@ -206,6 +168,7 @@ $(document).ready(function () {
 
             let recipe_heading = $("<div></div>").addClass("receipe-headline my-5");
             let date = $("<span></span>").html("January 05, 2021");
+            let heading_link = $("<a></a>").attr("href", "receipe-post.html");
             let heading = $("<h2></h2>").html(recipe.head).addClass("recipe-link");
             let recipe_duration = $("<div></div>").addClass("receipe-duration");
             let prep_time = $("<h6></h6>").html("Prep: " + recipe.prep);
@@ -230,56 +193,19 @@ $(document).ready(function () {
             recipe_rating.append(stars);
             rating_div.append(recipe_rating);
 
+            heading_link.append(heading)
             recipe_duration.append(prep_time).append(cook_time).append(portions);
-            recipe_heading.append(date).append(heading).append(recipe_duration);
+            recipe_heading.append(date).append(heading_link).append(recipe_duration);
             col_recipe_heading_div.append(recipe_heading);
             row_recipe.append(col_recipe_heading_div).append(rating_div);
             container_recipe.append(row_recipe);
             recipe_content.append(container_recipe);
 
             $("#recipes").append(container_image).append(recipe_content);
+        });
+    }
 
-            let preparation_row = $("<div></div>").addClass("row");
-            let preparation_col = $("<div></div>").addClass("col-12 col-lg-8");
-            let counter = 1;
-            recipe.steps.forEach(step => {
-                let whole_step = $("<div></div>").addClass("single-preparation-step d-flex");
-
-                let number_step = "";
-                number_step = (counter < 10 ? "0" : "") + counter + ".";
-
-                let number = $("<h4></h4>").html(number_step);
-                counter++;
-                let cooking_step = $("<p></p>").html(step);
-                whole_step.append(number).append(cooking_step);
-                preparation_col.append(whole_step);
-            });
-            preparation_row.append(preparation_col);
-
-            let ingredients_col = $("<div></div>").addClass("col-12 col-lg-4");
-            let ingredients = $("<div></div>").addClass("ingredients");
-
-            ingredients.html($("<h4></h4>").html("Ingredients"));
-            counter = 1;
-            $(".ingredients").html($("<h4></h4>").html("Ingredients"));
-                recipe.ingredients.forEach(ingredient => {
-                let whole_ingredient = $("<div></div>").addClass("custom-control custom-checkbox");
-                let input_checkbox = $("<input>").addClass("custom-control-input").attr("type", "checkbox").attr("id", "customCheck" + counter);
-                let ingredient_label = $("<label></label>").addClass("custom-control-label").attr("for", "customCheck" + counter).html(ingredient);
-                counter++;
-
-                whole_ingredient.append(input_checkbox).append(ingredient_label);
-                ingredients.append(whole_ingredient);
-            });
-
-            ingredients_col.append(ingredients);
-            preparation_row.append(ingredients_col);
-            container_recipe.append(preparation_row);
-
-            localStorage.removeItem("recipe-to-show");
-            localStorage.removeItem("food-type");
-        }
-
+    function initializeStorage() {
         if (localStorage.getItem("appetizer") != null)
             appetizer = JSON.parse(localStorage.getItem("appetizer"));
         else {
@@ -595,6 +521,123 @@ $(document).ready(function () {
             ];
 
             localStorage.setItem("snack", JSON.stringify(snack));
+        }
+    }
+
+    function initializePage() {
+
+        initializeStorage();
+
+        if (localStorage.getItem("error-msg") != null) {
+            $(".error-text").html(localStorage.getItem("error-msg"));
+            localStorage.removeItem("error-msg");
+        }
+        else
+            $(".error-text").html('');
+
+        let recipes_found = localStorage.getItem("recipes-found");
+        let recipe_to_show = localStorage.getItem("recipe-to-show");
+
+        if (recipes_found == null && recipe_to_show == null) {
+            let recipes = find_recipes("All recipes categories", "");
+            append_recipes(recipes);
+        }
+        else if (recipes_found != null) {
+            let recipes = JSON.parse(recipes_found);
+            append_recipes(recipes);
+            localStorage.removeItem("recipes-found");
+        }
+        else if (localStorage.getItem("recipe-to-show") != null) {
+            let recipe = JSON.parse(localStorage.getItem("recipe-to-show"));
+
+            let container_image = $("<div></div>").addClass("container");
+            let row_image = $("<div></div>").addClass("row");
+            let col_image = $("<div></div>").addClass("col-12 recipe-image");
+            let recipe_image = $("<img>").attr("src", "img/" + recipe.head + ".jpg").attr("alt", "");
+
+            col_image.append(recipe_image);
+            row_image.append(col_image);
+            container_image.append(row_image);
+
+            let recipe_content = $("<div></div>").addClass("receipe-content-area");
+            let container_recipe = $("<div></div>").addClass("container");
+            let row_recipe = $("<div></div>").addClass("row");
+            let col_recipe_heading_div = $("<div></div>").addClass("col-12 col-md-8");
+
+            let recipe_heading = $("<div></div>").addClass("receipe-headline my-5");
+            let date = $("<span></span>").html("January 05, 2021");
+            let heading = $("<h2></h2>").html(recipe.head).addClass("recipe-link");
+            let recipe_duration = $("<div></div>").addClass("receipe-duration");
+            let prep_time = $("<h6></h6>").html("Prep: " + recipe.prep);
+            let cook_time = $("<h6></h6>").html("Cook: " + recipe.cook);
+            let portions = $("<h6></h6>").html("Yields: " + recipe.portions);
+
+            let rating_div = $("<div></div>").addClass("col-12 col-md-4");
+            let recipe_rating = $("<div></div>").addClass("receipe-ratings text-right my-5");
+            let stars = $("<div></div>").addClass("ratings");
+
+            let recipe_stars = recipe.stars;
+            for (let i = 0; i < 5; i++) {
+                let star = "";
+                if (recipe_stars > 0)
+                    star = $("<i></i>").addClass("fa fa-star").attr("aria-hidden", "true");
+                else
+                    star = $("<i></i>").addClass("fa fa-star-o").attr("aria-hidden", "true");
+                recipe_stars--;
+                stars.append(star);
+            }
+
+            recipe_rating.append(stars);
+            rating_div.append(recipe_rating);
+
+            recipe_duration.append(prep_time).append(cook_time).append(portions);
+            recipe_heading.append(date).append(heading).append(recipe_duration);
+            col_recipe_heading_div.append(recipe_heading);
+            row_recipe.append(col_recipe_heading_div).append(rating_div);
+            container_recipe.append(row_recipe);
+            recipe_content.append(container_recipe);
+
+            $("#recipes").append(container_image).append(recipe_content);
+
+            let preparation_row = $("<div></div>").addClass("row");
+            let preparation_col = $("<div></div>").addClass("col-12 col-lg-8");
+            let counter = 1;
+            recipe.steps.forEach(step => {
+                let whole_step = $("<div></div>").addClass("single-preparation-step d-flex");
+
+                let number_step = "";
+                number_step = (counter < 10 ? "0" : "") + counter + ".";
+
+                let number = $("<h4></h4>").html(number_step);
+                counter++;
+                let cooking_step = $("<p></p>").html(step);
+                whole_step.append(number).append(cooking_step);
+                preparation_col.append(whole_step);
+            });
+            preparation_row.append(preparation_col);
+
+            let ingredients_col = $("<div></div>").addClass("col-12 col-lg-4");
+            let ingredients = $("<div></div>").addClass("ingredients");
+
+            ingredients.html($("<h4></h4>").html("Ingredients"));
+            counter = 1;
+            $(".ingredients").html($("<h4></h4>").html("Ingredients"));
+                recipe.ingredients.forEach(ingredient => {
+                let whole_ingredient = $("<div></div>").addClass("custom-control custom-checkbox");
+                let input_checkbox = $("<input>").addClass("custom-control-input").attr("type", "checkbox").attr("id", "customCheck" + counter);
+                let ingredient_label = $("<label></label>").addClass("custom-control-label").attr("for", "customCheck" + counter).html(ingredient);
+                counter++;
+
+                whole_ingredient.append(input_checkbox).append(ingredient_label);
+                ingredients.append(whole_ingredient);
+            });
+
+            ingredients_col.append(ingredients);
+            preparation_row.append(ingredients_col);
+            container_recipe.append(preparation_row);
+
+            localStorage.removeItem("recipe-to-show");
+            localStorage.removeItem("food-type");
         }
     }
 })
