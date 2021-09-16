@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Ćevapluk-Recipes</title>
+    <title>Ćevapluk-Dodaj recept</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/SausageLogo.png">
@@ -56,7 +56,7 @@
                     <nav class="classy-navbar justify-content-between" id="deliciousNav">
 
                         <!-- Logo -->
-                        <a class="nav-brand" href="index-eng.html">
+                        <a class="nav-brand" href="index.html">
                             <div id="logoText">Ćevapluk</div>
                         </a>
 
@@ -76,18 +76,18 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index-eng.html">Home</a></li>
-                                    <li><a href="receipe-post.html">Recipes</a></li>
-                                    <li class="active"><a href="add-recipe.html">Add Recipe</a></li>
-                                    <li><a href="#">My Account</a></li>
-                                    <li><a href="about.html">About us</a></li>
+                                    <li><a href="index-srb.html">Početna</a></li>
+                                    <li><a href="receipe-post-srb.html">Recepti</a></li>
+                                    <li class="active"><a href="add-recipe-srb.html">Dodaj recept</a></li>
+                                    <li><a href="#">Moj nalog</a></li>
+                                    <li><a href="about-srb.html">O nama</a></li>
+                                    <li>
+                                        <img id="srb" class="flag" src="img/srbija_zastava.png" alt="">
+                                    </li>
+                                    <li>
+                                        <img id="eng" class="flag" src="img/amerika_zastava.png" alt="">
+                                    </li>
                                 </ul>
-
-                                <!-- Newsletter Form -->
-                                <div class="search-btn">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </div>
-
                             </div>
                             <!-- Nav End -->
                         </div>
@@ -104,7 +104,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-text text-center">
-                        <h2>Add New Recipe</h2>
+                        <h2>Dodaj novi recept</h2>
                     </div>
                 </div>
             </div>
@@ -120,31 +120,31 @@
                         <form action="#" method="post">
                             <div class="row">
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="food-type" placeholder="Food type (Appetizer, Main course, Dessert, Snack)">
+                                    <input type="text" class="form-control" id="food-type" placeholder="Tip hrane (Predjelo, Glavno jelo, Dezert, Uzina)">
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="food-name" placeholder="Food name">
+                                    <input type="text" class="form-control" id="food-name" placeholder="Naziv hrane">
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="preparation-time" placeholder="Preparation time">
+                                    <input type="text" class="form-control" id="preparation-time" placeholder="Vreme pripreme">
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="cooking-time" placeholder="Cooking time">
+                                    <input type="text" class="form-control" id="cooking-time" placeholder="Vreme kuvanja">
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="portions" placeholder="Portions">
+                                    <input type="text" class="form-control" id="portions" placeholder="Porcije">
                                 </div>
                                 <div class="col-12">
-                                    <textarea name="message" class="form-control" id="steps" cols="30" rows="10" placeholder="Steps (One step each line)"></textarea>
+                                    <textarea name="message" class="form-control" id="steps" cols="30" rows="10" placeholder="Koraci (svaki korak novi red)"></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <textarea name="message" class="form-control" id="ingredients" cols="30" rows="10" placeholder="Ingredients (One ingredient each line)"></textarea>
+                                    <textarea name="message" class="form-control" id="ingredients" cols="30" rows="10" placeholder="Sastojci (svaki sastojak novi red)"></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" class="form-control" id="stars" placeholder="Stars">
+                                    <input type="text" class="form-control" id="stars" placeholder="Zvezdice">
                                 </div>
                                 <div class="col-12 text-center">
-                                    <button class="btn delicious-btn mt-30 send-recipe-info" type="submit">Send</button>
+                                    <button class="btn delicious-btn mt-30 send-recipe-info" type="submit">Pošalji</button>
                                 </div>
                             </div>
                         </form>
@@ -191,6 +191,8 @@
     <script src="js/active.js"></script>
     <!-- Recipe Post js -->
     <script src="js/add-recipe.js"></script>
+    <!-- Language js -->
+    <script src="js/language.js"></script>
 </body>
 
 </html>
