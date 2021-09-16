@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Ćevapluk-Recipes</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/SausageLogo.png">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Custom CSS file -->
+    <link rel="stylesheet" href="custom.css">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <i class="circle-preloader"></i>
+        <img src="img/core-img/salad.png" alt="">
+    </div>
+
+    <!-- Search Wrapper -->
+    <div class="search-wrapper">
+        <!-- Close Btn -->
+        <div class="close-btn"><i class="fa fa-times" aria-hidden="true"></i></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <form action="#" method="post">
+                        <input type="search" name="search" placeholder="Type any keywords...">
+                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- Navbar Area -->
+        <div class="delicious-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="deliciousNav">
+
+                        <!-- Logo -->
+                        <a class="nav-brand" href="index.html">
+                            <div id="logoText">Ćevapluk</div>
+                        </a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="index-eng.html">Home</a></li>
+                                    <li><a href="receipe-post-eng.html">Recipes</a></li>
+                                    <li class="active"><a href="add-recipe-eng.html">Add Recipe</a></li>
+                                    <li><a href="#">My Account</a></li>
+                                    <li><a href="about-eng.html">About us</a></li>
+                                    <li>
+                                        <img id="srb" class="flag" src="img/srbija_zastava.png" alt="">
+                                    </li>
+                                    <li>
+                                        <img id="eng" class="flag" src="img/amerika_zastava.png" alt="">
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcumb Area Start ##### -->
+    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb3.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcumb-text text-center">
+                        <h2>Add New Recipe</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ##### Contact Area Start ##### -->
+    <div class="recipe-info section-padding-0-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-form-area">
+                        <form action="#" method="post">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="food-type" placeholder="Food type (Appetizer, Main course, Dessert, Snack)">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="food-name" placeholder="Food name">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="preparation-time" placeholder="Preparation time">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="cooking-time" placeholder="Cooking time">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="portions" placeholder="Portions">
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="message" class="form-control" id="steps" cols="30" rows="10" placeholder="Steps (One step each line)"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="message" class="form-control" id="ingredients" cols="30" rows="10" placeholder="Ingredients (One ingredient each line)"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="stars" placeholder="Stars">
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button class="btn delicious-btn mt-30 send-recipe-info" type="submit">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Contact Area End ##### -->
+
+     <!-- ##### Footer Area Start ##### -->
+     <footer class="footer-area">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
+                    <!-- Footer Social Info -->
+                    <div class="footer-social-info text-right">
+                        <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                        <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    </div>
+                    <p>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>, Mladen Mirčić & Isidora Milošević, Odsek za softversko inženjerstvo Elektrotehničkog fakulteta u Beogradu
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area Start ##### -->
+
+    <!-- ##### All Javascript Files ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+    <!-- Recipe Post js -->
+    <script src="js/add-recipe.js"></script>
+    <!-- Language js -->
+    <script src="js/language.js"></script>
+</body>
+
+</html>

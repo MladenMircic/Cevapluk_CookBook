@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Ćevapluk-Recipes</title>
+    <title>Ćevapluk-Dodaj recept</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/SausageLogo.png">
@@ -19,7 +19,6 @@
 
     <!-- Custom CSS file -->
     <link rel="stylesheet" href="custom.css">
-    <link rel="stylesheet" href="receipe-post.css">
 
 </head>
 
@@ -77,18 +76,18 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index-eng.html">Home</a></li>
-                                    <li class="active"><a href="receipe-post.html">Recipes</a></li>
-                                    <li><a href="add-recipe.html">Add Recipe</a></li>
-                                    <li><a href="#">My Account</a></li>
-                                    <li><a href="about.html">About us</a></li>
+                                    <li><a href="index-srb.html">Početna</a></li>
+                                    <li><a href="receipe-post-srb.html">Recepti</a></li>
+                                    <li class="active"><a href="add-recipe-srb.html">Dodaj recept</a></li>
+                                    <li><a href="#">Moj nalog</a></li>
+                                    <li><a href="about-srb.html">O nama</a></li>
+                                    <li>
+                                        <img id="srb" class="flag" src="img/srbija_zastava.png" alt="">
+                                    </li>
+                                    <li>
+                                        <img id="eng" class="flag" src="img/amerika_zastava.png" alt="">
+                                    </li>
                                 </ul>
-
-                                <!-- Newsletter Form -->
-                                <div class="search-btn">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </div>
-
                             </div>
                             <!-- Nav End -->
                         </div>
@@ -105,50 +104,59 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-text text-center">
-                        <h2>All the best recipes!</h2>
+                        <h2>Dodaj novi recept</h2>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- ##### Breadcumb Area End ##### -->
 
-    <div class="receipe-post-area section-padding-80">
-
-        <!-- Receipe Post Search -->
-        <div class="receipe-post-search mb-80">
-            <div class="container">
-                <form>
-                    <div class="row">
-                        <div class="error-text col-12">
-                        </div>
-                        <div class="col-12 col-lg-3">
-                            <select name="select1" id="select1">
-                                <option value="1">All recipes categories</option>
-                                <option value="1">Appetizer</option>
-                                <option value="1">Main course</option>
-                                <option value="1">Dessert</option>
-                                <option value="1">Snack</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-lg-3">
-                            <input id="food-name" type="search" name="search" placeholder="Search Recipes">
-                        </div>
-                        <div class="col-12 col-lg-3 text-right">
-                            <button type="submit" class="btn delicious-btn">Search</button>
-                        </div>
+    <!-- ##### Contact Area Start ##### -->
+    <div class="recipe-info section-padding-0-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="contact-form-area">
+                        <form action="#" method="post">
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="food-type" placeholder="Tip hrane (Predjelo, Glavno jelo, Dezert, Uzina)">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="food-name" placeholder="Naziv hrane">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="preparation-time" placeholder="Vreme pripreme">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="cooking-time" placeholder="Vreme kuvanja">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="portions" placeholder="Porcije">
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="message" class="form-control" id="steps" cols="30" rows="10" placeholder="Koraci (svaki korak novi red)"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="message" class="form-control" id="ingredients" cols="30" rows="10" placeholder="Sastojci (svaki sastojak novi red)"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="stars" placeholder="Zvezdice">
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button class="btn delicious-btn mt-30 send-recipe-info" type="submit">Pošalji</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-
-        <div id="recipes">
-        </div>
     </div>
-        
+    <!-- ##### Contact Area End ##### -->
 
-    <!-- ##### Footer Area Start ##### -->
-    <footer class="footer-area">
+     <!-- ##### Footer Area Start ##### -->
+     <footer class="footer-area">
         <div class="container h-100">
             <div class="row h-100">
                 <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
@@ -182,7 +190,9 @@
     <!-- Active js -->
     <script src="js/active.js"></script>
     <!-- Recipe Post js -->
-    <script src="js/recipe-post.js"></script>
+    <script src="js/add-recipe.js"></script>
+    <!-- Language js -->
+    <script src="js/language.js"></script>
 </body>
 
 </html>
