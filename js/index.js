@@ -385,13 +385,13 @@ $(document).ready(function() {
             let recipe_div = $("<div></div>").addClass("top-cta-content");
             let recipe_head = $("<h3></h3>").html(found_recipes[i].head);
             let recipe_descr = $("<h6></h6>").html("Simple &amp; Delicious");
-            let recipe_link = $("<a></a>").attr("href", "receipe-post.html").addClass("btn delicious-btn").html("See Full Recipe").attr("id", i + 1);
+            let recipe_link = $("<a></a>").attr("href", "receipe-post-" + localStorage.getItem("language") + ".html").addClass("btn delicious-btn recipe-button").html("See Full Recipe").attr("id", i + 1);
             recipe_div.append(recipe_head).append(recipe_descr).append(recipe_link);
             $("#" + (i + 1) + "-recipe").append(recipe_image).append(recipe_div);
         }
     }
 
-    $(".delicious-btn").click(function() {
+    $(".recipe-button").click(function() {
         localStorage.setItem("recipe-to-show", JSON.stringify(found_recipes[parseInt($(this).attr("id")) - 1]));
         window.open("receipe-post.html", "_self");
     });
