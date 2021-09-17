@@ -7,9 +7,22 @@ $(document).ready(function() {
 
     let found_recipes = [];
 
+    let my_account = {};
+
     initializePage();
 
     function initializeStorage() {
+        if (localStorage.getItem("my-account") != null)
+            my_account = JSON.parse(localStorage.getItem("my-account"));
+        else {
+            my_account = {
+                recipes: [],
+                comments: [],
+                stars: []
+            }
+            localStorage.setItem("my-account", JSON.stringify(my_account));
+        }
+
         if (localStorage.getItem("appetizer") != null)
             appetizer = JSON.parse(localStorage.getItem("appetizer"));
         else {
@@ -31,7 +44,21 @@ $(document).ready(function() {
                         "Nuts (choose 2)",
                         "Bread or crackers (choose 2-4)"
                     ],
-                    stars: 5
+                    stars: 5,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 },{
                     head: "Russian salad",
                     prep: "1 hr",
@@ -51,7 +78,21 @@ $(document).ready(function() {
                         "1 tablespoon chopped fresh parsley, or to taste",
                         "1/2 cup of mayonnaise, or to taste"
                     ],
-                    stars: 3
+                    stars: 3,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ],
                 },{
                     head: "Dreamy fruit dip",
                     prep: "15 mins",
@@ -67,7 +108,21 @@ $(document).ready(function() {
                         "1 carton (8 ounces) frozen whipped topping, thawed",
                         "Assorted fresh fruit"
                     ],
-                    stars: 4
+                    stars: 4,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 }
             ];
 
@@ -110,7 +165,21 @@ $(document).ready(function() {
                         "4-5 slices of smoked ham or bacon",
                         "1 and 2/3 cup (400ml) water + 2/3 cup (160ml)"
                     ],
-                    stars: 3
+                    stars: 3,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 }, 
                 {
                     head: "Stuffed Peppers",
@@ -139,7 +208,21 @@ $(document).ready(function() {
                         "1 c. shredded Monterey jack",
                         "Freshly chopped parsley, for garnish"
                     ],
-                    stars: 2
+                    stars: 2,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 }, 
                 {
                     head: "Karadjordje Steak",
@@ -160,7 +243,21 @@ $(document).ready(function() {
                         "bread crumbs",
                         "salt"
                     ],
-                    stars: 5
+                    stars: 5,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 }
             ];
 
@@ -197,7 +294,21 @@ $(document).ready(function() {
                         "600 grams all-purpose flour",
                         "Rose hip or apricot jam"
                     ],
-                    stars: 4
+                    stars: 4,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 },{
                     head: "Apple pie",
                     prep: "1 hr 30 mins",
@@ -222,7 +333,21 @@ $(document).ready(function() {
                         "1 large egg white",
                         "Additional sugar"
                     ],
-                    stars: 3
+                    stars: 3,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 },{
                     head: "Tart Cherry Pie",
                     prep: "2 hrs",
@@ -254,7 +379,21 @@ $(document).ready(function() {
                         "Dried unsweetened cranberries, currants or raisins (optional)",
                         "Water (optional)"
                     ],
-                    stars: 1
+                    stars: 1,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 }
             ];
 
@@ -279,7 +418,21 @@ $(document).ready(function() {
                         "An egg",
                         "Pretop (a lard-like substance left after roasting pork or lamb)"
                     ],
-                    stars: 4
+                    stars: 4,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 },
                 {
                     head: "Kajmak",
@@ -294,7 +447,21 @@ $(document).ready(function() {
                         "100 g hard feta cheese",
                         "100 gr sour cream"
                     ],
-                    stars: 5
+                    stars: 5,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 },
                 {
                     head: "Fruit Salad",
@@ -320,7 +487,21 @@ $(document).ready(function() {
                         "1 cups seedless grapes",
                         "2 cups blueberries"
                     ],
-                    stars: 5
+                    stars: 5,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 }
             ];
 
@@ -388,6 +569,33 @@ $(document).ready(function() {
             $("#" + (i + 1) + "-recipe").append(recipe_image).append(recipe_div);
         }
     }
+
+    $(".fa").on({
+        mouseenter: function() {
+            let all_stars = $($(this).parent());
+            let stars = all_stars.children(".fa");
+            let j = -1;
+    
+            for (let i = 0; i < stars.length; i++) {
+                let curr_star = $(stars[i]);
+                if (j == 1) {
+                    if(curr_star.hasClass("fa-star"))
+                        curr_star.removeClass("fa-star");
+                    curr_star.addClass("fa-star-o");
+                }
+                else {
+                    if(curr_star.hasClass("fa-star-o"))
+                        curr_star.removeClass("fa-star-o");
+                    curr_star.addClass("fa-star");
+                }
+                if (stars[i] == this)
+                    j = 1;
+            }
+        },
+        mouseleave: function() {
+
+        }
+    })
 
     $(".recipe-button").click(function() {
         localStorage.setItem("recipe-to-show", JSON.stringify(found_recipes[parseInt($(this).attr("id")) - 1]));

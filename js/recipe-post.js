@@ -4,6 +4,8 @@ $(document).ready(function () {
     let main_course = [];
     let dessert = [];
     let snack = [];
+    let my_account = {};
+    let i = 1;
 
     initializePage();
 
@@ -155,7 +157,18 @@ $(document).ready(function () {
             let container_image = $("<div></div>").addClass("container");
             let row_image = $("<div></div>").addClass("row");
             let col_image = $("<div></div>").addClass("col-12 recipe-image");
-            let recipe_image = $("<img>").attr("src", "img/" + recipe.head + ".jpg").attr("alt", "");
+            
+            const recipe_image_failsafe = new Image();
+
+            let recipe_image = $("<img>").attr("alt", "");
+
+            recipe_image_failsafe.src = "img/" + recipe.head + ".jpg";
+            recipe_image_failsafe.onload = () => {
+                recipe_image.attr("src", "img/" + recipe.head + ".jpg");
+            }
+            recipe_image_failsafe.onerror = () => {
+                recipe_image.attr("src", "img/blog-img/1.jpg");
+            }
 
             col_image.append(recipe_image);
             row_image.append(col_image);
@@ -205,7 +218,116 @@ $(document).ready(function () {
         });
     }
 
+    $("#submit-comment").click(function() {
+        let comment = $(".new-comment").val();
+        $(".new-comment").val('');
+
+        let comment_area = $("<div></div>").addClass("contact-form-area").css("opacity", 0);
+        let comment_text = $("<input>")
+                            .addClass("form-control")
+                            .attr("type", "text")
+                            .attr("disabled", "true")
+                            .attr("id", "comment" + i)
+                            .val(comment);
+
+        let author_data = $("<div></div>").addClass("author-section").attr("id", "by" + i);
+        let author_profile_link = $("<a></a>").attr("href", "#").addClass("author-name");
+        author_profile_link.html("Mladen Mircic");
+        author_data.append("by ").append(author_profile_link);
+
+        comment_area.append(comment_text).append(author_data);
+        $(".comment-section").append(comment_area);
+
+        ScrollReveal().reveal("#comment" + i, {
+            delay: 500,
+            distance: "100%",
+            origin: "left",
+            easing: "ease-in-out" 
+        })
+        ScrollReveal().reveal("#by" + i, {
+            delay: 500,
+            distance: "100%",
+            origin: "left",
+            easing: "ease-in-out"
+        });
+
+        setTimeout(function() {
+            comment_area.css("opacity", 1);
+        }, 500);
+        i++;
+        
+        set_new_comment(comment);
+    });
+
+    function set_new_comment(comment) {
+        my_account.comments.push({
+            head: $("#heading").html(),
+            comment: comment
+        });
+
+        let name = $("#heading").html();
+        my_account.recipes.forEach(recipe => {
+            alert("radi");
+            if (recipe.head == name) {
+                recipe.comments.push({
+                    head: $("#heading").html(),
+                    author: "Mladen Mircic",
+                    comment: comment
+                });
+                return;
+            }
+        });
+
+        localStorage.setItem("my-account", JSON.stringify(my_account));
+
+        appetizer.forEach(food => {
+            if (food.head == name) {
+                food.comments.push({
+                    author: "Mladen Mircic",
+                    comment: comment
+                });
+                localStorage.setItem("appetizer", JSON.stringify(appetizer));
+                return;
+            }
+        });
+
+        main_course.forEach(food => {
+            if (food.head == name) {
+                food.comments.push({
+                    author: "Mladen Mircic",
+                    comment: comment
+                });
+                localStorage.setItem("main_course", JSON.stringify(main_course));
+                return;
+            }
+        });
+
+        dessert.forEach(food => {
+            if (food.head == name) {
+                food.comments.push({
+                    author: "Mladen Mircic",
+                    comment: comment
+                });
+                localStorage.setItem("dessert", JSON.stringify(dessert));
+                return;
+            }
+        });
+
+        snack.forEach(food => {
+            if (food.head == name) {
+                food.comments.push({
+                    author: "Mladen Mircic",
+                    comment: comment
+                });
+                localStorage.setItem("snack", JSON.stringify(snack));
+                return;
+            }
+        });
+    }
+
     function initializeStorage() {
+        my_account = JSON.parse(localStorage.getItem("my-account"));
+
         if (localStorage.getItem("appetizer") != null)
             appetizer = JSON.parse(localStorage.getItem("appetizer"));
         else {
@@ -697,7 +819,18 @@ $(document).ready(function () {
         let container_image = $("<div></div>").addClass("container");
         let row_image = $("<div></div>").addClass("row");
         let col_image = $("<div></div>").addClass("col-12 recipe-image");
-        let recipe_image = $("<img>").attr("src", "img/" + recipe.head + ".jpg").attr("alt", "");
+
+        const recipe_image_failsafe = new Image();
+
+        let recipe_image = $("<img>").attr("alt", "");
+
+        recipe_image_failsafe.src = "img/" + recipe.head + ".jpg";
+        recipe_image_failsafe.onload = () => {
+            recipe_image.attr("src", "img/" + recipe.head + ".jpg");
+        }
+        recipe_image_failsafe.onerror = () => {
+            recipe_image.attr("src", "img/blog-img/1.jpg");
+        }
 
         col_image.append(recipe_image);
         row_image.append(col_image);
@@ -710,7 +843,7 @@ $(document).ready(function () {
 
         let recipe_heading = $("<div></div>").addClass("receipe-headline my-5");
         let date = $("<span></span>").html("January 05, 2021");
-        let heading = $("<h2></h2>").html(recipe.head).addClass("recipe-link");
+        let heading = $("<h2></h2>").attr("id", "heading").html(recipe.head);
         let recipe_duration = $("<div></div>").addClass("receipe-duration");
         let prep_time = $("<h6></h6>").html("Prep: " + recipe.prep);
         let cook_time = $("<h6></h6>").html("Cook: " + recipe.cook);
@@ -762,7 +895,6 @@ $(document).ready(function () {
         let comment_section = $("<div></div>").addClass("comment-section");
         preparation_col.append(comment_section);
 
-        let i = 1;
         recipe.comments.forEach(comment => {
             let comment_area = $("<div></div>").addClass("contact-form-area");
             let comment_text = $("<input>")
@@ -773,7 +905,7 @@ $(document).ready(function () {
                                 .val(comment.comment);
 
             let author_data = $("<div></div>").addClass("author-section").attr("id", "by" + i);
-            let author_profile_link = $("<a></a>").attr("href", "#");
+            let author_profile_link = $("<a></a>").attr("href", "#").addClass("author-name");
             author_profile_link.html(comment.author);
             author_data.append("by ").append(author_profile_link);
 
@@ -781,6 +913,18 @@ $(document).ready(function () {
             comment_section.append(comment_area);
             i++;
         });
+
+        let leave_comment_area = $("<div></div>").addClass("contact-form-area");
+        let leave_comment_text = $("<input>")
+                            .addClass("form-control new-comment")
+                            .attr("type", "text")
+                            .attr("placeholder", "Leave a comment")
+                            .css("margin-top", "15%");
+
+        let leave_comment_submit = $("<button></button>").attr("type", "submit").attr("id", "submit-comment").addClass("btn delicious-btn").html("Publish").css("margin-bottom", "5%");
+
+        leave_comment_area.append(leave_comment_text);
+        preparation_col.append(leave_comment_area).append(leave_comment_submit);
 
         preparation_row.append(preparation_col);
 
@@ -829,10 +973,20 @@ $(document).ready(function () {
                 origin: "left",
                 easing: "ease-in-out"
             });
-
-            if(i == comments.length - 1)
-                $($(comments[i]).parent()).css("margin-bottom", "5%");
         }
+
+        ScrollReveal().reveal(".new-comment", {
+            delay: 500,
+            distance: "100%",
+            origin: "left",
+            easing: "ease-in-out"          
+        });
+        ScrollReveal().reveal("#submit-comment", {
+            delay: 500,
+            distance: "100%",
+            origin: "left",
+            easing: "ease-in-out" 
+        })
     }
 
     function initializePage() {

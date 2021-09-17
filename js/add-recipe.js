@@ -26,21 +26,24 @@ $(document).ready(function() {
 
         let steps_arr = steps.split("\n");
         let ingredients_arr = ingredients.split("\n");
-        alert(steps_arr);
-        alert(ingredients_arr);
-
+        
         let new_recipe = {
             head: food_name,
             prep: preparation_time,
             cook: cooking_time,
             portions: portions,
-            steps: steps,
-            ingredients: ingredients,
-            stars: stars
+            steps: steps_arr,
+            ingredients: ingredients_arr,
+            stars: stars,
+            comments: []
         };
 
         food_type_arr.push(new_recipe);
         localStorage.setItem(food_type, JSON.stringify(food_type_arr));
+
+        let my_account = JSON.parse(localStorage.getItem("my-account"));
+        my_account.recipes.push(new_recipe);
+        localStorage.setItem("my-account", JSON.stringify(my_account));
     });
 
 });

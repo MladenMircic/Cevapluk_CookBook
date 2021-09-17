@@ -27,3 +27,15 @@
 .contact-form-area {
     margin-top: 5%;
 }
+
+.author-name {
+    text-decoration: underline;
+    text-decoration-color: gray;
+    color: gray;
+}
+
+.author-name:hover {
+    text-decoration: underline;
+    text-decoration-color: green;
+    color: green;
+}
