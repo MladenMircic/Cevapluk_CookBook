@@ -168,7 +168,7 @@ $(document).ready(function () {
 
             let recipe_heading = $("<div></div>").addClass("receipe-headline my-5");
             let date = $("<span></span>").html("January 05, 2021");
-            let heading_link = $("<a></a>").attr("href", "receipe-post.html");
+            let heading_link = $("<a></a>").attr("href", "receipe-post-" + localStorage.getItem("language") + ".html");
             let heading = $("<h2></h2>").html(recipe.head).addClass("recipe-link");
             let recipe_duration = $("<div></div>").addClass("receipe-duration");
             let prep_time = $("<h6></h6>").html("Prep: " + recipe.prep);
@@ -227,7 +227,21 @@ $(document).ready(function () {
                         "Nuts (choose 2)",
                         "Bread or crackers (choose 2-4)"
                     ],
-                    stars: 5
+                    stars: 5,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 },{
                     head: "Russian salad",
                     prep: "1 hr",
@@ -247,7 +261,21 @@ $(document).ready(function () {
                         "1 tablespoon chopped fresh parsley, or to taste",
                         "1/2 cup of mayonnaise, or to taste"
                     ],
-                    stars: 3
+                    stars: 3,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 },{
                     head: "Dreamy fruit dip",
                     prep: "15 mins",
@@ -263,7 +291,21 @@ $(document).ready(function () {
                         "1 carton (8 ounces) frozen whipped topping, thawed",
                         "Assorted fresh fruit"
                     ],
-                    stars: 4
+                    stars: 4,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 }
             ];
 
@@ -306,7 +348,21 @@ $(document).ready(function () {
                         "4-5 slices of smoked ham or bacon",
                         "1 and 2/3 cup (400ml) water + 2/3 cup (160ml)"
                     ],
-                    stars: 3
+                    stars: 3,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 }, 
                 {
                     head: "Stuffed Peppers",
@@ -335,7 +391,21 @@ $(document).ready(function () {
                         "1 c. shredded Monterey jack",
                         "Freshly chopped parsley, for garnish"
                     ],
-                    stars: 2
+                    stars: 2,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 }, 
                 {
                     head: "Karadjordje Steak",
@@ -356,7 +426,21 @@ $(document).ready(function () {
                         "bread crumbs",
                         "salt"
                     ],
-                    stars: 5
+                    stars: 5,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 }
             ];
 
@@ -393,7 +477,21 @@ $(document).ready(function () {
                         "600 grams all-purpose flour",
                         "Rose hip or apricot jam"
                     ],
-                    stars: 4
+                    stars: 4,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 },{
                     head: "Apple pie",
                     prep: "1 hr 30 mins",
@@ -418,7 +516,21 @@ $(document).ready(function () {
                         "1 large egg white",
                         "Additional sugar"
                     ],
-                    stars: 3
+                    stars: 3,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 },{
                     head: "Tart Cherry Pie",
                     prep: "2 hrs",
@@ -450,7 +562,21 @@ $(document).ready(function () {
                         "Dried unsweetened cranberries, currants or raisins (optional)",
                         "Water (optional)"
                     ],
-                    stars: 1
+                    stars: 1,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 }
             ];
 
@@ -475,7 +601,21 @@ $(document).ready(function () {
                         "An egg",
                         "Pretop (a lard-like substance left after roasting pork or lamb)"
                     ],
-                    stars: 4
+                    stars: 4,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 },
                 {
                     head: "Kajmak",
@@ -490,7 +630,21 @@ $(document).ready(function () {
                         "100 g hard feta cheese",
                         "100 gr sour cream"
                     ],
-                    stars: 5
+                    stars: 5,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 },
                 {
                     head: "Fruit Salad",
@@ -516,11 +670,168 @@ $(document).ready(function () {
                         "1 cups seedless grapes",
                         "2 cups blueberries"
                     ],
-                    stars: 5
+                    stars: 5,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ]
                 }
             ];
 
             localStorage.setItem("snack", JSON.stringify(snack));
+        }
+    }
+
+    function append_recipe(recipe) {
+
+        let container_image = $("<div></div>").addClass("container");
+        let row_image = $("<div></div>").addClass("row");
+        let col_image = $("<div></div>").addClass("col-12 recipe-image");
+        let recipe_image = $("<img>").attr("src", "img/" + recipe.head + ".jpg").attr("alt", "");
+
+        col_image.append(recipe_image);
+        row_image.append(col_image);
+        container_image.append(row_image);
+
+        let recipe_content = $("<div></div>").addClass("receipe-content-area");
+        let container_recipe = $("<div></div>").addClass("container");
+        let row_recipe = $("<div></div>").addClass("row");
+        let col_recipe_heading_div = $("<div></div>").addClass("col-12 col-md-8");
+
+        let recipe_heading = $("<div></div>").addClass("receipe-headline my-5");
+        let date = $("<span></span>").html("January 05, 2021");
+        let heading = $("<h2></h2>").html(recipe.head).addClass("recipe-link");
+        let recipe_duration = $("<div></div>").addClass("receipe-duration");
+        let prep_time = $("<h6></h6>").html("Prep: " + recipe.prep);
+        let cook_time = $("<h6></h6>").html("Cook: " + recipe.cook);
+        let portions = $("<h6></h6>").html("Yields: " + recipe.portions);
+
+        let rating_div = $("<div></div>").addClass("col-12 col-md-4");
+        let recipe_rating = $("<div></div>").addClass("receipe-ratings text-right my-5");
+        let stars = $("<div></div>").addClass("ratings");
+
+        let recipe_stars = recipe.stars;
+        for (let i = 0; i < 5; i++) {
+            let star = "";
+            if (recipe_stars > 0)
+                star = $("<i></i>").addClass("fa fa-star").attr("aria-hidden", "true");
+            else
+                star = $("<i></i>").addClass("fa fa-star-o").attr("aria-hidden", "true");
+            recipe_stars--;
+            stars.append(star);
+        }
+
+        recipe_rating.append(stars);
+        rating_div.append(recipe_rating);
+
+        recipe_duration.append(prep_time).append(cook_time).append(portions);
+        recipe_heading.append(date).append(heading).append(recipe_duration);
+        col_recipe_heading_div.append(recipe_heading);
+        row_recipe.append(col_recipe_heading_div).append(rating_div);
+        container_recipe.append(row_recipe);
+        recipe_content.append(container_recipe);
+
+        $("#recipes").append(container_image).append(recipe_content);
+
+        let preparation_row = $("<div></div>").addClass("row");
+        let preparation_col = $("<div></div>").addClass("col-12 col-lg-8");
+        let counter = 1;
+        recipe.steps.forEach(step => {
+            let whole_step = $("<div></div>").addClass("single-preparation-step d-flex");
+
+            let number_step = "";
+            number_step = (counter < 10 ? "0" : "") + counter + ".";
+
+            let number = $("<h4></h4>").html(number_step);
+            counter++;
+            let cooking_step = $("<p></p>").html(step);
+            whole_step.append(number).append(cooking_step);
+            preparation_col.append(whole_step);
+        });
+
+        let comment_section = $("<div></div>").addClass("comment-section");
+        preparation_col.append(comment_section);
+
+        let i = 1;
+        recipe.comments.forEach(comment => {
+            let comment_area = $("<div></div>").addClass("contact-form-area");
+            let comment_text = $("<input>")
+                                .addClass("form-control")
+                                .attr("type", "text")
+                                .attr("disabled", "true")
+                                .attr("id", "comment" + i)
+                                .val(comment.comment);
+
+            let author_data = $("<div></div>").addClass("author-section").attr("id", "by" + i);
+            let author_profile_link = $("<a></a>").attr("href", "#");
+            author_profile_link.html(comment.author);
+            author_data.append("by ").append(author_profile_link);
+
+            comment_area.append(comment_text).append(author_data);
+            comment_section.append(comment_area);
+            i++;
+        });
+
+        preparation_row.append(preparation_col);
+
+        let ingredients_col = $("<div></div>").addClass("col-12 col-lg-4");
+        let ingredients = $("<div></div>").addClass("ingredients");
+
+        ingredients.html($("<h4></h4>").html("Ingredients"));
+        counter = 1;
+        $(".ingredients").html($("<h4></h4>").html("Ingredients"));
+            recipe.ingredients.forEach(ingredient => {
+            let whole_ingredient = $("<div></div>").addClass("custom-control custom-checkbox");
+
+            let input_checkbox = $("<input>")
+                                    .addClass("custom-control-input")
+                                    .attr("type", "checkbox")
+                                    .attr("id", "customCheck" + counter);
+
+            let ingredient_label = $("<label></label>")
+                                        .addClass("custom-control-label")
+                                        .attr("for", "customCheck" + counter)
+                                        .html(ingredient);
+            counter++;
+
+            whole_ingredient.append(input_checkbox).append(ingredient_label);
+            ingredients.append(whole_ingredient);
+        });
+
+        ingredients_col.append(ingredients);
+        preparation_row.append(ingredients_col);
+        container_recipe.append(preparation_row);
+
+        //Comments area
+
+        let comments = $(".comment-section").find(".form-control");
+        let authors = $(".comment-section").find(".author-section");
+        for (let i = 0, del = 750; i < comments.length; i++, del += 150) {
+            ScrollReveal().reveal("#" + $(comments[i]).attr("id"), {
+                delay: del,
+                distance: "100%",
+                origin: "left",
+                easing: "ease-in-out"
+            });
+            ScrollReveal().reveal("#" + $(authors[i]).attr("id"), {
+                delay: del,
+                distance: "100%",
+                origin: "left",
+                easing: "ease-in-out"
+            });
+
+            if(i == comments.length - 1)
+                $($(comments[i]).parent()).css("margin-bottom", "5%");
         }
     }
 
@@ -549,93 +860,7 @@ $(document).ready(function () {
         }
         else if (localStorage.getItem("recipe-to-show") != null) {
             let recipe = JSON.parse(localStorage.getItem("recipe-to-show"));
-
-            let container_image = $("<div></div>").addClass("container");
-            let row_image = $("<div></div>").addClass("row");
-            let col_image = $("<div></div>").addClass("col-12 recipe-image");
-            let recipe_image = $("<img>").attr("src", "img/" + recipe.head + ".jpg").attr("alt", "");
-
-            col_image.append(recipe_image);
-            row_image.append(col_image);
-            container_image.append(row_image);
-
-            let recipe_content = $("<div></div>").addClass("receipe-content-area");
-            let container_recipe = $("<div></div>").addClass("container");
-            let row_recipe = $("<div></div>").addClass("row");
-            let col_recipe_heading_div = $("<div></div>").addClass("col-12 col-md-8");
-
-            let recipe_heading = $("<div></div>").addClass("receipe-headline my-5");
-            let date = $("<span></span>").html("January 05, 2021");
-            let heading = $("<h2></h2>").html(recipe.head).addClass("recipe-link");
-            let recipe_duration = $("<div></div>").addClass("receipe-duration");
-            let prep_time = $("<h6></h6>").html("Prep: " + recipe.prep);
-            let cook_time = $("<h6></h6>").html("Cook: " + recipe.cook);
-            let portions = $("<h6></h6>").html("Yields: " + recipe.portions);
-
-            let rating_div = $("<div></div>").addClass("col-12 col-md-4");
-            let recipe_rating = $("<div></div>").addClass("receipe-ratings text-right my-5");
-            let stars = $("<div></div>").addClass("ratings");
-
-            let recipe_stars = recipe.stars;
-            for (let i = 0; i < 5; i++) {
-                let star = "";
-                if (recipe_stars > 0)
-                    star = $("<i></i>").addClass("fa fa-star").attr("aria-hidden", "true");
-                else
-                    star = $("<i></i>").addClass("fa fa-star-o").attr("aria-hidden", "true");
-                recipe_stars--;
-                stars.append(star);
-            }
-
-            recipe_rating.append(stars);
-            rating_div.append(recipe_rating);
-
-            recipe_duration.append(prep_time).append(cook_time).append(portions);
-            recipe_heading.append(date).append(heading).append(recipe_duration);
-            col_recipe_heading_div.append(recipe_heading);
-            row_recipe.append(col_recipe_heading_div).append(rating_div);
-            container_recipe.append(row_recipe);
-            recipe_content.append(container_recipe);
-
-            $("#recipes").append(container_image).append(recipe_content);
-
-            let preparation_row = $("<div></div>").addClass("row");
-            let preparation_col = $("<div></div>").addClass("col-12 col-lg-8");
-            let counter = 1;
-            recipe.steps.forEach(step => {
-                let whole_step = $("<div></div>").addClass("single-preparation-step d-flex");
-
-                let number_step = "";
-                number_step = (counter < 10 ? "0" : "") + counter + ".";
-
-                let number = $("<h4></h4>").html(number_step);
-                counter++;
-                let cooking_step = $("<p></p>").html(step);
-                whole_step.append(number).append(cooking_step);
-                preparation_col.append(whole_step);
-            });
-            preparation_row.append(preparation_col);
-
-            let ingredients_col = $("<div></div>").addClass("col-12 col-lg-4");
-            let ingredients = $("<div></div>").addClass("ingredients");
-
-            ingredients.html($("<h4></h4>").html("Ingredients"));
-            counter = 1;
-            $(".ingredients").html($("<h4></h4>").html("Ingredients"));
-                recipe.ingredients.forEach(ingredient => {
-                let whole_ingredient = $("<div></div>").addClass("custom-control custom-checkbox");
-                let input_checkbox = $("<input>").addClass("custom-control-input").attr("type", "checkbox").attr("id", "customCheck" + counter);
-                let ingredient_label = $("<label></label>").addClass("custom-control-label").attr("for", "customCheck" + counter).html(ingredient);
-                counter++;
-
-                whole_ingredient.append(input_checkbox).append(ingredient_label);
-                ingredients.append(whole_ingredient);
-            });
-
-            ingredients_col.append(ingredients);
-            preparation_row.append(ingredients_col);
-            container_recipe.append(preparation_row);
-
+            append_recipe(recipe);
             localStorage.removeItem("recipe-to-show");
             localStorage.removeItem("food-type");
         }

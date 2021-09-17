@@ -336,33 +336,31 @@ $(document).ready(function() {
             switch (recipe_picked) {
                 case 0: {
                     let current_recipe = appetizer[Math.floor(Math.random() * appetizer.length)];
-                    if (found_recipes.includes(current_recipe))
-                        continue;
+                    if (!found_recipes.includes(current_recipe))
+                        found_recipes.push(current_recipe);
 
-                    found_recipes.push(current_recipe);
                     break;
                 }
                 case 1: {
                     let current_recipe = main_course[Math.floor(Math.random() * main_course.length)];
-                    if (found_recipes.includes(current_recipe))
-                        continue;
+                    if (!found_recipes.includes(current_recipe))
+                        found_recipes.push(current_recipe);
 
-                    found_recipes.push(current_recipe);
                     break;
                 }
                 case 2: {
                     let current_recipe = dessert[Math.floor(Math.random() * dessert.length)];
-                    if (found_recipes.includes(current_recipe))
-                        continue;
+                    if (!found_recipes.includes(current_recipe))
+                        found_recipes.push(current_recipe);
 
-                    found_recipes.push(current_recipe);
+                    break;
                 }
                 case 3: {
                     let current_recipe = snack[Math.floor(Math.random() * snack.length)];
-                    if (found_recipes.includes(current_recipe))
-                        continue;
+                    if (!found_recipes.includes(current_recipe))
+                        found_recipes.push(current_recipe);
 
-                    found_recipes.push(current_recipe);
+                    break;
                 }
             }
         }
