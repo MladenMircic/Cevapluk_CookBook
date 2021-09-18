@@ -39,3 +39,9 @@
     text-decoration-color: green;
     color: green;
 }
+
+.pdf-download {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}

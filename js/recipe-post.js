@@ -368,7 +368,10 @@ $(document).ready(function () {
         });
     }
 
-    $("#submit-comment").click(function() {
+    function submit_comment() {
+        if ($(this).hasClass("disabled"))
+        return;
+
         let comment = $(".new-comment").val();
         $(".new-comment").val('');
 
@@ -376,7 +379,7 @@ $(document).ready(function () {
         let comment_text = $("<input>")
                             .addClass("form-control")
                             .attr("type", "text")
-                            .attr("disabled", "true")
+                            .attr("disabled", "")
                             .attr("id", "comment" + i)
                             .val(comment);
 
@@ -405,9 +408,9 @@ $(document).ready(function () {
             comment_area.css("opacity", 1);
         }, 500);
         i++;
-        
+
         set_new_comment(comment);
-    });
+    }
 
     function set_new_comment(comment) {
         my_account.comments.push({
@@ -431,7 +434,6 @@ $(document).ready(function () {
 
         if (language == "eng") {
             for (let i = 0; i < appetizer.length; i++) {
-                alert(appetizer[i].head);
                 if (appetizer[i].head == name) {
                     appetizer[i].comments.push({
                         author: "Mladen Mircic",
@@ -555,6 +557,119 @@ $(document).ready(function () {
             }
         }
     }
+
+    $(".new-comment").on(
+        "input", 
+        function() {
+            $("#submit-comment").remove();
+            let leave_comment_submit = $("<button></button>")
+                                        .attr("type", "submit")
+                                        .attr("id", "submit-comment")
+                                        .addClass("btn delicious-btn")
+                                        .css("margin-bottom", "5%");
+
+            if ($(this).val() == "")
+                leave_comment_submit.attr("disabled", "true").addClass("disabled");
+            else
+                leave_comment_submit.click(function() {
+                    submit_comment();
+                    $(this).remove();
+
+                    $("#submit-comment").remove();
+                    let leave_comment_submit1 = $("<button></button>")
+                                                .attr("type", "submit")
+                                                .attr("id", "submit-comment")
+                                                .attr("disabled", "true")
+                                                .addClass("btn delicious-btn disabled")
+                                                .css("margin-bottom", "5%");
+
+                    if (language == "eng")
+                        leave_comment_submit1.html("Publish");
+                    else
+                        leave_comment_submit1.html("Posalji");
+    
+                    $(".preparation").append(leave_comment_submit1);
+                });
+
+            if (language == "eng")
+                leave_comment_submit.html("Publish");
+            else
+                leave_comment_submit.html("Posalji");
+
+            $(".preparation").append(leave_comment_submit);
+        }
+    )
+
+    $(".pdf-download").click(function() {
+        let pdf_doc = new jsPDF();
+
+        pdf_doc.setFontStyle("bold");
+
+        if (language == "eng")
+            pdf_doc.text("Cooking steps:", 20, 20);
+        else
+            pdf_doc.text("Koraci:", 20, 20);
+
+        pdf_doc.setFontStyle("normal");
+        pdf_doc.setFontSize(pdf_doc.getFontSize() - 4);
+        let preparation_steps = $(".single-preparation-step");
+
+        let yOffset = 0;
+        let yCoord = 40;
+
+
+        for (let i = 0; i < preparation_steps.length; i++) {
+            if (yCoord + yOffset > 280) {
+                pdf_doc.addPage();
+                yCoord = 20;
+                yOffset = 0;
+            }
+
+            let step = $(preparation_steps[i]);
+
+            let number = $(step.children("h4")).html();
+            let step_text = $(step.children("p")).html();
+
+            pdf_doc.text(number, 30, yCoord + yOffset);
+            let split_text = pdf_doc.splitTextToSize(step_text, 150);
+            pdf_doc.text(split_text, 40, yCoord + yOffset);
+            yOffset += split_text.length * pdf_doc.getFontSize() * 0.6;
+        }
+
+        pdf_doc.setFontStyle("bold");
+        pdf_doc.setFontSize(pdf_doc.getFontSize() + 4);
+
+        if (language == "eng")
+            pdf_doc.text("Ingredients:", 20, yCoord + yOffset + 20);
+        else
+            pdf_doc.text("Sastojci:", 20, yCoord + yOffset + 20);
+        pdf_doc.setFontSize(pdf_doc.getFontSize() - 4);
+        pdf_doc.setFontStyle("normal");
+
+        let ingredients = $(".custom-control-label");
+
+        yCoord = yCoord + yOffset + 40;
+        yOffset = 0;
+        for (let i = 0; i < ingredients.length; i++) {
+            if (yCoord + yOffset > 280) {
+                pdf_doc.addPage();
+                yCoord = 20;
+                yOffset = 0;
+            }
+
+            let ingredient = $(ingredients[i]);
+
+            let number = (i + 1 < 10 ? "0" : "") + (i + 1) + ".";
+            let ingredient_text = ingredient.html();
+
+            pdf_doc.text(number, 30, yCoord + yOffset);
+            let split_text = pdf_doc.splitTextToSize(ingredient_text, 150);
+            pdf_doc.text(split_text, 40, yCoord + yOffset);
+            yOffset += split_text.length * pdf_doc.getFontSize() * 0.6;
+        }
+
+        pdf_doc.save($("#heading").html() + ".pdf");
+    });
 
     function initializeStorage() {
         my_account = JSON.parse(localStorage.getItem("my-account"));
@@ -685,9 +800,9 @@ $(document).ready(function () {
                             "Now it's time to add rice. It's very important to stir constantly when you add it. Cook fot another 5 minutes and remove from heat.",
                             "Season with salt, ground pepper, ground chilly and finelly chopped parsley. Pre-heat the oven to 250 degrees C and prepare baking dish 20x28cm.",
                             "Now you fill the cabbage. Place a spoon of beef in the middle of bottom the leaf. Fold from left then fold from right. Roll the cabbage keeping fingers firmly on the side.",
-                            "Place rolls in oiled baking dish. Sprinkle with chilly and parsley. Place bacon slices in the middle. Pour 1 and ⅔ cup of water in.",
+                            "Place rolls in oiled baking dish. Sprinkle with chilly and parsley. Place bacon slices in the middle. Pour 1 and 2/3 cup of water in.",
                             "Bake covered for 1 hour then reduce temperature to 200 degrees C and bake for another 1 hour.",
-                            "In the end, fry shortly flour with 5 tbs of oil in small sauce pan, stirring constantlly and adding chilly gradually. In the same time remove baking dish from the oven, pour ⅔ cup of water and mixture of flour, oil and chilly. Put uncovered dish in the oven for another 15 minutes.",
+                            "In the end, fry shortly flour with 5 tbs of oil in small sauce pan, stirring constantlly and adding chilly gradually. In the same time remove baking dish from the oven, pour 2/3 cup of water and mixture of flour, oil and chilly. Put uncovered dish in the oven for another 15 minutes.",
                             "Serve hot!"
                         ],
                         ingredients: [
@@ -987,7 +1102,7 @@ $(document).ready(function () {
                         cook: "/",
                         portions: "1 Serving",
                         steps: [
-                            "In a bowl whisk the butter with a fork until it’s fluffy. Add crumbled feta cheese and sour cream. Mix it all well. Note: You don’t need to add salt to the kajmak as the feta cheese is salty on its own. If you like a more mild kajmak, add some cream. This 5 minute kajmak makes a wonderful spread and goes great with ćavaps."
+                            "In a bowl whisk the butter with a fork until it’s fluffy. Add crumbled feta cheese and sour cream. Mix it all well. Note: You don’t need to add salt to the kajmak as the feta cheese is salty on its own. If you like a more mild kajmak, add some cream. This 5 minute kajmak makes a wonderful spread and goes great with cevaps."
                         ],
                         ingredients: [
                             "100 g butter",
@@ -1021,11 +1136,11 @@ $(document).ready(function () {
                             "Layer the fruit in a large, clear glass bowl in this order: pineapple, strawberries, kiwi fruit, bananas, oranges, grapes, and blueberries. Pour the cooled sauce over the fruit. Cover and refrigerate for 3 to 4 hours before serving."
                         ],
                         ingredients: [
-                            "⅔ cup fresh orange juice",
-                            "¼ cup and 1 tablespoon and 1 teaspoons fresh lemon juice",
-                            "¼ cup and 1 tablespoon and 1 teaspoons packed brown sugar",
-                            "½ teaspoon grated orange zest",
-                            "½ teaspoon grated lemon zest",
+                            "2/3 cup fresh orange juice",
+                            "1/4 cup and 1 tablespoon and 1 teaspoons fresh lemon juice",
+                            "1/4 cup and 1 tablespoon and 1 teaspoons packed brown sugar",
+                            "1/2 teaspoon grated orange zest",
+                            "1/2 teaspoon grated lemon zest",
                             "1 teaspoons vanilla extract",
                             "2 cups cubed fresh pineapple",
                             "2 cups strawberries, hulled and sliced",
@@ -1068,14 +1183,14 @@ $(document).ready(function () {
                     cook: "/",
                     portions: "4 Porcije",
                     steps: [
-                        "Počnite sa velikim stvarima: činije i sir. Sir treba poslužiti na sobnoj temperaturi.",
-                        "Dodajte meso, hleb i krekere. Meso možete dodati na nekoliko različitih načina: jednostavnim snopom, rastavljenim u liniju ili polukrug ili presavijanjem većih komada u zabavne oblike.",
-                        "Popunite velike prostore voćem i orašastim plodovima. Takođe, dodajte malo maslina i napunite sve male činije.",
-                        "Ugurajte malo zelenila u bilo koji prostor koji je još prazan."
+                        "Pocnite sa velikim stvarima: cinije i sir. Sir treba posluziti na sobnoj temperaturi.",
+                        "Dodajte meso, hleb i krekere. Meso mozete dodati na nekoliko razlicitih nacina: jednostavnim snopom, rastavljenim u liniju ili polukrug ili presavijanjem vecih komada u zabavne oblike.",
+                        "Popunite velike prostore voćem i orasastim plodovima. Takodje, dodajte malo maslina i napunite sve male cinije.",
+                        "Ugurajte malo zelenila u bilo koji prostor koji je jos prazan."
                     ],
                     ingredients: [
                         "Sir (izaberite 3-5)",
-                        "Voće i povrće (izaberite 1-3)",
+                        "Voce i povrce (izaberite 1-3)",
                         "Orasi (izaberite 2)",
                         "Hleb ili krekeri (izaberite 2-4)"
                     ],
@@ -1101,18 +1216,18 @@ $(document).ready(function () {
                     cook: "30 mins",
                     portions: "4 Porcije",
                     steps: [
-                        "Donesite veliki lonac vode da provri; dodajte krompir i šargarepu. Vratite smešu do ključanja i dodajte jaja; kuvati dok krompir ne omekša, 20 do 30 minuta. Ocijedite i malo ohladite smešu. Iseckati krompir i šargarepu; oguliti i iseckati jaja.",
-                        "Pomesajte krompir, šargarepu, jaja, kisele krastavce, grašak, šunku i peršun zajedno u velikoj činiji; umešajte majonez dok salata ne bude ravnomerno premazana."
+                        "Donesite veliki lonac vode da provri; dodajte krompir i sargarepu. Vratite smesu do kljucanja i dodajte jaja; kuvati dok krompir ne omeksa, 20 do 30 minuta. Ocedite i malo ohladite smesu. Iseckati krompir i sargarepu; oguliti i iseckati jaja.",
+                        "Pomesajte krompir, sargarepu, jaja, kisele krastavce, grasak, sunku i persun zajedno u velikoj ciniji; umesajte majonez dok salata ne bude ravnomerno premazana."
                     ],
                     ingredients: [
-                        "6 krompira, oljušteno",
-                        "1 šargarepa, ili više po ukusu",
+                        "6 krompira, oljusteno",
+                        "1 sargarepa, ili vise po ukusu",
                         "4 jaja",
-                        "6 veliki kiseli krastavci, isečeni na kockice",
+                        "6 veliki kiseli krastavci, iseceni na kockice",
                         "1 konzerva graska, iscedjena",
-                        "1/2 šolja potpuno skuvane šunke, ili po ukusu",
-                        "1 kašika seckanog svežeg peršuna, ili po ukusu",
-                        "1/2 šolja majoneza ili po ukusu"
+                        "1/2 solja potpuno skuvane sunke, ili po ukusu",
+                        "1 kasika seckanog svezeg persuna, ili po ukusu",
+                        "1/2 solja majoneza ili po ukusu"
                     ],
                     stars: 3,
                     comments: [ 
@@ -1132,18 +1247,18 @@ $(document).ready(function () {
                     difficulty: 4
                 },{
                     head: "Vocni umak",
-                    prep: "15 mins",
+                    prep: "15 minuta",
                     cook: "/",
-                    portions: "4 Servings",
+                    portions: "4 Porcije",
                     steps: [
-                        "U manjoj činiji umutite krem sir i puter dok ne postane glatko. Umutite kremu od belog sleza. Preklopite umućenim prelivom. Poslužite sa voćem. Čuvati u frižideru."
+                        "U manjoj ciniji umutite krem sir i puter dok ne postane glatko. Umutite kremu od belog sleza. Preklopite umucenim prelivom. Posluzite sa vocem. Cuvati u frizideru."
                     ],
                     ingredients: [
                         "1 kesica krem sira",
-                        "1/2 šolja putera, omekšano",
-                        "1/2 šolja krem od sleza",
-                        "1 karton smrznut šlag preliven, odmrznut",
-                        "Asortiman svežeg voća"
+                        "1/2 solja putera, omeksano",
+                        "1/2 solja krem od sleza",
+                        "1 karton smrznut slag preliven, odmrznut",
+                        "Asortiman svezeg voca"
                     ],
                     stars: 4,
                     comments: [ 
@@ -1177,25 +1292,25 @@ $(document).ready(function () {
                     cook: "2 hrs 15 mins",
                     portions: "5 Porcija",
                     steps: [
-                        "Najpre operite kupus i uklonite tvrdi komad stabljike na dnu lista. Budite oprezni i pokušajte da ne napravite rupu. Ostavi stranu.",
-                        "Na 2 kašike ulja propržite seckani luk do zlatno smeđe boje. Dodajte malo vode i kuvajte dok tečnost ne ispari i luk omekša, povremeno mešajući.",
-                        "Dodajte seckanu šargarepu, promešajte jednom, dodajte govedinu, ponovo promešajte i ostavite da se kuva oko 15 minuta. Povremeno promešajte drvenom kašikom da se goveđi grudvi slome.",
-                        "Sada je vreme da dodate pirinač. Veoma je važno stalno mešati kada ga dodajete. Kuvajte još 5 minuta i sklonite sa vatre.",
-                        "Začinite solju, mlevenim biberom, mljevenim čilijem i sitno sjeckanim peršunom. Prethodno zagrejte rernu na 250 stepeni C i pripremite posudu za pečenje 20k28cm.",
-                        "Sada napunite kupus. Stavite kašiku govedine na sredinu donjeg dela lista. Preklopite s leve strane, a zatim sa desne. Zarolajte kupus držeći prste sa strane.",
-                        "Stavite kiflice u nauljenu posudu za pečenje. Pospite čilijem i peršunom. Na sredinu stavite kriške slanine. Ulijte 1 i ⅔ šolje vode.",
-                        "Pecite poklopljeno 1 sat, a zatim smanjite temperaturu na 200 stepeni C i pecite još 1 sat.",
-                        "Na kraju kratko propržite brašno sa 5 kašika ulja u maloj šerpi, neprestano mešajući i postepeno dodavajući hladno. U isto vreme izvadite posudu za pečenje iz rerne, prelijte ⅔ šolje vode i mešavine brašna, ulja i hladnog. Stavite nepokriveno jelo u rernu još 15 minuta.",
-                        "Poslužite toplo!"
+                        "Najpre operite kupus i uklonite tvrdi komad stabljike na dnu lista. Budite oprezni i pokusajte da ne napravite rupu. Ostavi stranu.",
+                        "Na 2 kasike ulja proprzite seckani luk do zlatno smedje boje. Dodajte malo vode i kuvajte dok teCnost ne ispari i luk omeksa, povremeno mesajuci.",
+                        "Dodajte seckanu sargarepu, promesajte jednom, dodajte govedinu, ponovo promesajte i ostavite da se kuva oko 15 minuta. Povremeno promesajte drvenom kasikom da se govedje grudve slome.",
+                        "Sada je vreme da dodate pirinac. Veoma je vazno stalno mesati kada ga dodajete. Kuvajte jos 5 minuta i sklonite sa vatre.",
+                        "Zacinite solju, mlevenim biberom, mlevenim cilijem i sitno seckanim persunom. Prethodno zagrejte rernu na 250 stepeni C i pripremite posudu za pecenje 20k28cm.",
+                        "Sada napunite kupus. Stavite kasiku govedine na sredinu donjeg dela lista. Preklopite s leve strane, a zatim sa desne. Zarolajte kupus drzeci prste sa strane.",
+                        "Stavite kiflice u nauljenu posudu za pecenje. Pospite cilijem i persunom. Na sredinu stavite kriske slanine. Ulijte 1 i 2/3 solje vode.",
+                        "Pecite poklopljeno 1 sat, a zatim smanjite temperaturu na 200 stepeni C i pecite jos 1 sat.",
+                        "Na kraju kratko proprzite brasno sa 5 kasika ulja u maloj serpi, neprestano mesajuci i postepeno dodavajuci hladno. U isto vreme izvadite posudu za pecenje iz rerne, prelijte 2/3 solje vode i mesavine brasna, ulja i hladnog. Stavite nepokriveno jelo u rernu jos 15 minuta.",
+                        "Posluzite toplo!"
                     ],
                     ingredients: [
-                        "20 mali kiseli listovi kupusa",
-                        "450 grama mlevenog junećeg mesa",
+                        "20 malih kiselih listova kupusa",
+                        "450 grama mlevenog juneceg mesa",
                         "1 luk, sitno iseckan",
-                        "1 mala šargarepa, sitno iseckana",
+                        "1 mala sargarepa, sitno iseckana",
                         "1/4 solje (50g) pirinca",
                         "so, biber, po ukusu",
-                        "sitnjen čili, po ukusu",
+                        "sitnjen cili, po ukusu",
                         "7 kasicica (105ml) povrtnog ulja",
                         "2 kasicica (30g) brasna",
                         "dosta persuna",
@@ -1222,30 +1337,30 @@ $(document).ready(function () {
                 }, 
                 {
                     head: "Punjena paprika",
-                    prep: "1 hr 20 mins",
-                    cook: "10 mins",
+                    prep: "1 sat 20 minuta",
+                    cook: "10 minuta",
                     portions: "6 Porcija",
                     steps: [
-                        "Zagrejati rernu na 400 °. U malom tiganju pripremite pirinač prema uputstvima na pakovanju. U velikoj tavi na srednjoj vatri zagrejte ulje. Kuvajte luk dok ne omekša, oko 5 minuta. Umešajte paradajz pastu i beli luk i kuvajte dok ne zamiriše, još oko 1 minut. Dodajte mleveno goveđe meso i kuvajte, razbijajući meso drvenom kašikom, dok više ne postane ružičasto, 6 minuta. Iscedite mast.",
-                        "Vratite goveđu mešavinu u tiganj, a zatim umešajte kuvani pirinač i paradajz isečen na kockice. Začinite origanom, solju i biberom. Pustite da se krčka dok se tečnost malo ne smanji, oko 5 minuta.",
-                        "Paprike izrezane okrenute nagore stavite u posudu za pečenje i pokapajte uljem. U svaku papriku kašikom dodajte goveđu smesu i prelijte Monterei džekom, pa posudu za pečenje prekrijte folijom.",
-                        "Pecite dok paprike ne omekšaju, oko 35 minuta. Otkrijte i pecite dok sir ne zakipi, još 10 minuta.",
-                        "Pre služenja ukrasite peršunom."
+                        "Zagrejati rernu na 400 °. U malom tiganju pripremite pirinac prema uputstvima na pakovanju. U velikoj tavi na srednjoj vatri zagrejte ulje. Kuvajte luk dok ne omeksa, oko 5 minuta. Umesajte paradajz pastu i beli luk i kuvajte dok ne zamirise, jos oko 1 minut. Dodajte mleveno govedje meso i kuvajte, razbijajuci meso drvenom kasikom, dok vise ne postane ruzicasto, 6 minuta. Iscedite mast.",
+                        "Vratite govedju mesavinu u tiganj, a zatim umesajte kuvani pirinac i paradajz isecen na kockice. Zacinite origanom, solju i biberom. Pustite da se krcka dok se tecnost malo ne smanji, oko 5 minuta.",
+                        "Paprike izrezane okrenute nagore stavite u posudu za pecenje i pokapajte uljem. U svaku papriku kasikom dodajte govedju smesu i prelijte Monterei dzekom, pa posudu za pecenje prekrijte folijom.",
+                        "Pecite dok paprike ne omeksaju, oko 35 minuta. Otkrijte i pecite dok sir ne zakipi, jos 10 minuta.",
+                        "Pre sluzenja ukrasite persunom."
                     ],
                     ingredients: [
-                        "1/2 c. nekuvani pirinač",
-                        "2 tbsp. ekstra devičansko maslinovo ulje, plus još za kišu",
+                        "1/2 c. nekuvani pirinac",
+                        "2 tbsp. ekstra devicansko maslinovo ulje, plus jos za kisu",
                         "1 srednji luk, iseckan",
                         "2 tbsp. paradajz sos",
                         "3 cena belog luka, mlevenih",
                         "1 lb. mlevena junetina",
-                        "1 (14.5-oz.) konzerve paradajza isečene na kockice",
-                        "1 1/2 tsp. sušeni origano",
-                        "Košer soli",
-                        "Sveže mleveni crni biber",
+                        "1 (14.5-oz.) konzerve paradajza isecene na kockice",
+                        "1 1/2 tsp. suseni origano",
+                        "Koser soli",
+                        "Sveze mleveni crni biber",
                         "6 paprike, vrhovi i jezgra uklonjeni",
-                        "1 c. iseckan priključak Monterei",
-                        "Sveže iseckani peršun, za ukrašavanje"
+                        "1 c. iseckan prikljucak Monterei",
+                        "Sveze iseckani persun, za ukrasavanje"
                     ],
                     stars: 2,
                     comments: [ 
@@ -1265,19 +1380,19 @@ $(document).ready(function () {
                     difficulty: 5
                 }, 
                 {
-                    head: "Kardjordjeva snicla",
+                    head: "Karadjordjeva snicla",
                     prep: "1 hr",
                     cook: "15 mins",
                     portions: "4 Porcija",
                     steps: [
-                        "Pileći odresci od svinjetine dok ne budu tanki i mekani i na svaki odrezak stavite malo kajmaka (ili krem sira).",
-                        "Umotajte meso u kolute i svaki komad učvrstite čačkalicom.",
-                        "Odreske premažite brašnom, pa ih umočite u umućena jaja i na kraju uvaljajte u mrvice hleba.",
-                        "Pržite u vrelom ulju do zlatno žute boje."
+                        "Pileci odresci od svinjetine dok ne budu tanki i mekani i na svaki odrezak stavite malo kajmaka (ili krem sira).",
+                        "Umotajte meso u kolute i svaki komad ucvrstite cackalicom.",
+                        "Odreske premazite brasnom, pa ih umocite u umucena jaja i na kraju uvaljajte u mrvice hleba.",
+                        "Przite u vrelom ulju do zlatno zute boje."
                     ],
                     ingredients: [
                         "500 g svinjski odresci bez kostiju",
-                        "150 g kajmak – umesto toga možete koristiti krem sir",
+                        "150 g kajmak – umesto toga mozete koristiti krem sir",
                         "2 jaja",
                         "brasno",
                         "prezle",
@@ -1315,16 +1430,16 @@ $(document).ready(function () {
                     cook: "15 mins",
                     portions: "60 Kolaca",
                     steps: [
-                        "Nekoliko dana pre pravljenja kolačića, pomešajte šećer poslastičara sa zrnom vanile u maloj činiji sa čvrstim poklopcem. Ovo je vaš vanilin šećer. Čuvati na suvom mestu.",
-                        "U mikseru sa lopaticom istucite svinjsku mast sa granuliranim šećerom dok ne postane kremasta. Umutite jaje, žumanca, limunov sok i koricu limuna. Dodajte orahe i brašno i mutite dok se ne formira jednolično testo. Pokrijte testo i ostavite u frižideru najmanje 3 sata ili preko noći.",
-                        "Prethodno zagrejte rernu na 325 ° F (konvekciono pečenje na 350 ° F). Stavite testo na radnu površinu posutu brašnom i razvaljajte ga u okruglu debljinu 1/4 inča. Dva pleha obložite papirom za pečenje. Koristeći mali okrugli rezač za kolačiće (ja koristim rezače veličine 1 inča ili četvrtine), istisnite kolačiće i rasporedite ih jedan po jedan na plehove za pečenje.",
-                        "Pecite oko 12 minuta, tako da kolutići ostanu beli. Ostavite kolačiće da se ohlade na plehovima 5 minuta, a zatim ih prebacite na rešetku ili ravnu površinu da se potpuno ohlade.",
-                        "Kad se kolačići ohlade, uzimajte jednu po jednu kolačicu, premažite marmeladom i prelijte drugom okruglom.",
-                        "Svaki sendvič sa kolačićima obilno uvaljajte u vanilin šećer. Stavite kolačiće u limenu kutiju i sačekajte jedan do dva dana pre serviranja."
+                        "Nekoliko dana pre pravljenja kolacica, pomesajte secer poslasticara sa zrnom vanile u maloj ciniji sa cvrstim poklopcem. Ovo je vas vanilin secer. Cuvati na suvom mestu.",
+                        "U mikseru sa lopaticom istucite svinjsku mast sa granuliranim secerom dok ne postane kremasta. Umutite jaje, zumanca, limunov sok i koricu limuna. Dodajte orahe i brasno i mutite dok se ne formira jednolicno testo. Pokrijte testo i ostavite u frizideru najmanje 3 sata ili preko noci.",
+                        "Prethodno zagrejte rernu na 325 ° F (konvekciono pecenje na 350 ° F). Stavite testo na radnu povrsinu posutu brasnom i razvaljajte ga u okruglu debljinu 1/4 inca. Dva pleha oblozite papirom za pecenje. Koristeci mali okrugli rezac za kolacice (ja koristim rezace velicine 1 inca ili cetvrtine), istisnite kolacice i rasporedite ih jedan po jedan na plehove za pecenje.",
+                        "Pecite oko 12 minuta, tako da kolutici ostanu beli. Ostavite kolacice da se ohlade na plehovima 5 minuta, a zatim ih prebacite na resetku ili ravnu povrsinu da se potpuno ohlade.",
+                        "Kad se kolacici ohlade, uzimajte jednu po jednu kolacicu, premazite marmeladom i prelijte drugom okruglom.",
+                        "Svaki sendvic sa kolacicima obilno uvaljajte u vanilin secer. Stavite kolacice u limenu kutiju i sacekajte jedan do dva dana pre serviranja."
                     ],
                     ingredients: [
-                        "200 grama šećera za poslastičare",
-                        "1 zrno vanile, isečeno na komade od 1/2 inča",
+                        "200 grama secera za poslasticare",
+                        "1 zrno vanile, iseceno na komade od 1/2 inca",
                         "300 grama masti (idealno list masti)",
                         "250 grama secera u prahu",
                         "1 celo jaje",
@@ -1333,7 +1448,7 @@ $(document).ready(function () {
                         "1 limunove kore",
                         "250 grama sitnjenog lesnika",
                         "600 grama brasna",
-                        "Džem od šipka ili kajsije"
+                        "Dzem od sipka ili kajsije"
                     ],
                     stars: 4,
                     comments: [ 
@@ -1357,9 +1472,9 @@ $(document).ready(function () {
                     cook: "45 mins",
                     portions: "6 Porcija",
                     steps: [
-                        "Zagrejati rernu na 375 °. U maloj činiji pomešajte šećer, brašno i začine; ostaviti po strani. U veliku činiju prelijte jabuke limunovim sokom. Dodajte mešavinu šećera; bacati premazati.",
-                        "Na blago pobrašnjenoj površini razvaljajte polovinu testa u krug debljine 1/8 inča; transfer na 9-in. tanjir za pitu. Obrežite čak i sa obodom. Dodajte punjenje; tačka sa puterom. Preostalo testo razvaljajte u krug debljine 1/8 inča. Prepunite mesto. Trim, zaptivka i ivica kanelure. Isecite proreze na vrhu. Istucite belanca do pene; četkom preko kore. Pospite šećerom. Lagano pokrijte ivicu folijom.",
-                        "Pecite 25 minuta. Uklonite foliju; pecite dok kora ne postane zlatno braon i punjenje ne postane mehuriće, 20-25 minuta duže. Ohladite na rešetki."
+                        "Zagrejati rernu na 375 °. U maloj ciniji pomesajte secer, brasno i zacine; ostaviti po strani. U veliku ciniju prelijte jabuke limunovim sokom. Dodajte mesavinu secera; bacati premazati.",
+                        "Na blago pobrasnjenoj povrsini razvaljajte polovinu testa u krug debljine 1/8 inca; transfer na 9-in. tanjir za pitu. Obrezite cak i sa obodom. Dodajte punjenje; tacka sa puterom. Preostalo testo razvaljajte u krug debljine 1/8 inca. Prepunite mesto. Trim, zaptivka i ivica kanelure. Isecite proreze na vrhu. Istucite belanca do pene; Cetkom preko kore. Pospite secerom. Lagano pokrijte ivicu folijom.",
+                        "Pecite 25 minuta. Uklonite foliju; pecite dok kora ne postane zlatno braon i punjenje ne postane mehurice, 20-25 minuta duze. Ohladite na resetki."
                     ],
                     ingredients: [
                         "1/2 solja secera",
@@ -1367,11 +1482,11 @@ $(document).ready(function () {
                         "3 kasika brasna",
                         "1 kasicica cimeta",
                         "1/4 kasicica djumbira",
-                        "1/4 kasicica muškatni oraščić",
-                        "6 do 7 šolje tanko narezanih oljuštenih tart jabuka",
-                        "1 kašika limunovog soka",
+                        "1/4 kasicica muskatni orascic",
+                        "6 do 7 solje tanko narezanih oljustenih tart jabuka",
+                        "1 kasika limunovog soka",
                         "Testo za pitu sa dvostrukom korom",
-                        "1 kašika putera",
+                        "1 kasika putera",
                         "1 veliko jaje",
                         "Dodatno secera"
                     ],
@@ -1393,33 +1508,33 @@ $(document).ready(function () {
                     difficulty: 3
                 },{
                     head: "Pita s visnjama",
-                    prep: "2 hrs",
-                    cook: "1 hr",
-                    portions: "12 - 16 Porcije",
+                    prep: "2 sata",
+                    cook: "1 sat",
+                    portions: "12 - 16 Porcija",
                     steps: [
-                        "Stavite trešnje bez koštica u posudu za mešanje bez mrlja; prstima dvaput proverite da li ima jama. Dodajte tapioku, koricu limuna i kašiku šećera za poslastičare; promešajte da se temeljito unese. Ostavite smešu na sobnoj temperaturi 15 minuta, a za to vreme voćni sokovi će se zgusnuti.",
-                        "U međuvremenu odmotajte listove filo testa. Odmah ih prekrijte čistim, blago vlažnim peškirom. Postavite rešetke za pećnicu u gornju i donju trećinu pećnice; zagrejati na 350 stepeni.",
-                        "Pomešajte biljno ulje, maslinovo ulje i puter u šoljici za merenje tečnosti. Nakapajte malo mešavine ulja/maslaca na veliki pleh sa obodom, pa zagrejte lim u rerni 2 ili 3 minuta. Postavite lim za pečenje sa širokom stranom okrenutom prema vama, stavljajući ga između činije sa voćem i gomile filo testa.",
-                        "Položite dva lista filo testa na lim za pečenje tako da donji bude premazan uljima/puterom. Brzo ih preokrenite, a zatim nanesite još dva lista. Gornji list filo testa prelijte sa malo mešavine ulja/maslaca.",
-                        "Ostavljajući marginu od 1 inča, rasporedite 1/4 kisele pavlake u širini od 1 inča duž ivice fila koji vam je najbliži, a zatim rasporedite jednu četvrtinu mešavine višanja u paralelnu liniju i inča od pavlake. Za raznovrsnost ili ako vam ponestane trešanja, pospite voće suvim brusnicama, ribizlom ili grožđicama.",
-                        "Pokupite uglove filo testa koji su vam najbliži dok nežno pravite jedan preklop/kotrljanje od sebe. Premažite vrh rolade sa malo mešavine ulja/putera, pa nastavite da se presavijate i kotrljate dok ne dođete do krajnjeg kraja testa. Ako testo pukne, koristite malo vode ili malo mešavine ulja/maslaca da ga ponovo zalepite.",
-                        "Ponovite postupak da biste napravili još tri filovana fila, koristeći preostalu mešavinu pavlake i višnje, ostavljajući dovoljno smeše ulja/maslaca za poslednje četkanje. Neiskorišćeni listovi filo testa mogu se čvrsto umotati u plastičnu foliju i staviti u frižider ili zamrznuti do 2 nedelje. Napunjene filo rolate rasporedite po podmazanom plehu, ravnomerno razmaknute.",
-                        "Preostalom mešavinom ulja/maslaca (po potrebi zagrejte) očetkajte vrhove svake rolne. Pecite 15 minuta na donjoj rešetki, a zatim prebacite na gornju srednju rešetku, okrećući lim za pečenje napred prema nazad; pecite 15 do 20 minuta, dok ne porumene i ne hrskaju po ivicama.",
-                        "Ohladite na plehu oko 10 minuta. Tankom lopaticom otpustite dna po potrebi. Radeći po jedan kolut trešnje, prebacite na dasku za sečenje",
-                        "U ovom trenutku, rolne se mogu umotati u aluminijumsku foliju i staviti u frižider na jedan dan. Odmotajte, stavite na podmazan pleh i zagrejte u rerni na 300 stepeni dok se ne zagreje.",
-                        "Za posluživanje, isecite svaki kolut višnje po dijagonali na tri ili 4 jednaka dela i poređajte na poslužavnik. Pomoću cedila sa finom mrežicom prosijte šećer slatkiša po vrhu svakog komada."
+                        "Stavite tresnje bez kostica u posudu za mesanje bez mrlja; prstima dvaput proverite da li ima jama. Dodajte tapioku, koricu limuna i kasiku secera za poslasticare; promesajte da se temeljito unese. Ostavite smesu na sobnoj temperaturi 15 minuta, a za to vreme vocni sokovi ce se zgusnuti.",
+                        "U medjuvremenu odmotajte listove filo testa. Odmah ih prekrijte cistim, blago vlaznim peskirom. Postavite resetke za pecnicu u gornju i donju trecinu pecnice; zagrejati na 350 stepeni.",
+                        "Pomesajte biljno ulje, maslinovo ulje i puter u soljici za merenje tecnosti. Nakapajte malo mesavine ulja/maslaca na veliki pleh sa obodom, pa zagrejte lim u rerni 2 ili 3 minuta. Postavite lim za peCenje sa sirokom stranom okrenutom prema vama, stavljajuci ga izmedju cinije sa vocem i gomile filo testa.",
+                        "Polozite dva lista filo testa na lim za pecenje tako da donji bude premazan uljima/puterom. Brzo ih preokrenite, a zatim nanesite jos dva lista. Gornji list filo testa prelijte sa malo mesavine ulja/maslaca.",
+                        "Ostavljajuci marginu od 1 inca, rasporedite 1/4 kisele pavlake u sirini od 1 inca duz ivice fila koji vam je najblizi, a zatim rasporedite 1/4 mesavine visanja u paralelnu liniju i inca od pavlake. Za raznovrsnost ili ako vam ponestane tresanja, pospite voce suvim brusnicama, ribizlom ili grozdjicama.",
+                        "Pokupite uglove filo testa koji su vam najblizi dok nezno pravite jedan preklop/kotrljanje od sebe. Premazite vrh rolade sa malo mesavine ulja/putera, pa nastavite da se presavijate i kotrljate dok ne dodjete do krajnjeg kraja testa. Ako testo pukne, koristite malo vode ili malo mesavine ulja/maslaca da ga ponovo zalepite.",
+                        "Ponovite postupak da biste napravili jos tri filovana fila, koristeci preostalu mesavinu pavlake i visnje, ostavljajuci dovoljno smese ulja/maslaca za poslednje cetkanje. Neiskorisceni listovi filo testa mogu se cvrsto umotati u plasticnu foliju i staviti u frizider ili zamrznuti do 2 nedelje. Napunjene filo rolate rasporedite po podmazanom plehu, ravnomerno razmaknute.",
+                        "Preostalom mesavinom ulja/maslaca (po potrebi zagrejte) ocetkajte vrhove svake rolne. Pecite 15 minuta na donjoj resetki, a zatim prebacite na gornju srednju resetku, okrecuci lim za pecenje napred prema nazad; pecite 15 do 20 minuta, dok ne porumene i ne hrskaju po ivicama.",
+                        "Ohladite na plehu oko 10 minuta. Tankom lopaticom otpustite dna po potrebi. Radeci po jedan kolut tresnje, prebacite na dasku za secenje",
+                        "U ovom trenutku, rolne se mogu umotati u aluminijumsku foliju i staviti u frizider na jedan dan. Odmotajte, stavite na podmazan pleh i zagrejte u rerni na 300 stepeni dok se ne zagreje.",
+                        "Za posluzivanje, isecite svaki kolut visnje po dijagonali na tri ili 4 jednaka dela i poredjajte na posluzavnik. Pomocu cedila sa finom mrezicom prosijte secer slatkisa po vrhu svakog komada."
                     ],
                     ingredients: [
-                        "5 do 6 šoljica sveže višnje bez koštica; može zameniti dve tegle od 48 unci bez koštica, oceđene; vidi glavnu belešku",
-                        "Velikodušna 1 kašika pudinga od tapioke u prahu",
+                        "5 do 6 soljica sveze visnje bez kostica; moze zameniti dve tegle od 48 unci bez kostica, ocedjene; vidi glavnu belesku",
+                        "Velikodusna 1 kasika pudinga od tapioke u prahu",
                         "Rendana korica 1 limuna",
-                        "1 gomila kašike šećera za poslastičare, plus još za brisanje prašine",
-                        "1 funta tankog filo testa, poželjno marke Apollo",
-                        "1/4 šolja biljnog ulja",
-                        "1/4 šolja blagog/svetlog maslinovog ulja",
-                        "8 kašike (1 štapić) nesoljenog putera, rastopljenog i toplog",
-                        "1/2 šolje obične ili nemasne pavlake",
-                        "Osušene nezaslađene brusnice, ribizla ili grožđice (opciono)",
+                        "1 gomila kasike sećera za poslastiCare, plus jos za brisanje prasine",
+                        "1 funta tankog filo testa, pozeljno marke Apollo",
+                        "1/4 solja biljnog ulja",
+                        "1/4 solja blagog/svetlog maslinovog ulja",
+                        "8 kasike (1 stapic) nesoljenog putera, rastopljenog i toplog",
+                        "1/2 solje obicne ili nemasne pavlake",
+                        "Osusene nezasladjene brusnice, ribizla ili grozdjice (opciono)",
                         "Voda"
                     ],
                     stars: 1,
@@ -1450,14 +1565,14 @@ $(document).ready(function () {
             uzina = [
                 {
                     head: "Komplet lepinja",
-                    prep: "15 mins",
-                    cook: "10 mins",
+                    prep: "15 minuta",
+                    cook: "10 minuta",
                     portions: "1 Porcija",
                     steps: [
-                        "Isecite lepinju horizontalno, stvarajući blago udubljenje u sredini, tako da lepinja podseća na lonac sa poklopcem. Premažite kajmak preko donjeg dela lepinje. Umutite jaje i rasporedite ga po kajmaku. Zatim stavite donji deo lepinje u zagrejanu rernu i pecite oko 10 minuta (u zavisnosti koliko hrskava volite lepinju). Gornji deo lepinje stavite u šporet neposredno pre nego što izvadite donji tako da i ona bude lepa i topla. Nakon što ih ispečete, uzmite lepinje i prelijte ih vrelim pretopom."
+                        "Isecite lepinju horizontalno, stvarajuci blago udubljenje u sredini, tako da lepinja podseca na lonac sa poklopcem. Premazite kajmak preko donjeg dela lepinje. Umutite jaje i rasporedite ga po kajmaku. Zatim stavite donji deo lepinje u zagrejanu rernu i pecite oko 10 minuta (u zavisnosti koliko hrskava volite lepinju). Gornji deo lepinje stavite u sporet neposredno pre nego sto izvadite donji tako da i ona bude lepa i topla. Nakon sto ih ispecete, uzmite lepinje i prelijte ih vrelim pretopom."
                     ],
                     ingredients: [
-                        "Sveža ravna lepinja",
+                        "Sveza ravna lepinja",
                         "Kajmak",
                         "Jedno jaje",
                         "Pretop"
@@ -1481,11 +1596,11 @@ $(document).ready(function () {
                 },
                 {
                     head: "Kajmak",
-                    prep: "10 mins",
+                    prep: "10 minuta",
                     cook: "/",
                     portions: "1 Porcija",
                     steps: [
-                        "U činiji umutite viljuškom maslac dok ne postane penast. Dodajte izmrvljeni feta sir i pavlaku. Sve to dobro izmešajte. Napomena: Kajmaku nije potrebno dodavati sol jer je feta sir sam po sebi slan. Ako volite blaži kajmak, dodajte malo pavlake. Ovaj petominutni kajmak pravi divan namaz i odlično se slaže sa ćavapsima."
+                        "U ciniji umutite viljuskom maslac dok ne postane penast. Dodajte izmrvljeni feta sir i pavlaku. Sve to dobro izmesajte. Napomena: Kajmaku nije potrebno dodavati so jer je feta sir sam po sebi slan. Ako volite blazi kajmak, dodajte malo pavlake. Ovaj petominutni kajmak pravi divan namaz i odlicno se slaze sa cevapima."
                     ],
                     ingredients: [
                         "100 g putera",
@@ -1511,27 +1626,27 @@ $(document).ready(function () {
                 },
                 {
                     head: "Vocna salata",
-                    prep: "15 mins",
+                    prep: "15 minuta",
                     cook: "/",
                     portions: "10 Porcija",
                     steps: [
-                        "Sok od pomorandže, sok od limuna, smeđi šećer, koricu narandže i koricu limuna prokuvajte u šerpi na srednje jakoj vatri. Smanjite vatru na srednje nisku i pirjajte dok se malo ne zgusne, oko 5 minuta. Sklonite sa vatre i umešajte ekstrakt vanile. Ostavite sa strane da se ohladi.",
-                        "Stavite voće u veliku, prozirnu staklenu činiju ovim redosledom: ananas, jagode, kivi, banane, pomorandže, grožđe i borovnice. Ohlađen sos prelijte preko voća. Pokrijte i ostavite u frižideru 3 do 4 sata pre služenja."
+                        "Sok od pomorandze, sok od limuna, smedji secer, koricu narandze i koricu limuna prokuvajte u serpi na srednje jakoj vatri. Smanjite vatru na srednje nisku i pirjajte dok se malo ne zgusne, oko 5 minuta. Sklonite sa vatre i umesajte ekstrakt vanile. Ostavite sa strane da se ohladi.",
+                        "Stavite voce u veliku, prozirnu staklenu ciniju ovim redosledom: ananas, jagode, kivi, banane, pomorandze, grozdje i borovnice. Ohladjen sos prelijte preko voca. Pokrijte i ostavite u frizideru 3 do 4 sata pre sluzenja."
                     ],
                     ingredients: [
-                        "⅔ šolja svežeg soka od pomorandže",
-                        "¼ šolja i 1 kašika i 1 kašičica svežeg limunovog soka",
-                        "¼ šolja i 1 kašika i 1 kašičica pakovanog smeđeg šećera",
-                        "½ kašičica naribane korice pomorandže",
-                        "½ kašičica naribane korice limuna",
-                        "1 kašičice ekstrakta vanile",
-                        "2 šolje iseckanog svežeg ananasa",
-                        "2 šolje jagoda, oljuštene i narezane",
+                        "2/3 solja svezeg soka od pomorandze",
+                        "1/4 solja i 1 kasika i 1 kasicica svezeg limunovog soka",
+                        "1/4 solja i 1 kasika i 1 kasicica pakovanog smedjeg secera",
+                        "1/2 kasicica naribane korice pomorandze",
+                        "1/2 kasicica naribane korice limuna",
+                        "1 kasicice ekstrakta vanile",
+                        "2 solje iseckanog svezeg ananasa",
+                        "2 solje jagoda, oljustene i narezane",
                         "3 kivi, oguljen i narezan",
-                        "3 banane, isečene",
-                        "2 pomorandže, oguljene i isečene",
-                        "1 šolje grožđa bez semena",
-                        "2 šolje borovnica"
+                        "3 banane, isecene",
+                        "2 pomorandze, oguljene i isecene",
+                        "1 solje grozdja bez semena",
+                        "2 solje borovnica"
                     ],
                     stars: 5,
                     comments: [ 
@@ -1606,8 +1721,16 @@ $(document).ready(function () {
             stars.append(star);
         }
 
+        let pdf_button_div = $("<div></div>").addClass("pdf-download");
+        let pdf_button = $("<button></button>")
+                            .attr("type", "submit")
+                            .addClass("btn delicious-btn")
+                            .html("PDF");
+
+        pdf_button_div.append(pdf_button);
+
         recipe_rating.append(stars);
-        rating_div.append(recipe_rating);
+        rating_div.append(recipe_rating).append(pdf_button_div);
 
         recipe_duration.append(prep_time).append(cook_time).append(portions);
         recipe_heading.append(date).append(heading).append(recipe_duration);
@@ -1619,7 +1742,7 @@ $(document).ready(function () {
         $("#recipes").append(container_image).append(recipe_content);
 
         let preparation_row = $("<div></div>").addClass("row");
-        let preparation_col = $("<div></div>").addClass("col-12 col-lg-8");
+        let preparation_col = $("<div></div>").addClass("col-12 col-lg-8 preparation");
         let counter = 1;
         recipe.steps.forEach(step => {
             let whole_step = $("<div></div>").addClass("single-preparation-step d-flex");
@@ -1666,7 +1789,16 @@ $(document).ready(function () {
                             .attr("type", "text")
                             .css("margin-top", "15%");
 
-        let leave_comment_submit = $("<button></button>").attr("type", "submit").attr("id", "submit-comment").addClass("btn delicious-btn").css("margin-bottom", "5%");
+        let leave_comment_submit = $("<button></button>")
+                                    .attr("type", "submit")
+                                    .attr("id", "submit-comment")
+                                    .attr("disabled", "true")
+                                    .addClass("btn delicious-btn disabled")
+                                    .css("margin-bottom", "5%");
+
+        leave_comment_submit.click(function() {
+            submit_comment();
+        });
 
         leave_comment_area.append(leave_comment_text);
         preparation_col.append(leave_comment_area).append(leave_comment_submit);
@@ -1704,7 +1836,7 @@ $(document).ready(function () {
             portions.html("Porcije: " + recipe.portions);
             leave_comment_text.attr("placeholder", "Ostavi komentar");
             ingredients_text.html("Sastojci");
-            leave_comment_submit.html("Pošalji");
+            leave_comment_submit.html("Posalji");
             date.html("Januar 05, 2021");
 
         }
