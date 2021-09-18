@@ -20,6 +20,9 @@
     <!-- Custom CSS file -->
     <link rel="stylesheet" href="custom.css">
 
+     <!-- Recipe-Post CSS file -->
+    <link rel="stylesheet" href="receipe-post.css">
+
 </head>
 
 <body>
@@ -79,7 +82,7 @@
                                     <li><a href="index-srb.html">Početna</a></li>
                                     <li class="active"><a href="receipe-post-srb.html">Recepti</a></li>
                                     <li><a href="add-recipe-srb.html">Dodaj recept</a></li>
-                                    <li><a href="#">Moj nalog</a></li>
+                                    <li><a href="my-account-srb.html">Moj nalog</a></li>
                                     <li><a href="about-srb.html">O nama</a></li>
                                     <li>
                                         <img id="srb" class="flag" src="img/srbija_zastava.png" alt="">
@@ -117,232 +120,31 @@
         <!-- Receipe Post Search -->
         <div class="receipe-post-search mb-80">
             <div class="container">
-                <form action="#" method="post">
+                <form>
                     <div class="row">
-                        <div class="col-12 col-lg-3">
+                        <div class="error-text col-12">
+                        </div>
+                        <div class="col-12 col-lg-4">
                             <select name="select1" id="select1">
-                                <option value="1">Kategorije recepata</option>
+                                <option value="1">Sve kategorije recepata</option>
                                 <option value="1">Predjelo</option>
                                 <option value="1">Glavno jelo</option>
                                 <option value="1">Dezert</option>
                                 <option value="1">Uzina</option>
                             </select>
                         </div>
-                        <div class="col-12 col-lg-3">
-                            <select name="select1" id="select2">
-                                <option value="1">All Receipies Categories</option>
-                                <option value="1">All Receipies Categories 2</option>
-                                <option value="1">All Receipies Categories 3</option>
-                                <option value="1">All Receipies Categories 4</option>
-                                <option value="1">All Receipies Categories 5</option>
-                            </select>
+                        <div class="col-12 col-lg-4">
+                            <input id="food-name" type="search" name="search" placeholder="Pretraži recepte">
                         </div>
-                        <div class="col-12 col-lg-3">
-                            <input type="search" name="search" placeholder="Search Receipies">
-                        </div>
-                        <div class="col-12 col-lg-3 text-right">
-                            <button type="submit" class="btn delicious-btn">Pretraga</button>
+                        <div class="col-12 col-lg-4 text-right">
+                            <button type="submit" class="btn delicious-btn">Pretraži</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- Receipe Slider -->
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <img src="img/bg-img/bg5.jpg" alt="">
-                </div>
-            </div>
-        </div>
-
-        <!-- Receipe Content Area -->
-        <div class="receipe-content-area">
-            <div class="container">
-
-                <div class="row">
-                    <div class="col-12 col-md-8">
-                        <div class="receipe-headline my-5">
-                            <span>Januar 05, 2021</span>
-                            <h2>Kobasice sa kupusom i krompirom</h2>
-                            <div class="receipe-duration">
-                                <h6>Priprema: 1hr & 15 mins</h6>
-                                <h6>Kuvanje: 30 mins</h6>
-                                <h6>Porcije: 4 porcije</h6>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <div class="receipe-ratings text-right my-5">
-                            <div class="ratings">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12 col-lg-8">
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>01.</h4>
-                            <p>U posoljenoj vodi skuvajte krompire u kori. Pazite da se ne prekuva.</p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>02.</h4>
-                            <p>Iseckajte luk na trakice i dinstajte ga na malo svinjske masti dok ne pozlati.</p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>03.</h4>
-                            <p>Dodajte skuvani, oguljeni i iseckani krompir.</p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>04.</h4>
-                            <p>Dobro pobiberite i dodajte crvenu dimljenu papriku pa sve sjedinite.</p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>05.</h4>
-                            <p>Prema potrebi podlijte s malo vode i dinstajte još pet minuta.</p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>06.</h4>
-                            <p>Kobasice podlijte pivom i kratko ih propržite na tiganju.</p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>07.</h4>
-                            <p>Izvadite kobasice iz tiganja pa na tu masnoću dodajte kiseli kupus, malo senfa, jabuku i crvenu papriku.</p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>08.</h4>
-                            <p>Dinstajte 20-ak minuta.</p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>09.</h4>
-                            <p>U posudu stavite restovani krompir, kupus i kobasicu.</p>
-                        </div>
-                        <!-- Single Preparation Step -->
-                        <div class="single-preparation-step d-flex">
-                            <h4>10.</h4>
-                            <p>Po želji narendajte i aromatični topljeni sir pa zapecite 15 minuta u rerni zagreanoj na 200 Celzijusa.</p>
-                        </div>
-                    </div>
-
-                    <!-- Ingredients -->
-                    <div class="col-12 col-lg-4">
-                        <div class="ingredients">
-                            <h4>Sastojci</h4>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                <label class="custom-control-label" for="customCheck1">2 komada domaće kobasice</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                <label class="custom-control-label" for="customCheck2">700 grama krompira</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                <label class="custom-control-label" for="customCheck3">1 glavica crvenog luka</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                <label class="custom-control-label" for="customCheck4">400 grama seckanog kiselog kupusa</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                <label class="custom-control-label" for="customCheck5">1 zelena rendana jabuka</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                <label class="custom-control-label" for="customCheck6">crvena dimljena paprika</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                <label class="custom-control-label" for="customCheck7">so i krupni biber</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck8">
-                                <label class="custom-control-label" for="customCheck8">malo svinjske masti</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck8">
-                                <label class="custom-control-label" for="customCheck8">100 ml piva</label>
-                            </div>
-
-                            <!-- Custom Checkbox -->
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck8">
-                                <label class="custom-control-label" for="customCheck8">kašičica senfa</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-heading text-left">
-                            <h3>Ostavite komentar</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="contact-form-area">
-                            <form action="#" method="post">
-                                <div class="row">
-                                    <div class="col-12 col-lg-6">
-                                        <input type="text" class="form-control" id="name" placeholder="Ime">
-                                    </div>
-                                    <div class="col-12 col-lg-6">
-                                        <input type="email" class="form-control" id="email" placeholder="E-mail">
-                                    </div>
-                                    <div class="col-12">
-                                        <input type="text" class="form-control" id="subject" placeholder="Tema">
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea name="message" class="form-control" id="message" cols="30" rows="10" placeholder="Poruka"></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn delicious-btn mt-30" type="submit">Postavite komentar</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="recipes">
         </div>
     </div>
 
@@ -380,6 +182,10 @@
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+    <!-- ScrollReveal js -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- Recipe Post js -->
+    <script src="js/recipe-post.js"></script>
     <!-- Utility js -->
     <script src="js/utility.js"></script>
 </body>

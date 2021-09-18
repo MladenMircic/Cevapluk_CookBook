@@ -9,7 +9,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Ćevapluk-Dodaj recept</title>
+    <title>Ćevapluk-Recipes</title>
 
     <!-- Favicon -->
     <link rel="icon" href="img/SausageLogo.png">
@@ -19,6 +19,9 @@
 
     <!-- Custom CSS file -->
     <link rel="stylesheet" href="custom.css">
+
+    <!-- My Account CSS file -->
+    <link rel="stylesheet" href="my-account.css">
 
 </head>
 
@@ -78,8 +81,8 @@
                                 <ul>
                                     <li><a href="index-srb.html">Početna</a></li>
                                     <li><a href="receipe-post-srb.html">Recepti</a></li>
-                                    <li class="active"><a href="add-recipe-srb.html">Dodaj recept</a></li>
-                                    <li><a href="my-account-srb.html">Moj nalog</a></li>
+                                    <li><a href="add-recipe-srb.html">Dodaj recept</a></li>
+                                    <li class="active"><a href="my-account-srb.html">Moj nalog</a></li>
                                     <li><a href="about-srb.html">O nama</a></li>
                                     <li>
                                         <img id="srb" class="flag" src="img/srbija_zastava.png" alt="">
@@ -98,83 +101,55 @@
     </header>
     <!-- ##### Header Area End ##### -->
 
-    <!-- ##### Breadcumb Area Start ##### -->
-    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb3.jpg);">
+     <!-- ##### Breadcumb Area Start ##### -->
+     <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb3.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="breadcumb-text text-center">
-                        <h2>Dodaj novi recept</h2>
+                        <h2>Moje informacije</h2>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- ##### Contact Area Start ##### -->
-    <div class="recipe-info section-padding-0-80">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="contact-form-area">
-                        <form action="#" method="post">
-                            <div class="row">
-                                <div class="col-12">
-                                    <input type="text" class="form-control" id="food-type" placeholder="Tip hrane (Predjelo, Glavno jelo, Dezert, Uzina)">
-                                </div>
-                                <div class="col-12">
-                                    <input type="text" class="form-control" id="food-name" placeholder="Naziv hrane">
-                                </div>
-                                <div class="col-12">
-                                    <input type="text" class="form-control" id="preparation-time" placeholder="Vreme pripreme">
-                                </div>
-                                <div class="col-12">
-                                    <input type="text" class="form-control" id="cooking-time" placeholder="Vreme kuvanja">
-                                </div>
-                                <div class="col-12">
-                                    <input type="text" class="form-control" id="portions" placeholder="Porcije">
-                                </div>
-                                <div class="col-12">
-                                    <textarea name="message" class="form-control" id="steps" cols="30" rows="10" placeholder="Koraci (svaki korak novi red)"></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <textarea name="message" class="form-control" id="ingredients" cols="30" rows="10" placeholder="Sastojci (svaki sastojak novi red)"></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <input type="text" class="form-control" id="stars" placeholder="Zvezdice">
-                                </div>
-                                <div class="col-12 text-center">
-                                    <button class="btn delicious-btn mt-30 send-recipe-info" type="submit">Dodaj</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+    <!-- ##### Breadcumb Area End ##### -->
+    
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-heading">
+                    <h3>~ Moji recepti ~</h3>
                 </div>
             </div>
         </div>
     </div>
-    <!-- ##### Contact Area End ##### -->
 
-     <!-- ##### Footer Area Start ##### -->
-     <footer class="footer-area">
-        <div class="container h-100">
-            <div class="row h-100">
-                <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
-                    <!-- Footer Social Info -->
-                    <div class="footer-social-info text-right">
-                        <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
-                        <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                    </div>
-                    <p>
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script>, Mladen Mirčić & Isidora Milošević, Odsek za softversko inženjerstvo Elektrotehničkog fakulteta u Beogradu
-                    </p>
+    <div class="container">
+        <div class="row my-recipes">
+        </div>    
+    </div>
+
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-12 h-100 d-flex flex-wrap align-items-center justify-content-between">
+                <!-- Footer Social Info -->
+                <div class="footer-social-info text-right">
+                    <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
                 </div>
+                <p>
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>, Mladen Mirčić & Isidora Milošević, Odsek za softversko inženjerstvo Elektrotehničkog fakulteta u Beogradu
+                </p>
             </div>
         </div>
+    </div>
     </footer>
     <!-- ##### Footer Area Start ##### -->
 
@@ -189,8 +164,10 @@
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+    <!-- ScrollReveal js -->
+    <script src="https://unpkg.com/scrollreveal"></script>
     <!-- Recipe Post js -->
-    <script src="js/add-recipe.js"></script>
+    <script src="js/my-account.js"></script>
     <!-- Utility js -->
     <script src="js/utility.js"></script>
 </body>

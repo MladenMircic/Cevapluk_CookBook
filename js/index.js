@@ -510,7 +510,6 @@ $(document).ready(function() {
     }
 
     function get_random_recipes() {
-
         while(found_recipes.length < 2) {
             let recipe_picked = Math.floor(Math.random() * 4);
 
@@ -551,7 +550,8 @@ $(document).ready(function() {
 
         let path = window.location.pathname;
         let page = path.split("/").pop();
-        localStorage.setItem("language", page.split(".")[0].split("-")[1]);
+        let language = page.split(".")[0].split("-")[1];
+        localStorage.setItem("language", language);
 
         initializeStorage();
         
@@ -560,11 +560,33 @@ $(document).ready(function() {
 
         get_random_recipes();
         for (let i = 0; i < 2; i++) {
-            let recipe_image = $("<img>").attr("src", "img/" + found_recipes[i].head + ".jpg").attr("alt", "").addClass("recipe-img");
+
+            const recipe_image_failsafe = new Image();
+            recipe_image_failsafe.src = "img/" + found_recipes[i].head + ".jpg";
+            let recipe_image = $("<img>").attr("alt", "").addClass("recipe-img");
+
+            recipe_image_failsafe.onload = () => {
+                recipe_image.attr("src", "img/" + found_recipes[i].head + ".jpg")
+            }
+            recipe_image_failsafe.onerror = () => {
+                recipe_image.attr("src", "img/blog-img/1.jpg");
+            }
+
             let recipe_div = $("<div></div>").addClass("top-cta-content");
             let recipe_head = $("<h3></h3>").html(found_recipes[i].head);
-            let recipe_descr = $("<h6></h6>").html("Simple &amp; Delicious");
+            let recipe_descr = $("<h6></h6>");
+
             let recipe_link = $("<a></a>").attr("href", "receipe-post-" + localStorage.getItem("language") + ".html").addClass("btn delicious-btn recipe-button").html("See Full Recipe").attr("id", i + 1);
+
+            if (language == "srb") {
+                recipe_link.html("Pogledaj Ceo Recept");
+                recipe_descr.html("Jednostavno &amp; Ukusno");
+            }
+            else {
+                recipe_link.html("See Full Recipe")
+                recipe_descr.html("Simple &amp; Delicious");
+            }
+
             recipe_div.append(recipe_head).append(recipe_descr).append(recipe_link);
             $("#" + (i + 1) + "-recipe").append(recipe_image).append(recipe_div);
         }
