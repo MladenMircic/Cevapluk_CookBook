@@ -191,50 +191,100 @@ $(document).ready(function () {
     $(".recipe-link").click(function() {
         let recipe_name = $(this).html();
         let found = false;
-        appetizer.forEach(food => {
-            localStorage.setItem("food-type", "Appetizer");
-            if (food.head == recipe_name) {
-                localStorage.setItem("recipe-to-show", JSON.stringify(food));
-                found = true;
+
+        if (language == "eng") {
+            appetizer.forEach(food => {
+                localStorage.setItem("food-type", "Appetizer");
+                if (food.head == recipe_name) {
+                    localStorage.setItem("recipe-to-show", JSON.stringify(food));
+                    found = true;
+                    return;
+                }
+            });
+    
+            if (found)
                 return;
-            }
-        });
-
-        if (found)
-            return;
-
-        main_course.forEach(food => {
-            localStorage.setItem("food-type", "Main course");
-            if (food.head == recipe_name) {
-                localStorage.setItem("recipe-to-show", JSON.stringify(food));
-                found = true;
+    
+            main_course.forEach(food => {
+                localStorage.setItem("food-type", "Main course");
+                if (food.head == recipe_name) {
+                    localStorage.setItem("recipe-to-show", JSON.stringify(food));
+                    found = true;
+                    return;
+                }
+            });
+    
+            if (found)
                 return;
-            }
-        });
-
-        if (found)
-            return;
-
-        dessert.forEach(food => {
-            localStorage.setItem("food-type", "Dessert");
-            if (food.head == recipe_name) {
-                localStorage.setItem("recipe-to-show", JSON.stringify(food));
-                found = true;
+    
+            dessert.forEach(food => {
+                localStorage.setItem("food-type", "Dessert");
+                if (food.head == recipe_name) {
+                    localStorage.setItem("recipe-to-show", JSON.stringify(food));
+                    found = true;
+                    return;
+                }
+            });
+    
+            if (found)
                 return;
-            }
-        });
-
-        if (found)
-            return;
-
-        snack.forEach(food => {
-            localStorage.setItem("food-type", "Snack");
-            if (food.head == recipe_name) {
-                localStorage.setItem("recipe-to-show", JSON.stringify(food));
-                found = true;
+    
+            snack.forEach(food => {
+                localStorage.setItem("food-type", "Snack");
+                if (food.head == recipe_name) {
+                    localStorage.setItem("recipe-to-show", JSON.stringify(food));
+                    found = true;
+                    return;
+                }
+            });
+        }
+        else {
+            predjelo.forEach(food => {
+                localStorage.setItem("food-type", "Predjelo");
+                if (food.head == recipe_name) {
+                    localStorage.setItem("recipe-to-show", JSON.stringify(food));
+                    found = true;
+                    return;
+                }
+            });
+    
+            if (found)
                 return;
-            }
-        });
+    
+            glavno_jelo.forEach(food => {
+                localStorage.setItem("food-type", "Glavno jelo");
+                if (food.head == recipe_name) {
+                    localStorage.setItem("recipe-to-show", JSON.stringify(food));
+                    found = true;
+                    return;
+                }
+            });
+    
+            if (found)
+                return;
+    
+            dezert.forEach(food => {
+                localStorage.setItem("food-type", "Dezert");
+                if (food.head == recipe_name) {
+                    localStorage.setItem("recipe-to-show", JSON.stringify(food));
+                    found = true;
+                    return;
+                }
+            });
+    
+            if (found)
+                return;
+    
+            uzina.forEach(food => {
+                localStorage.setItem("food-type", "Uzina");
+                if (food.head == recipe_name) {
+                    localStorage.setItem("recipe-to-show", JSON.stringify(food));
+                    found = true;
+                    return;
+                }
+            });
+        }
+        
 
     });
 
@@ -381,6 +431,7 @@ $(document).ready(function () {
 
         if (language == "eng") {
             for (let i = 0; i < appetizer.length; i++) {
+                alert(appetizer[i].head);
                 if (appetizer[i].head == name) {
                     appetizer[i].comments.push({
                         author: "Mladen Mircic",
@@ -390,6 +441,9 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
+                    localStorage.setItem("appetizer", JSON.stringify(appetizer));
+                    localStorage.setItem("predjelo", JSON.stringify(predjelo));
+                    return;
                 }
             }
             for (let i = 0; i < main_course.length; i++) {
@@ -402,6 +456,9 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
+                    localStorage.setItem("main_course", JSON.stringify(main_course));
+                    localStorage.setItem("glavno_jelo", JSON.stringify(glavno_jelo));
+                    return;
                 }
             }
             for (let i = 0; i < dessert.length; i++) {
@@ -414,6 +471,9 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
+                    localStorage.setItem("dessert", JSON.stringify(dessert));
+                    localStorage.setItem("dezert", JSON.stringify(dezert));
+                    return;
                 }
             }
             for (let i = 0; i < snack.length; i++) {
@@ -426,6 +486,9 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
+                    localStorage.setItem("appetizer", JSON.stringify(snack));
+                    localStorage.setItem("predjelo", JSON.stringify(uzina));
+                    return;
                 }
             }
         }
@@ -440,6 +503,9 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
+                    localStorage.setItem("appetizer", JSON.stringify(appetizer));
+                    localStorage.setItem("predjelo", JSON.stringify(predjelo));
+                    return;
                 }
             }
             for (let i = 0; i < glavno_jelo.length; i++) {
@@ -452,6 +518,9 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
+                    localStorage.setItem("appetizer", JSON.stringify(main_course));
+                    localStorage.setItem("predjelo", JSON.stringify(glavno_jelo));
+                    return;
                 }
             }
             for (let i = 0; i < dezert.length; i++) {
@@ -464,6 +533,9 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
+                    localStorage.setItem("appetizer", JSON.stringify(dessert));
+                    localStorage.setItem("predjelo", JSON.stringify(dezert));
+                    return;
                 }
             }
             for (let i = 0; i < uzina.length; i++) {
@@ -476,6 +548,9 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
+                    localStorage.setItem("appetizer", JSON.stringify(snack));
+                    localStorage.setItem("predjelo", JSON.stringify(uzina));
+                    return;
                 }
             }
         }
@@ -485,8 +560,7 @@ $(document).ready(function () {
         my_account = JSON.parse(localStorage.getItem("my-account"));
 
 
-        if (language == "eng") {
-            if (localStorage.getItem("appetizer") != null)
+        if (localStorage.getItem("appetizer") != null)
                 appetizer = JSON.parse(localStorage.getItem("appetizer"));
             else {
                 appetizer = [
@@ -982,506 +1056,504 @@ $(document).ready(function () {
 
                 localStorage.setItem("snack", JSON.stringify(snack));
             }
-        }
-        else {
-            if (localStorage.getItem("predjelo") != null)
-                predjelo = JSON.parse(localStorage.getItem("predjelo"));
-            else {
-                predjelo = [
-                    {
-                        head: "Tanjir sa sirom",
-                        prep: "30 mins",
-                        cook: "/",
-                        portions: "4 Porcije",
-                        steps: [
-                            "Počnite sa velikim stvarima: činije i sir. Sir treba poslužiti na sobnoj temperaturi.",
-                            "Dodajte meso, hleb i krekere. Meso možete dodati na nekoliko različitih načina: jednostavnim snopom, rastavljenim u liniju ili polukrug ili presavijanjem većih komada u zabavne oblike.",
-                            "Popunite velike prostore voćem i orašastim plodovima. Takođe, dodajte malo maslina i napunite sve male činije.",
-                            "Ugurajte malo zelenila u bilo koji prostor koji je još prazan."
-                        ],
-                        ingredients: [
-                            "Sir (izaberite 3-5)",
-                            "Voće i povrće (izaberite 1-3)",
-                            "Orasi (izaberite 2)",
-                            "Hleb ili krekeri (izaberite 2-4)"
-                        ],
-                        stars: 5,
-                        comments: [ 
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Fantastik Bombastik'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Prefinjen ukus & miris'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Dominacija od \'rane nema sta!'
-                            },
-                        ],
-                        difficulty: 4
-                    },{
-                        head: "Ruska salata",
-                        prep: "1 hr",
-                        cook: "30 mins",
-                        portions: "4 Porcije",
-                        steps: [
-                            "Donesite veliki lonac vode da provri; dodajte krompir i šargarepu. Vratite smešu do ključanja i dodajte jaja; kuvati dok krompir ne omekša, 20 do 30 minuta. Ocijedite i malo ohladite smešu. Iseckati krompir i šargarepu; oguliti i iseckati jaja.",
-                            "Pomesajte krompir, šargarepu, jaja, kisele krastavce, grašak, šunku i peršun zajedno u velikoj činiji; umešajte majonez dok salata ne bude ravnomerno premazana."
-                        ],
-                        ingredients: [
-                            "6 krompira, oljušteno",
-                            "1 šargarepa, ili više po ukusu",
-                            "4 jaja",
-                            "6 veliki kiseli krastavci, isečeni na kockice",
-                            "1 konzerva graska, iscedjena",
-                            "1/2 šolja potpuno skuvane šunke, ili po ukusu",
-                            "1 kašika seckanog svežeg peršuna, ili po ukusu",
-                            "1/2 šolja majoneza ili po ukusu"
-                        ],
-                        stars: 3,
-                        comments: [ 
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Fantastik Bombastik'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Prefinjen ukus & miris'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Dominacija od \'rane nema sta!'
-                            },
-                        ],
-                        difficulty: 4
-                    },{
-                        head: "Vocni umak",
-                        prep: "15 mins",
-                        cook: "/",
-                        portions: "4 Servings",
-                        steps: [
-                            "U manjoj činiji umutite krem sir i puter dok ne postane glatko. Umutite kremu od belog sleza. Preklopite umućenim prelivom. Poslužite sa voćem. Čuvati u frižideru."
-                        ],
-                        ingredients: [
-                            "1 kesica krem sira",
-                            "1/2 šolja putera, omekšano",
-                            "1/2 šolja krem od sleza",
-                            "1 karton smrznut šlag preliven, odmrznut",
-                            "Asortiman svežeg voća"
-                        ],
-                        stars: 4,
-                        comments: [ 
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Fantastik Bombastik'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Prefinjen ukus & miris'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Dominacija od \'rane nema sta!'
-                            },
-                        ],
-                        difficulty: 6
-                    }
-                ];
-
-                localStorage.setItem("predjelo", JSON.stringify(predjelo));
-            }
-
-            if (localStorage.getItem("glavno_jelo") != null)
-                glavno_jelo = JSON.parse(localStorage.getItem("glavno_jelo"));
-            else {
-                glavno_jelo = [
-                    {
-                        head: "Sarma",
-                        prep: "3 hrs",
-                        cook: "2 hrs 15 mins",
-                        portions: "5 Porcija",
-                        steps: [
-                            "Najpre operite kupus i uklonite tvrdi komad stabljike na dnu lista. Budite oprezni i pokušajte da ne napravite rupu. Ostavi stranu.",
-                            "Na 2 kašike ulja propržite seckani luk do zlatno smeđe boje. Dodajte malo vode i kuvajte dok tečnost ne ispari i luk omekša, povremeno mešajući.",
-                            "Dodajte seckanu šargarepu, promešajte jednom, dodajte govedinu, ponovo promešajte i ostavite da se kuva oko 15 minuta. Povremeno promešajte drvenom kašikom da se goveđi grudvi slome.",
-                            "Sada je vreme da dodate pirinač. Veoma je važno stalno mešati kada ga dodajete. Kuvajte još 5 minuta i sklonite sa vatre.",
-                            "Začinite solju, mlevenim biberom, mljevenim čilijem i sitno sjeckanim peršunom. Prethodno zagrejte rernu na 250 stepeni C i pripremite posudu za pečenje 20k28cm.",
-                            "Sada napunite kupus. Stavite kašiku govedine na sredinu donjeg dela lista. Preklopite s leve strane, a zatim sa desne. Zarolajte kupus držeći prste sa strane.",
-                            "Stavite kiflice u nauljenu posudu za pečenje. Pospite čilijem i peršunom. Na sredinu stavite kriške slanine. Ulijte 1 i ⅔ šolje vode.",
-                            "Pecite poklopljeno 1 sat, a zatim smanjite temperaturu na 200 stepeni C i pecite još 1 sat.",
-                            "Na kraju kratko propržite brašno sa 5 kašika ulja u maloj šerpi, neprestano mešajući i postepeno dodavajući hladno. U isto vreme izvadite posudu za pečenje iz rerne, prelijte ⅔ šolje vode i mešavine brašna, ulja i hladnog. Stavite nepokriveno jelo u rernu još 15 minuta.",
-                            "Poslužite toplo!"
-                        ],
-                        ingredients: [
-                            "20 mali kiseli listovi kupusa",
-                            "450 grama mlevenog junećeg mesa",
-                            "1 luk, sitno iseckan",
-                            "1 mala šargarepa, sitno iseckana",
-                            "1/4 solje (50g) pirinca",
-                            "so, biber, po ukusu",
-                            "sitnjen čili, po ukusu",
-                            "7 kasicica (105ml) povrtnog ulja",
-                            "2 kasicica (30g) brasna",
-                            "dosta persuna",
-                            "dodatno cilija i persuna za ukras",
-                            "4-5 kolutova sunke ili slanine",
-                            "1 i 2/3 soljica (400ml) vode + 2/3 soljica (160ml)"
-                        ],
-                        stars: 3,
-                        comments: [ 
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Fantastik Bombastik'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Prefinjen ukus & miris'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Dominacija od \'rane nema sta!'
-                            },
-                        ],
-                        difficulty: 9
-                    }, 
-                    {
-                        head: "Punjena paprika",
-                        prep: "1 hr 20 mins",
-                        cook: "10 mins",
-                        portions: "6 Porcija",
-                        steps: [
-                            "Zagrejati rernu na 400 °. U malom tiganju pripremite pirinač prema uputstvima na pakovanju. U velikoj tavi na srednjoj vatri zagrejte ulje. Kuvajte luk dok ne omekša, oko 5 minuta. Umešajte paradajz pastu i beli luk i kuvajte dok ne zamiriše, još oko 1 minut. Dodajte mleveno goveđe meso i kuvajte, razbijajući meso drvenom kašikom, dok više ne postane ružičasto, 6 minuta. Iscedite mast.",
-                            "Vratite goveđu mešavinu u tiganj, a zatim umešajte kuvani pirinač i paradajz isečen na kockice. Začinite origanom, solju i biberom. Pustite da se krčka dok se tečnost malo ne smanji, oko 5 minuta.",
-                            "Paprike izrezane okrenute nagore stavite u posudu za pečenje i pokapajte uljem. U svaku papriku kašikom dodajte goveđu smesu i prelijte Monterei džekom, pa posudu za pečenje prekrijte folijom.",
-                            "Pecite dok paprike ne omekšaju, oko 35 minuta. Otkrijte i pecite dok sir ne zakipi, još 10 minuta.",
-                            "Pre služenja ukrasite peršunom."
-                        ],
-                        ingredients: [
-                            "1/2 c. nekuvani pirinač",
-                            "2 tbsp. ekstra devičansko maslinovo ulje, plus još za kišu",
-                            "1 srednji luk, iseckan",
-                            "2 tbsp. paradajz sos",
-                            "3 cena belog luka, mlevenih",
-                            "1 lb. mlevena junetina",
-                            "1 (14.5-oz.) konzerve paradajza isečene na kockice",
-                            "1 1/2 tsp. sušeni origano",
-                            "Košer soli",
-                            "Sveže mleveni crni biber",
-                            "6 paprike, vrhovi i jezgra uklonjeni",
-                            "1 c. iseckan priključak Monterei",
-                            "Sveže iseckani peršun, za ukrašavanje"
-                        ],
-                        stars: 2,
-                        comments: [ 
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Fantastik Bombastik'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Prefinjen ukus & miris'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Dominacija od \'rane nema sta!'
-                            },
-                        ],
-                        difficulty: 5
-                    }, 
-                    {
-                        head: "Kardjordjeva snicla",
-                        prep: "1 hr",
-                        cook: "15 mins",
-                        portions: "4 Porcija",
-                        steps: [
-                            "Pileći odresci od svinjetine dok ne budu tanki i mekani i na svaki odrezak stavite malo kajmaka (ili krem sira).",
-                            "Umotajte meso u kolute i svaki komad učvrstite čačkalicom.",
-                            "Odreske premažite brašnom, pa ih umočite u umućena jaja i na kraju uvaljajte u mrvice hleba.",
-                            "Pržite u vrelom ulju do zlatno žute boje."
-                        ],
-                        ingredients: [
-                            "500 g svinjski odresci bez kostiju",
-                            "150 g kajmak – umesto toga možete koristiti krem sir",
-                            "2 jaja",
-                            "brasno",
-                            "prezle",
-                            "so"
-                        ],
-                        stars: 5,
-                        comments: [ 
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Fantastik Bombastik'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Prefinjen ukus & miris'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Dominacija od \'rane nema sta!'
-                            },
-                        ],
-                        difficulty: 3
-                    }
-                ];
-
-                localStorage.setItem("glavno_jelo", JSON.stringify(glavno_jelo));
-            }
-
-            if (localStorage.getItem("dezert") != null)
-                dezert = JSON.parse(localStorage.getItem("dezert"));
-            else {
-                dezert = [
-                    {
-                        head: "Vanilice",
-                        prep: "1 hr",
-                        cook: "15 mins",
-                        portions: "60 Kolaca",
-                        steps: [
-                            "Nekoliko dana pre pravljenja kolačića, pomešajte šećer poslastičara sa zrnom vanile u maloj činiji sa čvrstim poklopcem. Ovo je vaš vanilin šećer. Čuvati na suvom mestu.",
-                            "U mikseru sa lopaticom istucite svinjsku mast sa granuliranim šećerom dok ne postane kremasta. Umutite jaje, žumanca, limunov sok i koricu limuna. Dodajte orahe i brašno i mutite dok se ne formira jednolično testo. Pokrijte testo i ostavite u frižideru najmanje 3 sata ili preko noći.",
-                            "Prethodno zagrejte rernu na 325 ° F (konvekciono pečenje na 350 ° F). Stavite testo na radnu površinu posutu brašnom i razvaljajte ga u okruglu debljinu 1/4 inča. Dva pleha obložite papirom za pečenje. Koristeći mali okrugli rezač za kolačiće (ja koristim rezače veličine 1 inča ili četvrtine), istisnite kolačiće i rasporedite ih jedan po jedan na plehove za pečenje.",
-                            "Pecite oko 12 minuta, tako da kolutići ostanu beli. Ostavite kolačiće da se ohlade na plehovima 5 minuta, a zatim ih prebacite na rešetku ili ravnu površinu da se potpuno ohlade.",
-                            "Kad se kolačići ohlade, uzimajte jednu po jednu kolačicu, premažite marmeladom i prelijte drugom okruglom.",
-                            "Svaki sendvič sa kolačićima obilno uvaljajte u vanilin šećer. Stavite kolačiće u limenu kutiju i sačekajte jedan do dva dana pre serviranja."
-                        ],
-                        ingredients: [
-                            "200 grama šećera za poslastičare",
-                            "1 zrno vanile, isečeno na komade od 1/2 inča",
-                            "300 grama masti (idealno list masti)",
-                            "250 grama secera u prahu",
-                            "1 celo jaje",
-                            "2 zumanceta",
-                            "Sok od limuna",
-                            "1 limunove kore",
-                            "250 grama sitnjenog lesnika",
-                            "600 grama brasna",
-                            "Džem od šipka ili kajsije"
-                        ],
-                        stars: 4,
-                        comments: [ 
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Fantastik Bombastik'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Prefinjen ukus & miris'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Dominacija od \'rane nema sta!'
-                            },
-                        ],
-                        difficulty: 5
-                    },{
-                        head: "Pita od jabuka",
-                        prep: "1 hr 30 mins",
-                        cook: "45 mins",
-                        portions: "6 Porcija",
-                        steps: [
-                            "Zagrejati rernu na 375 °. U maloj činiji pomešajte šećer, brašno i začine; ostaviti po strani. U veliku činiju prelijte jabuke limunovim sokom. Dodajte mešavinu šećera; bacati premazati.",
-                            "Na blago pobrašnjenoj površini razvaljajte polovinu testa u krug debljine 1/8 inča; transfer na 9-in. tanjir za pitu. Obrežite čak i sa obodom. Dodajte punjenje; tačka sa puterom. Preostalo testo razvaljajte u krug debljine 1/8 inča. Prepunite mesto. Trim, zaptivka i ivica kanelure. Isecite proreze na vrhu. Istucite belanca do pene; četkom preko kore. Pospite šećerom. Lagano pokrijte ivicu folijom.",
-                            "Pecite 25 minuta. Uklonite foliju; pecite dok kora ne postane zlatno braon i punjenje ne postane mehuriće, 20-25 minuta duže. Ohladite na rešetki."
-                        ],
-                        ingredients: [
-                            "1/2 solja secera",
-                            "1/2 solja braon secera",
-                            "3 kasika brasna",
-                            "1 kasicica cimeta",
-                            "1/4 kasicica djumbira",
-                            "1/4 kasicica muškatni oraščić",
-                            "6 do 7 šolje tanko narezanih oljuštenih tart jabuka",
-                            "1 kašika limunovog soka",
-                            "Testo za pitu sa dvostrukom korom",
-                            "1 kašika putera",
-                            "1 veliko jaje",
-                            "Dodatno secera"
-                        ],
-                        stars: 3,
-                        comments: [ 
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Fantastik Bombastik'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Prefinjen ukus & miris'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Dominacija od \'rane nema sta!'
-                            },
-                        ],
-                        difficulty: 3
-                    },{
-                        head: "Pita s visnjama",
-                        prep: "2 hrs",
-                        cook: "1 hr",
-                        portions: "12 - 16 Porcije",
-                        steps: [
-                            "Stavite trešnje bez koštica u posudu za mešanje bez mrlja; prstima dvaput proverite da li ima jama. Dodajte tapioku, koricu limuna i kašiku šećera za poslastičare; promešajte da se temeljito unese. Ostavite smešu na sobnoj temperaturi 15 minuta, a za to vreme voćni sokovi će se zgusnuti.",
-                            "U međuvremenu odmotajte listove filo testa. Odmah ih prekrijte čistim, blago vlažnim peškirom. Postavite rešetke za pećnicu u gornju i donju trećinu pećnice; zagrejati na 350 stepeni.",
-                            "Pomešajte biljno ulje, maslinovo ulje i puter u šoljici za merenje tečnosti. Nakapajte malo mešavine ulja/maslaca na veliki pleh sa obodom, pa zagrejte lim u rerni 2 ili 3 minuta. Postavite lim za pečenje sa širokom stranom okrenutom prema vama, stavljajući ga između činije sa voćem i gomile filo testa.",
-                            "Položite dva lista filo testa na lim za pečenje tako da donji bude premazan uljima/puterom. Brzo ih preokrenite, a zatim nanesite još dva lista. Gornji list filo testa prelijte sa malo mešavine ulja/maslaca.",
-                            "Ostavljajući marginu od 1 inča, rasporedite 1/4 kisele pavlake u širini od 1 inča duž ivice fila koji vam je najbliži, a zatim rasporedite jednu četvrtinu mešavine višanja u paralelnu liniju i inča od pavlake. Za raznovrsnost ili ako vam ponestane trešanja, pospite voće suvim brusnicama, ribizlom ili grožđicama.",
-                            "Pokupite uglove filo testa koji su vam najbliži dok nežno pravite jedan preklop/kotrljanje od sebe. Premažite vrh rolade sa malo mešavine ulja/putera, pa nastavite da se presavijate i kotrljate dok ne dođete do krajnjeg kraja testa. Ako testo pukne, koristite malo vode ili malo mešavine ulja/maslaca da ga ponovo zalepite.",
-                            "Ponovite postupak da biste napravili još tri filovana fila, koristeći preostalu mešavinu pavlake i višnje, ostavljajući dovoljno smeše ulja/maslaca za poslednje četkanje. Neiskorišćeni listovi filo testa mogu se čvrsto umotati u plastičnu foliju i staviti u frižider ili zamrznuti do 2 nedelje. Napunjene filo rolate rasporedite po podmazanom plehu, ravnomerno razmaknute.",
-                            "Preostalom mešavinom ulja/maslaca (po potrebi zagrejte) očetkajte vrhove svake rolne. Pecite 15 minuta na donjoj rešetki, a zatim prebacite na gornju srednju rešetku, okrećući lim za pečenje napred prema nazad; pecite 15 do 20 minuta, dok ne porumene i ne hrskaju po ivicama.",
-                            "Ohladite na plehu oko 10 minuta. Tankom lopaticom otpustite dna po potrebi. Radeći po jedan kolut trešnje, prebacite na dasku za sečenje",
-                            "U ovom trenutku, rolne se mogu umotati u aluminijumsku foliju i staviti u frižider na jedan dan. Odmotajte, stavite na podmazan pleh i zagrejte u rerni na 300 stepeni dok se ne zagreje.",
-                            "Za posluživanje, isecite svaki kolut višnje po dijagonali na tri ili 4 jednaka dela i poređajte na poslužavnik. Pomoću cedila sa finom mrežicom prosijte šećer slatkiša po vrhu svakog komada."
-                        ],
-                        ingredients: [
-                            "5 do 6 šoljica sveže višnje bez koštica; može zameniti dve tegle od 48 unci bez koštica, oceđene; vidi glavnu belešku",
-                            "Velikodušna 1 kašika pudinga od tapioke u prahu",
-                            "Rendana korica 1 limuna",
-                            "1 gomila kašike šećera za poslastičare, plus još za brisanje prašine",
-                            "1 funta tankog filo testa, poželjno marke Apollo",
-                            "1/4 šolja biljnog ulja",
-                            "1/4 šolja blagog/svetlog maslinovog ulja",
-                            "8 kašike (1 štapić) nesoljenog putera, rastopljenog i toplog",
-                            "1/2 šolje obične ili nemasne pavlake",
-                            "Osušene nezaslađene brusnice, ribizla ili grožđice (opciono)",
-                            "Voda"
-                        ],
-                        stars: 1,
-                        comments: [ 
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Fantastik Bombastik'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Prefinjen ukus & miris'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Dominacija od \'rane nema sta!'
-                            },
-                        ],
-                        difficulty: 7
-                    }
-                ];
-
-                localStorage.setItem("dezert", JSON.stringify(dezert));
-            }
-
-            if (localStorage.getItem("uzina") != null)
-                uzina = JSON.parse(localStorage.getItem("uzina"));
-            else {
-                uzina = [
-                    {
-                        head: "Komplet lepinja",
-                        prep: "15 mins",
-                        cook: "10 mins",
-                        portions: "1 Porcija",
-                        steps: [
-                            "Isecite lepinju horizontalno, stvarajući blago udubljenje u sredini, tako da lepinja podseća na lonac sa poklopcem. Premažite kajmak preko donjeg dela lepinje. Umutite jaje i rasporedite ga po kajmaku. Zatim stavite donji deo lepinje u zagrejanu rernu i pecite oko 10 minuta (u zavisnosti koliko hrskava volite lepinju). Gornji deo lepinje stavite u šporet neposredno pre nego što izvadite donji tako da i ona bude lepa i topla. Nakon što ih ispečete, uzmite lepinje i prelijte ih vrelim pretopom."
-                        ],
-                        ingredients: [
-                            "Sveža ravna lepinja",
-                            "Kajmak",
-                            "Jedno jaje",
-                            "Pretop"
-                        ],
-                        stars: 4,
-                        comments: [ 
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Fantastik Bombastik'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Prefinjen ukus & miris'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Dominacija od \'rane nema sta!'
-                            },
-                        ],
-                        difficulty: 8
-                    },
-                    {
-                        head: "Kajmak",
-                        prep: "10 mins",
-                        cook: "/",
-                        portions: "1 Porcija",
-                        steps: [
-                            "U činiji umutite viljuškom maslac dok ne postane penast. Dodajte izmrvljeni feta sir i pavlaku. Sve to dobro izmešajte. Napomena: Kajmaku nije potrebno dodavati sol jer je feta sir sam po sebi slan. Ako volite blaži kajmak, dodajte malo pavlake. Ovaj petominutni kajmak pravi divan namaz i odlično se slaže sa ćavapsima."
-                        ],
-                        ingredients: [
-                            "100 g putera",
-                            "100 g feta sira",
-                            "100 gr pavlaka"
-                        ],
-                        stars: 5,
-                        comments: [ 
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Fantastik Bombastik'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Prefinjen ukus & miris'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Dominacija od \'rane nema sta!'
-                            },
-                        ],
-                        difficulty: 3
-                    },
-                    {
-                        head: "Vocna salata",
-                        prep: "15 mins",
-                        cook: "/",
-                        portions: "10 Porcija",
-                        steps: [
-                            "Sok od pomorandže, sok od limuna, smeđi šećer, koricu narandže i koricu limuna prokuvajte u šerpi na srednje jakoj vatri. Smanjite vatru na srednje nisku i pirjajte dok se malo ne zgusne, oko 5 minuta. Sklonite sa vatre i umešajte ekstrakt vanile. Ostavite sa strane da se ohladi.",
-                            "Stavite voće u veliku, prozirnu staklenu činiju ovim redosledom: ananas, jagode, kivi, banane, pomorandže, grožđe i borovnice. Ohlađen sos prelijte preko voća. Pokrijte i ostavite u frižideru 3 do 4 sata pre služenja."
-                        ],
-                        ingredients: [
-                            "⅔ šolja svežeg soka od pomorandže",
-                            "¼ šolja i 1 kašika i 1 kašičica svežeg limunovog soka",
-                            "¼ šolja i 1 kašika i 1 kašičica pakovanog smeđeg šećera",
-                            "½ kašičica naribane korice pomorandže",
-                            "½ kašičica naribane korice limuna",
-                            "1 kašičice ekstrakta vanile",
-                            "2 šolje iseckanog svežeg ananasa",
-                            "2 šolje jagoda, oljuštene i narezane",
-                            "3 kivi, oguljen i narezan",
-                            "3 banane, isečene",
-                            "2 pomorandže, oguljene i isečene",
-                            "1 šolje grožđa bez semena",
-                            "2 šolje borovnica"
-                        ],
-                        stars: 5,
-                        comments: [ 
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Fantastik Bombastik'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Prefinjen ukus & miris'
-                            },
-                            {
-                                author: "Mladen Mircic",
-                                comment: 'Dominacija od \'rane nema sta!'
-                            },
-                        ],
-                        difficulty: 8
-                    }
-                ];
-
-                localStorage.setItem("uzina", JSON.stringify(uzina));
-            }
-        }
         
+
+            if (localStorage.getItem("predjelo") != null)
+            predjelo = JSON.parse(localStorage.getItem("predjelo"));
+        else {
+            predjelo = [
+                {
+                    head: "Tanjir sa sirom",
+                    prep: "30 mins",
+                    cook: "/",
+                    portions: "4 Porcije",
+                    steps: [
+                        "Počnite sa velikim stvarima: činije i sir. Sir treba poslužiti na sobnoj temperaturi.",
+                        "Dodajte meso, hleb i krekere. Meso možete dodati na nekoliko različitih načina: jednostavnim snopom, rastavljenim u liniju ili polukrug ili presavijanjem većih komada u zabavne oblike.",
+                        "Popunite velike prostore voćem i orašastim plodovima. Takođe, dodajte malo maslina i napunite sve male činije.",
+                        "Ugurajte malo zelenila u bilo koji prostor koji je još prazan."
+                    ],
+                    ingredients: [
+                        "Sir (izaberite 3-5)",
+                        "Voće i povrće (izaberite 1-3)",
+                        "Orasi (izaberite 2)",
+                        "Hleb ili krekeri (izaberite 2-4)"
+                    ],
+                    stars: 5,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ],
+                    difficulty: 4
+                },{
+                    head: "Ruska salata",
+                    prep: "1 hr",
+                    cook: "30 mins",
+                    portions: "4 Porcije",
+                    steps: [
+                        "Donesite veliki lonac vode da provri; dodajte krompir i šargarepu. Vratite smešu do ključanja i dodajte jaja; kuvati dok krompir ne omekša, 20 do 30 minuta. Ocijedite i malo ohladite smešu. Iseckati krompir i šargarepu; oguliti i iseckati jaja.",
+                        "Pomesajte krompir, šargarepu, jaja, kisele krastavce, grašak, šunku i peršun zajedno u velikoj činiji; umešajte majonez dok salata ne bude ravnomerno premazana."
+                    ],
+                    ingredients: [
+                        "6 krompira, oljušteno",
+                        "1 šargarepa, ili više po ukusu",
+                        "4 jaja",
+                        "6 veliki kiseli krastavci, isečeni na kockice",
+                        "1 konzerva graska, iscedjena",
+                        "1/2 šolja potpuno skuvane šunke, ili po ukusu",
+                        "1 kašika seckanog svežeg peršuna, ili po ukusu",
+                        "1/2 šolja majoneza ili po ukusu"
+                    ],
+                    stars: 3,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ],
+                    difficulty: 4
+                },{
+                    head: "Vocni umak",
+                    prep: "15 mins",
+                    cook: "/",
+                    portions: "4 Servings",
+                    steps: [
+                        "U manjoj činiji umutite krem sir i puter dok ne postane glatko. Umutite kremu od belog sleza. Preklopite umućenim prelivom. Poslužite sa voćem. Čuvati u frižideru."
+                    ],
+                    ingredients: [
+                        "1 kesica krem sira",
+                        "1/2 šolja putera, omekšano",
+                        "1/2 šolja krem od sleza",
+                        "1 karton smrznut šlag preliven, odmrznut",
+                        "Asortiman svežeg voća"
+                    ],
+                    stars: 4,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ],
+                    difficulty: 6
+                }
+            ];
+
+            localStorage.setItem("predjelo", JSON.stringify(predjelo));
+        }
+
+        if (localStorage.getItem("glavno_jelo") != null)
+            glavno_jelo = JSON.parse(localStorage.getItem("glavno_jelo"));
+        else {
+            glavno_jelo = [
+                {
+                    head: "Sarma",
+                    prep: "3 hrs",
+                    cook: "2 hrs 15 mins",
+                    portions: "5 Porcija",
+                    steps: [
+                        "Najpre operite kupus i uklonite tvrdi komad stabljike na dnu lista. Budite oprezni i pokušajte da ne napravite rupu. Ostavi stranu.",
+                        "Na 2 kašike ulja propržite seckani luk do zlatno smeđe boje. Dodajte malo vode i kuvajte dok tečnost ne ispari i luk omekša, povremeno mešajući.",
+                        "Dodajte seckanu šargarepu, promešajte jednom, dodajte govedinu, ponovo promešajte i ostavite da se kuva oko 15 minuta. Povremeno promešajte drvenom kašikom da se goveđi grudvi slome.",
+                        "Sada je vreme da dodate pirinač. Veoma je važno stalno mešati kada ga dodajete. Kuvajte još 5 minuta i sklonite sa vatre.",
+                        "Začinite solju, mlevenim biberom, mljevenim čilijem i sitno sjeckanim peršunom. Prethodno zagrejte rernu na 250 stepeni C i pripremite posudu za pečenje 20k28cm.",
+                        "Sada napunite kupus. Stavite kašiku govedine na sredinu donjeg dela lista. Preklopite s leve strane, a zatim sa desne. Zarolajte kupus držeći prste sa strane.",
+                        "Stavite kiflice u nauljenu posudu za pečenje. Pospite čilijem i peršunom. Na sredinu stavite kriške slanine. Ulijte 1 i ⅔ šolje vode.",
+                        "Pecite poklopljeno 1 sat, a zatim smanjite temperaturu na 200 stepeni C i pecite još 1 sat.",
+                        "Na kraju kratko propržite brašno sa 5 kašika ulja u maloj šerpi, neprestano mešajući i postepeno dodavajući hladno. U isto vreme izvadite posudu za pečenje iz rerne, prelijte ⅔ šolje vode i mešavine brašna, ulja i hladnog. Stavite nepokriveno jelo u rernu još 15 minuta.",
+                        "Poslužite toplo!"
+                    ],
+                    ingredients: [
+                        "20 mali kiseli listovi kupusa",
+                        "450 grama mlevenog junećeg mesa",
+                        "1 luk, sitno iseckan",
+                        "1 mala šargarepa, sitno iseckana",
+                        "1/4 solje (50g) pirinca",
+                        "so, biber, po ukusu",
+                        "sitnjen čili, po ukusu",
+                        "7 kasicica (105ml) povrtnog ulja",
+                        "2 kasicica (30g) brasna",
+                        "dosta persuna",
+                        "dodatno cilija i persuna za ukras",
+                        "4-5 kolutova sunke ili slanine",
+                        "1 i 2/3 soljica (400ml) vode + 2/3 soljica (160ml)"
+                    ],
+                    stars: 3,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ],
+                    difficulty: 9
+                }, 
+                {
+                    head: "Punjena paprika",
+                    prep: "1 hr 20 mins",
+                    cook: "10 mins",
+                    portions: "6 Porcija",
+                    steps: [
+                        "Zagrejati rernu na 400 °. U malom tiganju pripremite pirinač prema uputstvima na pakovanju. U velikoj tavi na srednjoj vatri zagrejte ulje. Kuvajte luk dok ne omekša, oko 5 minuta. Umešajte paradajz pastu i beli luk i kuvajte dok ne zamiriše, još oko 1 minut. Dodajte mleveno goveđe meso i kuvajte, razbijajući meso drvenom kašikom, dok više ne postane ružičasto, 6 minuta. Iscedite mast.",
+                        "Vratite goveđu mešavinu u tiganj, a zatim umešajte kuvani pirinač i paradajz isečen na kockice. Začinite origanom, solju i biberom. Pustite da se krčka dok se tečnost malo ne smanji, oko 5 minuta.",
+                        "Paprike izrezane okrenute nagore stavite u posudu za pečenje i pokapajte uljem. U svaku papriku kašikom dodajte goveđu smesu i prelijte Monterei džekom, pa posudu za pečenje prekrijte folijom.",
+                        "Pecite dok paprike ne omekšaju, oko 35 minuta. Otkrijte i pecite dok sir ne zakipi, još 10 minuta.",
+                        "Pre služenja ukrasite peršunom."
+                    ],
+                    ingredients: [
+                        "1/2 c. nekuvani pirinač",
+                        "2 tbsp. ekstra devičansko maslinovo ulje, plus još za kišu",
+                        "1 srednji luk, iseckan",
+                        "2 tbsp. paradajz sos",
+                        "3 cena belog luka, mlevenih",
+                        "1 lb. mlevena junetina",
+                        "1 (14.5-oz.) konzerve paradajza isečene na kockice",
+                        "1 1/2 tsp. sušeni origano",
+                        "Košer soli",
+                        "Sveže mleveni crni biber",
+                        "6 paprike, vrhovi i jezgra uklonjeni",
+                        "1 c. iseckan priključak Monterei",
+                        "Sveže iseckani peršun, za ukrašavanje"
+                    ],
+                    stars: 2,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ],
+                    difficulty: 5
+                }, 
+                {
+                    head: "Kardjordjeva snicla",
+                    prep: "1 hr",
+                    cook: "15 mins",
+                    portions: "4 Porcija",
+                    steps: [
+                        "Pileći odresci od svinjetine dok ne budu tanki i mekani i na svaki odrezak stavite malo kajmaka (ili krem sira).",
+                        "Umotajte meso u kolute i svaki komad učvrstite čačkalicom.",
+                        "Odreske premažite brašnom, pa ih umočite u umućena jaja i na kraju uvaljajte u mrvice hleba.",
+                        "Pržite u vrelom ulju do zlatno žute boje."
+                    ],
+                    ingredients: [
+                        "500 g svinjski odresci bez kostiju",
+                        "150 g kajmak – umesto toga možete koristiti krem sir",
+                        "2 jaja",
+                        "brasno",
+                        "prezle",
+                        "so"
+                    ],
+                    stars: 5,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ],
+                    difficulty: 3
+                }
+            ];
+
+            localStorage.setItem("glavno_jelo", JSON.stringify(glavno_jelo));
+        }
+
+        if (localStorage.getItem("dezert") != null)
+            dezert = JSON.parse(localStorage.getItem("dezert"));
+        else {
+            dezert = [
+                {
+                    head: "Vanilice",
+                    prep: "1 hr",
+                    cook: "15 mins",
+                    portions: "60 Kolaca",
+                    steps: [
+                        "Nekoliko dana pre pravljenja kolačića, pomešajte šećer poslastičara sa zrnom vanile u maloj činiji sa čvrstim poklopcem. Ovo je vaš vanilin šećer. Čuvati na suvom mestu.",
+                        "U mikseru sa lopaticom istucite svinjsku mast sa granuliranim šećerom dok ne postane kremasta. Umutite jaje, žumanca, limunov sok i koricu limuna. Dodajte orahe i brašno i mutite dok se ne formira jednolično testo. Pokrijte testo i ostavite u frižideru najmanje 3 sata ili preko noći.",
+                        "Prethodno zagrejte rernu na 325 ° F (konvekciono pečenje na 350 ° F). Stavite testo na radnu površinu posutu brašnom i razvaljajte ga u okruglu debljinu 1/4 inča. Dva pleha obložite papirom za pečenje. Koristeći mali okrugli rezač za kolačiće (ja koristim rezače veličine 1 inča ili četvrtine), istisnite kolačiće i rasporedite ih jedan po jedan na plehove za pečenje.",
+                        "Pecite oko 12 minuta, tako da kolutići ostanu beli. Ostavite kolačiće da se ohlade na plehovima 5 minuta, a zatim ih prebacite na rešetku ili ravnu površinu da se potpuno ohlade.",
+                        "Kad se kolačići ohlade, uzimajte jednu po jednu kolačicu, premažite marmeladom i prelijte drugom okruglom.",
+                        "Svaki sendvič sa kolačićima obilno uvaljajte u vanilin šećer. Stavite kolačiće u limenu kutiju i sačekajte jedan do dva dana pre serviranja."
+                    ],
+                    ingredients: [
+                        "200 grama šećera za poslastičare",
+                        "1 zrno vanile, isečeno na komade od 1/2 inča",
+                        "300 grama masti (idealno list masti)",
+                        "250 grama secera u prahu",
+                        "1 celo jaje",
+                        "2 zumanceta",
+                        "Sok od limuna",
+                        "1 limunove kore",
+                        "250 grama sitnjenog lesnika",
+                        "600 grama brasna",
+                        "Džem od šipka ili kajsije"
+                    ],
+                    stars: 4,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ],
+                    difficulty: 5
+                },{
+                    head: "Pita od jabuka",
+                    prep: "1 hr 30 mins",
+                    cook: "45 mins",
+                    portions: "6 Porcija",
+                    steps: [
+                        "Zagrejati rernu na 375 °. U maloj činiji pomešajte šećer, brašno i začine; ostaviti po strani. U veliku činiju prelijte jabuke limunovim sokom. Dodajte mešavinu šećera; bacati premazati.",
+                        "Na blago pobrašnjenoj površini razvaljajte polovinu testa u krug debljine 1/8 inča; transfer na 9-in. tanjir za pitu. Obrežite čak i sa obodom. Dodajte punjenje; tačka sa puterom. Preostalo testo razvaljajte u krug debljine 1/8 inča. Prepunite mesto. Trim, zaptivka i ivica kanelure. Isecite proreze na vrhu. Istucite belanca do pene; četkom preko kore. Pospite šećerom. Lagano pokrijte ivicu folijom.",
+                        "Pecite 25 minuta. Uklonite foliju; pecite dok kora ne postane zlatno braon i punjenje ne postane mehuriće, 20-25 minuta duže. Ohladite na rešetki."
+                    ],
+                    ingredients: [
+                        "1/2 solja secera",
+                        "1/2 solja braon secera",
+                        "3 kasika brasna",
+                        "1 kasicica cimeta",
+                        "1/4 kasicica djumbira",
+                        "1/4 kasicica muškatni oraščić",
+                        "6 do 7 šolje tanko narezanih oljuštenih tart jabuka",
+                        "1 kašika limunovog soka",
+                        "Testo za pitu sa dvostrukom korom",
+                        "1 kašika putera",
+                        "1 veliko jaje",
+                        "Dodatno secera"
+                    ],
+                    stars: 3,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ],
+                    difficulty: 3
+                },{
+                    head: "Pita s visnjama",
+                    prep: "2 hrs",
+                    cook: "1 hr",
+                    portions: "12 - 16 Porcije",
+                    steps: [
+                        "Stavite trešnje bez koštica u posudu za mešanje bez mrlja; prstima dvaput proverite da li ima jama. Dodajte tapioku, koricu limuna i kašiku šećera za poslastičare; promešajte da se temeljito unese. Ostavite smešu na sobnoj temperaturi 15 minuta, a za to vreme voćni sokovi će se zgusnuti.",
+                        "U međuvremenu odmotajte listove filo testa. Odmah ih prekrijte čistim, blago vlažnim peškirom. Postavite rešetke za pećnicu u gornju i donju trećinu pećnice; zagrejati na 350 stepeni.",
+                        "Pomešajte biljno ulje, maslinovo ulje i puter u šoljici za merenje tečnosti. Nakapajte malo mešavine ulja/maslaca na veliki pleh sa obodom, pa zagrejte lim u rerni 2 ili 3 minuta. Postavite lim za pečenje sa širokom stranom okrenutom prema vama, stavljajući ga između činije sa voćem i gomile filo testa.",
+                        "Položite dva lista filo testa na lim za pečenje tako da donji bude premazan uljima/puterom. Brzo ih preokrenite, a zatim nanesite još dva lista. Gornji list filo testa prelijte sa malo mešavine ulja/maslaca.",
+                        "Ostavljajući marginu od 1 inča, rasporedite 1/4 kisele pavlake u širini od 1 inča duž ivice fila koji vam je najbliži, a zatim rasporedite jednu četvrtinu mešavine višanja u paralelnu liniju i inča od pavlake. Za raznovrsnost ili ako vam ponestane trešanja, pospite voće suvim brusnicama, ribizlom ili grožđicama.",
+                        "Pokupite uglove filo testa koji su vam najbliži dok nežno pravite jedan preklop/kotrljanje od sebe. Premažite vrh rolade sa malo mešavine ulja/putera, pa nastavite da se presavijate i kotrljate dok ne dođete do krajnjeg kraja testa. Ako testo pukne, koristite malo vode ili malo mešavine ulja/maslaca da ga ponovo zalepite.",
+                        "Ponovite postupak da biste napravili još tri filovana fila, koristeći preostalu mešavinu pavlake i višnje, ostavljajući dovoljno smeše ulja/maslaca za poslednje četkanje. Neiskorišćeni listovi filo testa mogu se čvrsto umotati u plastičnu foliju i staviti u frižider ili zamrznuti do 2 nedelje. Napunjene filo rolate rasporedite po podmazanom plehu, ravnomerno razmaknute.",
+                        "Preostalom mešavinom ulja/maslaca (po potrebi zagrejte) očetkajte vrhove svake rolne. Pecite 15 minuta na donjoj rešetki, a zatim prebacite na gornju srednju rešetku, okrećući lim za pečenje napred prema nazad; pecite 15 do 20 minuta, dok ne porumene i ne hrskaju po ivicama.",
+                        "Ohladite na plehu oko 10 minuta. Tankom lopaticom otpustite dna po potrebi. Radeći po jedan kolut trešnje, prebacite na dasku za sečenje",
+                        "U ovom trenutku, rolne se mogu umotati u aluminijumsku foliju i staviti u frižider na jedan dan. Odmotajte, stavite na podmazan pleh i zagrejte u rerni na 300 stepeni dok se ne zagreje.",
+                        "Za posluživanje, isecite svaki kolut višnje po dijagonali na tri ili 4 jednaka dela i poređajte na poslužavnik. Pomoću cedila sa finom mrežicom prosijte šećer slatkiša po vrhu svakog komada."
+                    ],
+                    ingredients: [
+                        "5 do 6 šoljica sveže višnje bez koštica; može zameniti dve tegle od 48 unci bez koštica, oceđene; vidi glavnu belešku",
+                        "Velikodušna 1 kašika pudinga od tapioke u prahu",
+                        "Rendana korica 1 limuna",
+                        "1 gomila kašike šećera za poslastičare, plus još za brisanje prašine",
+                        "1 funta tankog filo testa, poželjno marke Apollo",
+                        "1/4 šolja biljnog ulja",
+                        "1/4 šolja blagog/svetlog maslinovog ulja",
+                        "8 kašike (1 štapić) nesoljenog putera, rastopljenog i toplog",
+                        "1/2 šolje obične ili nemasne pavlake",
+                        "Osušene nezaslađene brusnice, ribizla ili grožđice (opciono)",
+                        "Voda"
+                    ],
+                    stars: 1,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ],
+                    difficulty: 7
+                }
+            ];
+
+            localStorage.setItem("dezert", JSON.stringify(dezert));
+        }
+
+        if (localStorage.getItem("uzina") != null)
+            uzina = JSON.parse(localStorage.getItem("uzina"));
+        else {
+            uzina = [
+                {
+                    head: "Komplet lepinja",
+                    prep: "15 mins",
+                    cook: "10 mins",
+                    portions: "1 Porcija",
+                    steps: [
+                        "Isecite lepinju horizontalno, stvarajući blago udubljenje u sredini, tako da lepinja podseća na lonac sa poklopcem. Premažite kajmak preko donjeg dela lepinje. Umutite jaje i rasporedite ga po kajmaku. Zatim stavite donji deo lepinje u zagrejanu rernu i pecite oko 10 minuta (u zavisnosti koliko hrskava volite lepinju). Gornji deo lepinje stavite u šporet neposredno pre nego što izvadite donji tako da i ona bude lepa i topla. Nakon što ih ispečete, uzmite lepinje i prelijte ih vrelim pretopom."
+                    ],
+                    ingredients: [
+                        "Sveža ravna lepinja",
+                        "Kajmak",
+                        "Jedno jaje",
+                        "Pretop"
+                    ],
+                    stars: 4,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ],
+                    difficulty: 8
+                },
+                {
+                    head: "Kajmak",
+                    prep: "10 mins",
+                    cook: "/",
+                    portions: "1 Porcija",
+                    steps: [
+                        "U činiji umutite viljuškom maslac dok ne postane penast. Dodajte izmrvljeni feta sir i pavlaku. Sve to dobro izmešajte. Napomena: Kajmaku nije potrebno dodavati sol jer je feta sir sam po sebi slan. Ako volite blaži kajmak, dodajte malo pavlake. Ovaj petominutni kajmak pravi divan namaz i odlično se slaže sa ćavapsima."
+                    ],
+                    ingredients: [
+                        "100 g putera",
+                        "100 g feta sira",
+                        "100 gr pavlaka"
+                    ],
+                    stars: 5,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ],
+                    difficulty: 3
+                },
+                {
+                    head: "Vocna salata",
+                    prep: "15 mins",
+                    cook: "/",
+                    portions: "10 Porcija",
+                    steps: [
+                        "Sok od pomorandže, sok od limuna, smeđi šećer, koricu narandže i koricu limuna prokuvajte u šerpi na srednje jakoj vatri. Smanjite vatru na srednje nisku i pirjajte dok se malo ne zgusne, oko 5 minuta. Sklonite sa vatre i umešajte ekstrakt vanile. Ostavite sa strane da se ohladi.",
+                        "Stavite voće u veliku, prozirnu staklenu činiju ovim redosledom: ananas, jagode, kivi, banane, pomorandže, grožđe i borovnice. Ohlađen sos prelijte preko voća. Pokrijte i ostavite u frižideru 3 do 4 sata pre služenja."
+                    ],
+                    ingredients: [
+                        "⅔ šolja svežeg soka od pomorandže",
+                        "¼ šolja i 1 kašika i 1 kašičica svežeg limunovog soka",
+                        "¼ šolja i 1 kašika i 1 kašičica pakovanog smeđeg šećera",
+                        "½ kašičica naribane korice pomorandže",
+                        "½ kašičica naribane korice limuna",
+                        "1 kašičice ekstrakta vanile",
+                        "2 šolje iseckanog svežeg ananasa",
+                        "2 šolje jagoda, oljuštene i narezane",
+                        "3 kivi, oguljen i narezan",
+                        "3 banane, isečene",
+                        "2 pomorandže, oguljene i isečene",
+                        "1 šolje grožđa bez semena",
+                        "2 šolje borovnica"
+                    ],
+                    stars: 5,
+                    comments: [ 
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Fantastik Bombastik'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Prefinjen ukus & miris'
+                        },
+                        {
+                            author: "Mladen Mircic",
+                            comment: 'Dominacija od \'rane nema sta!'
+                        },
+                    ],
+                    difficulty: 8
+                }
+            ];
+
+            localStorage.setItem("uzina", JSON.stringify(uzina));
+        }
     }
 
     function append_recipe(recipe) {
@@ -1698,7 +1770,11 @@ $(document).ready(function () {
         let recipe_to_show = localStorage.getItem("recipe-to-show");
 
         if (recipes_found == null && recipe_to_show == null) {
-            let recipes = find_recipes("All recipes categories", "", "Sort by");
+            let recipes;
+            if (language == "eng")
+                recipes = find_recipes("All recipes categories", "", "Sort by");
+            else
+                recipes = find_recipes("Sve kategorije recepata", "", "Sortiraj");
             append_recipes(recipes);
         }
         else if (recipes_found != null) {
