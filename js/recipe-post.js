@@ -107,7 +107,7 @@ $(document).ready(function () {
             else {
                 switch (type_of_food != '' ? type_of_food : localStorage.getItem("food-type")) {
                     case 'Predjelo': {
-                        appetizer.forEach(food => {
+                        predjelo.forEach(food => {
                             if (food.head.toLowerCase().includes(name.toLowerCase())) {
                                 found.push(food);
                                 return;
@@ -116,7 +116,7 @@ $(document).ready(function () {
                         break;
                     }
                     case 'Glavno jelo': {
-                        main_course.forEach(food => {
+                        glavno_jelo.forEach(food => {
                             if (food.head.toLowerCase().includes(name.toLowerCase())) {
                                 found.push(food);
                                 return;
