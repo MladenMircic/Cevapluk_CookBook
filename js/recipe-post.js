@@ -4,95 +4,182 @@ $(document).ready(function () {
     let main_course = [];
     let dessert = [];
     let snack = [];
+    let predjelo = [];
+    let glavno_jelo = [];
+    let dezert = [];
+    let uzina = [];
     let my_account = {};
     let i = 1;
+    let language = localStorage.getItem("language");
 
     initializePage();
 
-    function find_recipes(type_of_food, name) {
+    function find_recipes(type_of_food, name, criteria) {
         let found = [];
-        if (type_of_food == 'All recipes categories') {
+
+        if (language == "eng") {
+            if (type_of_food == 'All recipes categories') {
             
-            appetizer.forEach(food => {
-                if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
-                    found.push(food);
-            });
+                appetizer.forEach(food => {
+                    if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
+                        found.push(food);
+                });
+    
+                main_course.forEach(food => {
+                    if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
+                        found.push(food);
+                });
+    
+                dessert.forEach(food => {
+                    if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
+                        found.push(food);
+                });
+    
+                snack.forEach(food => {
+                    if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
+                        found.push(food);
+                });
+            }
+            else {
+                switch (type_of_food != '' ? type_of_food : localStorage.getItem("food-type")) {
+                    case 'Appetizer': {
+                        appetizer.forEach(food => {
+                            if (food.head.toLowerCase().includes(name.toLowerCase())) {
+                                found.push(food);
+                                return;
+                            }
+                        });
+                        break;
+                    }
+                    case 'Main course': {
+                        main_course.forEach(food => {
+                            if (food.head.toLowerCase().includes(name.toLowerCase())) {
+                                found.push(food);
+                                return;
+                            }
+                        });
+                        break;
+                    }
+                    case 'Dessert': {
+                        dessert.forEach(food => {
+                            if (food.head.toLowerCase().includes(name.toLowerCase())) {
+                                found.push(food);
+                                return;
+                            }
+                        });
+                        break;
+                    }
+                    case 'Snack': {
+                        snack.forEach(food => {
+                            if (food.head.toLowerCase().includes(name.toLowerCase())) {
+                                found.push(food);
+                                return;
+                            }
+                        });
+                        break;
+                    }
+                }
+            }
+        }
+        else {
+            if (type_of_food == 'Sve kategorije recepata') {
+            
+                predjelo.forEach(food => {
+                    if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
+                        found.push(food);
+                });
+    
+                glavno_jelo.forEach(food => {
+                    if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
+                        found.push(food);
+                });
+    
+                dezert.forEach(food => {
+                    if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
+                        found.push(food);
+                });
+    
+                uzina.forEach(food => {
+                    if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
+                        found.push(food);
+                });
+            }
+            else {
+                switch (type_of_food != '' ? type_of_food : localStorage.getItem("food-type")) {
+                    case 'Predjelo': {
+                        appetizer.forEach(food => {
+                            if (food.head.toLowerCase().includes(name.toLowerCase())) {
+                                found.push(food);
+                                return;
+                            }
+                        });
+                        break;
+                    }
+                    case 'Glavno jelo': {
+                        main_course.forEach(food => {
+                            if (food.head.toLowerCase().includes(name.toLowerCase())) {
+                                found.push(food);
+                                return;
+                            }
+                        });
+                        break;
+                    }
+                    case 'Dezert': {
+                        dezert.forEach(food => {
+                            if (food.head.toLowerCase().includes(name.toLowerCase())) {
+                                found.push(food);
+                                return;
+                            }
+                        });
+                        break;
+                    }
+                    case 'Uzina': {
+                        uzina.forEach(food => {
+                            if (food.head.toLowerCase().includes(name.toLowerCase())) {
+                                found.push(food);
+                                return;
+                            }
+                        });
+                        break;
+                    }
+                }
+            }
+        }
+              
 
-            main_course.forEach(food => {
-                if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
-                    found.push(food);
-            });
-
-            dessert.forEach(food => {
-                if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
-                    found.push(food);
-            });
-
-            snack.forEach(food => {
-                if (name == '' || food.head.toLowerCase().includes(name.toLowerCase()))
-                    found.push(food);
-            });
-
+        if (criteria == "Sort by" || criteria == "Sortiraj") {
             for (let i = found.length - 1; i > 0; i--) {
                 let change_ind = Math.floor(Math.random() * (i + 1));
                 let temp = found[i];
                 found[i] = found[change_ind];
                 found[change_ind] = temp;
             }
-
-            return found;
+        }
+        else if (criteria == "Rating" || criteria == "Ocena") {
+            found.sort((first, second) => {
+                return second.stars - first.stars;
+            });
+        }
+        else {
+            found.sort((first, second) => {
+                return second.difficulty - first.difficulty;
+            });
         }
 
-        switch (type_of_food != '' ? type_of_food : localStorage.getItem("food-type")) {
-            case 'Appetizer': {
-                appetizer.forEach(food => {
-                    if (food.head.toLowerCase().includes(name.toLowerCase())) {
-                        found.push(food);
-                        return;
-                    }
-                });
-                break;
-            }
-            case 'Main course': {
-                main_course.forEach(food => {
-                    if (food.head.toLowerCase().includes(name.toLowerCase())) {
-                        found.push(food);
-                        return;
-                    }
-                });
-                break;
-            }
-            case 'Dessert': {
-                dessert.forEach(food => {
-                    if (food.head.toLowerCase().includes(name.toLowerCase())) {
-                        found.push(food);
-                        return;
-                    }
-                });
-                break;
-            }
-            case 'Snack': {
-                snack.forEach(food => {
-                    if (food.head.toLowerCase().includes(name.toLowerCase())) {
-                        found.push(food);
-                        return;
-                    }
-                });
-                break;
-            }
-        }
         return found;
     }
 
     $(".delicious-btn").click(function() {
-        let type_of_food = $($(".list").children(".selected")).html();
+        let selected_options = $(".list").children(".selected");
+        let type_of_food = $(selected_options[0]).html();
         let name = $("#food-name").val();
+        let sort_criteria = $(selected_options[1]).html();
 
-        if (type_of_food == 'All recipes categories' && name == '') {
+        if (type_of_food == 'All recipes categories' && name == '' && sort_criteria == "Sort by") {
             return;
         }
 
-        let found_recipes = find_recipes(type_of_food, name);
+        let found_recipes = find_recipes(type_of_food, name, sort_criteria);
 
         if (found_recipes.length == 0)
             localStorage.setItem("error-msg", "No results!");
@@ -180,13 +267,13 @@ $(document).ready(function () {
             let col_recipe_heading_div = $("<div></div>").addClass("col-12 col-md-8");
 
             let recipe_heading = $("<div></div>").addClass("receipe-headline my-5");
-            let date = $("<span></span>").html("January 05, 2021");
-            let heading_link = $("<a></a>").attr("href", "receipe-post-" + localStorage.getItem("language") + ".html");
+            let date = $("<span></span>");
+            let heading_link = $("<a></a>").attr("href", "receipe-post-" + language + ".html");
             let heading = $("<h2></h2>").html(recipe.head).addClass("recipe-link");
             let recipe_duration = $("<div></div>").addClass("receipe-duration");
-            let prep_time = $("<h6></h6>").html("Prep: " + recipe.prep);
-            let cook_time = $("<h6></h6>").html("Cook: " + recipe.cook);
-            let portions = $("<h6></h6>").html("Yields: " + recipe.portions);
+            let prep_time = $("<h6></h6>");
+            let cook_time = $("<h6></h6>");
+            let portions = $("<h6></h6>");
 
             let rating_div = $("<div></div>").addClass("col-12 col-md-4");
             let recipe_rating = $("<div></div>").addClass("receipe-ratings text-right my-5");
@@ -213,6 +300,19 @@ $(document).ready(function () {
             row_recipe.append(col_recipe_heading_div).append(rating_div);
             container_recipe.append(row_recipe);
             recipe_content.append(container_recipe);
+
+            if (language == "eng") {
+                prep_time.html("Prep: " + recipe.prep);
+                cook_time.html("Cook: " + recipe.cook);
+                portions.html("Yields: " + recipe.portions);
+                date.html("January 05, 2021")
+            }
+            else {
+                prep_time.html("Priprema: " + recipe.prep);
+                cook_time.html("Kuvanje: " + recipe.cook);
+                portions.html("Porcije: " + recipe.portions);
+                date.html("Januar 05, 2021")
+            }
 
             $("#recipes").append(container_image).append(recipe_content);
         });
@@ -279,54 +379,110 @@ $(document).ready(function () {
 
         localStorage.setItem("my-account", JSON.stringify(my_account));
 
-        appetizer.forEach(food => {
-            if (food.head == name) {
-                food.comments.push({
-                    author: "Mladen Mircic",
-                    comment: comment
-                });
-                localStorage.setItem("appetizer", JSON.stringify(appetizer));
-                return;
+        if (language == "eng") {
+            for (let i = 0; i < appetizer.length; i++) {
+                if (appetizer[i].head == name) {
+                    appetizer[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                    predjelo[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                }
             }
-        });
-
-        main_course.forEach(food => {
-            if (food.head == name) {
-                food.comments.push({
-                    author: "Mladen Mircic",
-                    comment: comment
-                });
-                localStorage.setItem("main_course", JSON.stringify(main_course));
-                return;
+            for (let i = 0; i < main_course.length; i++) {
+                if (main_course[i].head == name) {
+                    main_course[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                    glavno_jelo[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                }
             }
-        });
-
-        dessert.forEach(food => {
-            if (food.head == name) {
-                food.comments.push({
-                    author: "Mladen Mircic",
-                    comment: comment
-                });
-                localStorage.setItem("dessert", JSON.stringify(dessert));
-                return;
+            for (let i = 0; i < dessert.length; i++) {
+                if (dessert[i].head == name) {
+                    dessert[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                    dezert[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                }
             }
-        });
-
-        snack.forEach(food => {
-            if (food.head == name) {
-                food.comments.push({
-                    author: "Mladen Mircic",
-                    comment: comment
-                });
-                localStorage.setItem("snack", JSON.stringify(snack));
-                return;
+            for (let i = 0; i < snack.length; i++) {
+                if (snack[i].head == name) {
+                    snack[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                    uzina[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                }
             }
-        });
+        }
+        else {
+            for (let i = 0; i < predjelo.length; i++) {
+                if (predjelo[i].head == name) {
+                    appetizer[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                    predjelo[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                }
+            }
+            for (let i = 0; i < glavno_jelo.length; i++) {
+                if (glavno_jelo[i].head == name) {
+                    main_course[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                    glavno_jelo[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                }
+            }
+            for (let i = 0; i < dezert.length; i++) {
+                if (dezert[i].head == name) {
+                    dessert[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                    dezert[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                }
+            }
+            for (let i = 0; i < uzina.length; i++) {
+                if (uzina[i].head == name) {
+                    snack[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                    uzina[i].comments.push({
+                        author: "Mladen Mircic",
+                        comment: comment
+                    });
+                }
+            }
+        }
     }
 
     function initializeStorage() {
         my_account = JSON.parse(localStorage.getItem("my-account"));
-        langauge = localStorage.getItem("language");
 
 
         if (language == "eng") {
@@ -1306,8 +1462,6 @@ $(document).ready(function () {
 
     function append_recipe(recipe) {
 
-        let language = localStorage.getItem("language");
-
         let container_image = $("<div></div>").addClass("container");
         let row_image = $("<div></div>").addClass("row");
         let col_image = $("<div></div>").addClass("col-12 recipe-image");
@@ -1334,7 +1488,7 @@ $(document).ready(function () {
         let col_recipe_heading_div = $("<div></div>").addClass("col-12 col-md-8");
 
         let recipe_heading = $("<div></div>").addClass("receipe-headline my-5");
-        let date = $("<span></span>").html("January 05, 2021");
+        let date = $("<span></span>");
         let heading = $("<h2></h2>").attr("id", "heading").html(recipe.head);
         let recipe_duration = $("<div></div>").addClass("receipe-duration");
         let prep_time = $("<h6></h6>");
@@ -1399,7 +1553,11 @@ $(document).ready(function () {
             let author_data = $("<div></div>").addClass("author-section").attr("id", "by" + i);
             let author_profile_link = $("<a></a>").attr("href", "#").addClass("author-name");
             author_profile_link.html(comment.author);
-            author_data.append("by ").append(author_profile_link);
+
+            if (language == "srb")
+                author_data.append("autor ").append(author_profile_link);
+            else
+                author_data.append("by ").append(author_profile_link);
 
             comment_area.append(comment_text).append(author_data);
             comment_section.append(comment_area);
@@ -1451,6 +1609,8 @@ $(document).ready(function () {
             leave_comment_text.attr("placeholder", "Ostavi komentar");
             ingredients_text.html("Sastojci");
             leave_comment_submit.html("Pošalji");
+            date.html("Januar 05, 2021");
+
         }
         else {
             prep_time.html("Prep: " + recipe.prep);
@@ -1459,6 +1619,7 @@ $(document).ready(function () {
             leave_comment_text.attr("placeholder", "Leave a comment");
             ingredients_text.html("Ingredients");
             leave_comment_submit.html("Publish");
+            date.html("January 05, 2021");
         }
 
         ingredients_col.append(ingredients);
@@ -1513,7 +1674,7 @@ $(document).ready(function () {
         let recipe_to_show = localStorage.getItem("recipe-to-show");
 
         if (recipes_found == null && recipe_to_show == null) {
-            let recipes = find_recipes("All recipes categories", "");
+            let recipes = find_recipes("All recipes categories", "", "Sort by");
             append_recipes(recipes);
         }
         else if (recipes_found != null) {
