@@ -10,6 +10,8 @@ $(document).ready(function () {
     let uzina = [];
     let my_account = {};
     let i = 1;
+    let rated = false;
+    let current_rate;
     let language = localStorage.getItem("language");
 
     initializePage();
@@ -324,6 +326,7 @@ $(document).ready(function () {
             let prep_time = $("<h6></h6>");
             let cook_time = $("<h6></h6>");
             let portions = $("<h6></h6>");
+            let difficulty = $("<h6></h6>");
 
             let rating_div = $("<div></div>").addClass("col-12 col-md-4");
             let recipe_rating = $("<div></div>").addClass("receipe-ratings text-right my-5");
@@ -344,7 +347,11 @@ $(document).ready(function () {
             rating_div.append(recipe_rating);
 
             heading_link.append(heading)
-            recipe_duration.append(prep_time).append(cook_time).append(portions);
+            recipe_duration.append(prep_time)
+                            .append(cook_time)
+                            .append(portions)
+                            .append(difficulty);
+
             recipe_heading.append(date).append(heading_link).append(recipe_duration);
             col_recipe_heading_div.append(recipe_heading);
             row_recipe.append(col_recipe_heading_div).append(rating_div);
@@ -355,13 +362,15 @@ $(document).ready(function () {
                 prep_time.html("Prep: " + recipe.prep);
                 cook_time.html("Cook: " + recipe.cook);
                 portions.html("Yields: " + recipe.portions);
-                date.html("January 05, 2021")
+                difficulty.html("Difficulty: " + recipe.difficulty);
+                date.html("January 05, 2021");
             }
             else {
                 prep_time.html("Priprema: " + recipe.prep);
                 cook_time.html("Kuvanje: " + recipe.cook);
                 portions.html("Porcije: " + recipe.portions);
-                date.html("Januar 05, 2021")
+                difficulty.html("Tezina: " + recipe.difficulty);
+                date.html("Januar 05, 2021");
             }
 
             $("#recipes").append(container_image).append(recipe_content);
@@ -370,7 +379,7 @@ $(document).ready(function () {
 
     function submit_comment() {
         if ($(this).hasClass("disabled"))
-        return;
+            return;
 
         let comment = $(".new-comment").val();
         $(".new-comment").val('');
@@ -413,10 +422,12 @@ $(document).ready(function () {
     }
 
     function set_new_comment(comment) {
-        my_account.comments.push({
-            head: $("#heading").html(),
+        let my_comment = {
+            type: '',
+            head_eng: '',
+            head_srb: '',
             comment: comment
-        });
+        };
 
         let name = $("#heading").html();
         my_account.recipes.forEach(recipe => {
@@ -430,8 +441,6 @@ $(document).ready(function () {
             }
         });
 
-        localStorage.setItem("my-account", JSON.stringify(my_account));
-
         if (language == "eng") {
             for (let i = 0; i < appetizer.length; i++) {
                 if (appetizer[i].head == name) {
@@ -443,9 +452,14 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
+
+                    my_comment.head_eng = appetizer[i].head;
+                    my_comment.head_srb = predjelo[i].head;
+                    my_comment.type = "Appetizer";
+
                     localStorage.setItem("appetizer", JSON.stringify(appetizer));
                     localStorage.setItem("predjelo", JSON.stringify(predjelo));
-                    return;
+                    break;
                 }
             }
             for (let i = 0; i < main_course.length; i++) {
@@ -458,9 +472,14 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
+
+                    my_comment.head_eng = main_course[i].head;
+                    my_comment.head_srb = glavno_jelo[i].head;
+                    my_comment.type = "Main Course";
+
                     localStorage.setItem("main_course", JSON.stringify(main_course));
                     localStorage.setItem("glavno_jelo", JSON.stringify(glavno_jelo));
-                    return;
+                    break;
                 }
             }
             for (let i = 0; i < dessert.length; i++) {
@@ -473,9 +492,14 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
+
+                    my_comment.head_eng = dessert[i].head;
+                    my_comment.head_srb = dezert[i].head;
+                    my_comment.type = "Dessert";
+
                     localStorage.setItem("dessert", JSON.stringify(dessert));
                     localStorage.setItem("dezert", JSON.stringify(dezert));
-                    return;
+                    break;
                 }
             }
             for (let i = 0; i < snack.length; i++) {
@@ -488,9 +512,14 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
-                    localStorage.setItem("appetizer", JSON.stringify(snack));
-                    localStorage.setItem("predjelo", JSON.stringify(uzina));
-                    return;
+
+                    my_comment.head_eng = snack[i].head;
+                    my_comment.head_srb = uzina[i].head;
+                    my_comment.type = "Snack";
+
+                    localStorage.setItem("snack", JSON.stringify(snack));
+                    localStorage.setItem("uzina", JSON.stringify(uzina));
+                    break;
                 }
             }
         }
@@ -505,9 +534,14 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
+
+                    my_comment.head_eng = appetizer[i].head;
+                    my_comment.head_srb = predjelo[i].head;
+                    my_comment.type = "Appetizer";
+
                     localStorage.setItem("appetizer", JSON.stringify(appetizer));
                     localStorage.setItem("predjelo", JSON.stringify(predjelo));
-                    return;
+                    break;
                 }
             }
             for (let i = 0; i < glavno_jelo.length; i++) {
@@ -520,9 +554,14 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
+
+                    my_comment.head_eng = main_course[i].head;
+                    my_comment.head_srb = glavno_jelo[i].head;
+                    my_comment.type = "Main Course";
+
                     localStorage.setItem("appetizer", JSON.stringify(main_course));
                     localStorage.setItem("predjelo", JSON.stringify(glavno_jelo));
-                    return;
+                    break;
                 }
             }
             for (let i = 0; i < dezert.length; i++) {
@@ -535,9 +574,14 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
-                    localStorage.setItem("appetizer", JSON.stringify(dessert));
-                    localStorage.setItem("predjelo", JSON.stringify(dezert));
-                    return;
+
+                    my_comment.head_eng = dessert[i].head;
+                    my_comment.head_srb = dezert[i].head;
+                    my_comment.type = "Dessert";
+
+                    localStorage.setItem("dessert", JSON.stringify(dessert));
+                    localStorage.setItem("dezert", JSON.stringify(dezert));
+                    break;
                 }
             }
             for (let i = 0; i < uzina.length; i++) {
@@ -550,12 +594,20 @@ $(document).ready(function () {
                         author: "Mladen Mircic",
                         comment: comment
                     });
-                    localStorage.setItem("appetizer", JSON.stringify(snack));
-                    localStorage.setItem("predjelo", JSON.stringify(uzina));
-                    return;
+
+                    my_comment.head_eng = snack[i].head;
+                    my_comment.head_srb = uzina[i].head;
+                    my_comment.type = "Snack";
+
+                    localStorage.setItem("snack", JSON.stringify(snack));
+                    localStorage.setItem("uzina", JSON.stringify(uzina));
+                    break;
                 }
             }
         }
+
+        my_account.comments.push(my_comment);
+        localStorage.setItem("my-account", JSON.stringify(my_account));
     }
 
     $(".new-comment").on(
@@ -598,7 +650,7 @@ $(document).ready(function () {
 
             $(".preparation").append(leave_comment_submit);
         }
-    )
+    );
 
     $(".pdf-download").click(function() {
         let pdf_doc = new jsPDF();
@@ -616,7 +668,6 @@ $(document).ready(function () {
 
         let yOffset = 0;
         let yCoord = 40;
-
 
         for (let i = 0; i < preparation_steps.length; i++) {
             if (yCoord + yOffset > 280) {
@@ -643,6 +694,7 @@ $(document).ready(function () {
             pdf_doc.text("Ingredients:", 20, yCoord + yOffset + 20);
         else
             pdf_doc.text("Sastojci:", 20, yCoord + yOffset + 20);
+
         pdf_doc.setFontSize(pdf_doc.getFontSize() - 4);
         pdf_doc.setFontStyle("normal");
 
@@ -670,6 +722,59 @@ $(document).ready(function () {
 
         pdf_doc.save($("#heading").html() + ".pdf");
     });
+
+    $(".star").on({
+        mouseenter: function() {
+            if (rated)
+                return;
+
+            let all_stars = $($(this).parent());
+            let stars = all_stars.children(".star");
+            let j = -1;
+            current_rate = 0;
+    
+            for (let i = 0; i < stars.length; i++) {
+                let curr_star = $(stars[i]);
+                if (j == 1) {
+                    if(curr_star.hasClass("fa-star"))
+                        curr_star.removeClass("fa-star");
+                    curr_star.addClass("fa-star-o");
+                }
+                else {
+                    if(curr_star.hasClass("fa-star-o"))
+                        curr_star.removeClass("fa-star-o");
+                    curr_star.addClass("fa-star");
+                }
+                if (stars[i] == this)
+                    j = 1;
+                else if (j == -1)
+                    current_rate++;
+            }
+            current_rate++;
+        },
+        mouseleave: function() {
+            if (rated)
+                return;
+
+            let all_stars = $($(this).parent());
+            let stars = all_stars.children(".star");
+
+            for (let i = 0; i < stars.length; i++) {
+                let curr_starr = $(stars[i]);
+                if (curr_starr.hasClass("fa-star"))
+                    curr_starr.removeClass("fa-star");
+                if (!curr_starr.hasClass("fa-star-o"))
+                    curr_starr.addClass("fa-star-o");
+            }
+            current_rate = 0;
+        },
+        click: function() {
+            if (rated)
+                return;
+
+            rated = true;
+        }
+    })
 
     function initializeStorage() {
         my_account = JSON.parse(localStorage.getItem("my-account"));
@@ -1528,7 +1633,7 @@ $(document).ready(function () {
                         "5 do 6 soljica sveze visnje bez kostica; moze zameniti dve tegle od 48 unci bez kostica, ocedjene; vidi glavnu belesku",
                         "Velikodusna 1 kasika pudinga od tapioke u prahu",
                         "Rendana korica 1 limuna",
-                        "1 gomila kasike sećera za poslastiCare, plus jos za brisanje prasine",
+                        "1 gomila kasike secera za poslasticare, plus jos za brisanje prasine",
                         "1 funta tankog filo testa, pozeljno marke Apollo",
                         "1/4 solja biljnog ulja",
                         "1/4 solja blagog/svetlog maslinovog ulja",
@@ -1830,27 +1935,12 @@ $(document).ready(function () {
             ingredients.append(whole_ingredient);
         });
 
-        if (language == "srb") {
-            prep_time.html("Priprema: " + recipe.prep);
-            cook_time.html("Kuvanje: " + recipe.cook);
-            portions.html("Porcije: " + recipe.portions);
-            leave_comment_text.attr("placeholder", "Ostavi komentar");
-            ingredients_text.html("Sastojci");
-            leave_comment_submit.html("Posalji");
-            date.html("Januar 05, 2021");
+        let recipe_video = $("<iframe></iframe>")
+                            .attr("src", recipe.video)
+                            .attr("width", "100%")
+                            .attr("height", "300px");
 
-        }
-        else {
-            prep_time.html("Prep: " + recipe.prep);
-            cook_time.html("Cook: " + recipe.cook);
-            portions.html("Yields: " + recipe.portions);
-            leave_comment_text.attr("placeholder", "Leave a comment");
-            ingredients_text.html("Ingredients");
-            leave_comment_submit.html("Publish");
-            date.html("January 05, 2021");
-        }
-
-        ingredients_col.append(ingredients);
+        ingredients_col.append(ingredients).append(recipe_video);
         preparation_row.append(ingredients_col);
         container_recipe.append(preparation_row);
 
@@ -1884,7 +1974,44 @@ $(document).ready(function () {
             distance: "100%",
             origin: "left",
             easing: "ease-in-out" 
-        })
+        });
+
+        //Rating area
+
+        let rate_recipe = $("<div></div>").css("margin-top", "5%");
+        let rate_text = $("<h4></h4>").addClass("text-left");
+        let recipe_ratings = $("<div></div>").addClass("receipe-ratings my-5 text-left");
+        stars = $("<div></div>").addClass("ratings");
+        for (let i = 0; i < 5; i++) {
+            let star = $("<i></i>").addClass("star fa fa-star-o").attr("aria-hidden", "true");
+            stars.append(star);
+        }
+
+        recipe_ratings.append(stars);
+        rate_recipe.append(rate_text).append(recipe_ratings);
+        $(".preparation").append(rate_recipe);
+
+        if (language == "srb") {
+            prep_time.html("Priprema: " + recipe.prep);
+            cook_time.html("Kuvanje: " + recipe.cook);
+            portions.html("Porcije: " + recipe.portions);
+            leave_comment_text.attr("placeholder", "Ostavi komentar");
+            ingredients_text.html("Sastojci");
+            leave_comment_submit.html("Posalji");
+            rate_text.html("Oceni ovaj recept");
+            date.html("Januar 05, 2021");
+
+        }
+        else {
+            prep_time.html("Prep: " + recipe.prep);
+            cook_time.html("Cook: " + recipe.cook);
+            portions.html("Yields: " + recipe.portions);
+            leave_comment_text.attr("placeholder", "Leave a comment");
+            ingredients_text.html("Ingredients");
+            leave_comment_submit.html("Publish");
+            rate_text.html("Rate this recipe");
+            date.html("January 05, 2021");
+        }
     }
 
     function initializePage() {
@@ -1918,7 +2045,6 @@ $(document).ready(function () {
             let recipe = JSON.parse(localStorage.getItem("recipe-to-show"));
             append_recipe(recipe);
             localStorage.removeItem("recipe-to-show");
-            localStorage.removeItem("food-type");
         }
     }
 })

@@ -1144,33 +1144,6 @@ $(document).ready(function() {
         }
     }
 
-    $(".fa").on({
-        mouseenter: function() {
-            let all_stars = $($(this).parent());
-            let stars = all_stars.children(".fa");
-            let j = -1;
-    
-            for (let i = 0; i < stars.length; i++) {
-                let curr_star = $(stars[i]);
-                if (j == 1) {
-                    if(curr_star.hasClass("fa-star"))
-                        curr_star.removeClass("fa-star");
-                    curr_star.addClass("fa-star-o");
-                }
-                else {
-                    if(curr_star.hasClass("fa-star-o"))
-                        curr_star.removeClass("fa-star-o");
-                    curr_star.addClass("fa-star");
-                }
-                if (stars[i] == this)
-                    j = 1;
-            }
-        },
-        mouseleave: function() {
-
-        }
-    })
-
     $(".recipe-button").click(function() {
         localStorage.setItem("recipe-to-show", JSON.stringify(found_recipes[parseInt($(this).attr("id")) - 1]));
         window.open("receipe-post.html", "_self");

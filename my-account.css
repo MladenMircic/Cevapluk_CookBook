@@ -1,3 +1,15 @@
 .recipe-name {
     cursor: pointer;
 }
+
+.recipe-comment {
+    text-decoration: underline;
+    text-decoration-color: gray;
+    color: gray;
+}
+
+.recipe-comment:hover {
+    text-decoration: underline;
+    text-decoration-color: green;
+    color: green;
+}
