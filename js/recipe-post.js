@@ -772,6 +772,84 @@ $(document).ready(function () {
             if (rated)
                 return;
 
+            let name = $("#heading").html();
+
+            my_account.stars.push({
+                rating: current_rate,
+                head: name,
+            });
+
+            localStorage.setItem("my-account", JSON.stringify(my_account));
+
+            appetizer.forEach(food => {
+                if (food.head == name) {
+                    food.stars = (food.stars + current_rate) / 2;
+                    localStorage.setItem("appetizer", JSON.stringify(appetizer));
+                    return;
+                }            
+            });
+
+            main_course.forEach(food => {
+                if (food.head == name) {
+                    food.stars = (food.stars + current_rate) / 2;
+                    localStorage.setItem("main_course", JSON.stringify(main_course));
+                    return;
+                }            
+            });
+
+            dessert.forEach(food => {
+                if (food.head == name) {
+                    food.stars = (food.stars + current_rate) / 2;
+                    localStorage.setItem("dessert", JSON.stringify(dessert));
+                    return;
+                }            
+            });
+
+            snack.forEach(food => {
+                if (food.head == name) {
+                    food.stars = (food.stars + current_rate) / 2;
+                    localStorage.setItem("snack", JSON.stringify(snack));
+                    return;
+                }            
+            });
+
+            predjelo.forEach(food => {
+                if (food.head == name) {
+                    food.stars = (food.stars + current_rate) / 2;
+                    localStorage.setItem("predjelo", JSON.stringify(predjelo));
+                    return;
+                }            
+            });
+
+            glavno_jelo.forEach(food => {
+                if (food.head == name) {
+                    food.stars = (food.stars + current_rate) / 2;
+                    localStorage.setItem("glavno_jelo", JSON.stringify(glavno_jelo));
+                    return;
+                }            
+            });
+
+            dezert.forEach(food => {
+                if (food.head == name) {
+                    food.stars = (food.stars + current_rate) / 2;
+                    localStorage.setItem("dezert", JSON.stringify(dezert));
+                    return;
+                }            
+            });
+
+            uzina.forEach(food => {
+                if (food.head == name) {
+                    food.stars = (food.stars + current_rate) / 2;
+                    localStorage.setItem("uzina", JSON.stringify(uzina));
+                    return;
+                }            
+            });
+
+            if (language == "eng")
+                $(".rate-text").html("Rated");
+            else
+                $(".rate-text").html("Ocenjen");
+            current_rate = 0;
             rated = true;
         }
     })
@@ -1839,6 +1917,14 @@ $(document).ready(function () {
         let recipe_rating = $("<div></div>").addClass("receipe-ratings text-right my-5");
         let stars = $("<div></div>").addClass("ratings");
 
+        my_account.stars.forEach(rate => {
+            if (rate.head == recipe.head) {
+                rated = true;
+                current_rate = rate.rating;
+                return;
+            }
+        });
+
         let recipe_stars = recipe.stars;
         for (let i = 0; i < 5; i++) {
             let star = "";
@@ -1962,7 +2048,9 @@ $(document).ready(function () {
         let recipe_video = $("<iframe></iframe>")
                             .attr("src", recipe.video)
                             .attr("width", "100%")
-                            .attr("height", "300px");
+                            .attr("height", "300px")
+                            .attr("allowfullscreen", "")
+                            .attr("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
 
         ingredients_col.append(ingredients).append(recipe_video);
         preparation_row.append(ingredients_col);
@@ -2003,17 +2091,22 @@ $(document).ready(function () {
         //Rating area
 
         let rate_recipe = $("<div></div>").css("margin-top", "5%");
-        let rate_text = $("<h4></h4>").addClass("text-left");
+        let rate_text = $("<h4></h4>").addClass("text-left rate-text");
         let recipe_ratings = $("<div></div>").addClass("receipe-ratings my-5 text-left");
         stars = $("<div></div>").addClass("ratings");
         for (let i = 0; i < 5; i++) {
-            let star = $("<i></i>").addClass("star fa fa-star-o").attr("aria-hidden", "true");
+            let star = $("<i></i>").addClass("star fa").attr("aria-hidden", "true");
+            if (rated && current_rate > 0)
+                star.addClass("fa-star")
+            else
+                star.addClass("fa-star-o");
             stars.append(star);
+            current_rate--;
         }
 
         recipe_ratings.append(stars);
         rate_recipe.append(rate_text).append(recipe_ratings);
-        $(".preparation").append(rate_recipe);
+        ingredients_col.append(rate_recipe);
 
         if (language == "srb") {
             prep_time.html("Priprema: " + recipe.prep);
@@ -2022,7 +2115,10 @@ $(document).ready(function () {
             leave_comment_text.attr("placeholder", "Ostavi komentar");
             ingredients_text.html("Sastojci");
             leave_comment_submit.html("Posalji");
-            rate_text.html("Oceni ovaj recept");
+            if (!rated)
+                rate_text.html("Oceni ovaj recept");
+            else
+                rate_text.html("Ocenjen");
             date.html("Januar 05, 2021");
 
         }
@@ -2033,7 +2129,10 @@ $(document).ready(function () {
             leave_comment_text.attr("placeholder", "Leave a comment");
             ingredients_text.html("Ingredients");
             leave_comment_submit.html("Publish");
-            rate_text.html("Rate this recipe");
+            if (!rated)
+                rate_text.html("Rate this recipe");
+            else
+                rate_text.html("Rated");
             date.html("January 05, 2021");
         }
     }

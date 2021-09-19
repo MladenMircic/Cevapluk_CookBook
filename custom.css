@@ -46,7 +46,7 @@
     cursor: pointer;
 }
 
-.my-recipes {
+.my-recipes, .my-ratings {
     display: flex;
     flex-direction: row;
     justify-content: space-around;

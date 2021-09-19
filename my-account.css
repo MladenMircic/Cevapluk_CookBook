@@ -1,4 +1,4 @@
-.recipe-name {
+.recipe-name, .rating-name {
     cursor: pointer;
 }
 
@@ -12,4 +12,31 @@
     text-decoration: underline;
     text-decoration-color: green;
     color: green;
+}
+
+.rating-image {
+    width: 400px;
+    height: 300px;
+}
+
+.delete-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+@keyframes disappear {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.recipe-disappear {
+    animation-name: disappear;
+    animation-duration: 1s;
+    transform: translateY(-150px);
+    transition: transform 1s;
 }
