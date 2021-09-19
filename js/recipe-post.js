@@ -816,7 +816,8 @@ $(document).ready(function () {
                                 comment: 'Dominacija od \'rane nema sta!'
                             },
                         ],
-                        difficulty: 5
+                        difficulty: 5,
+                        video: "https://www.youtube.com/embed/Jwo0LL6fZVM"
                     },{
                         head: "Russian salad",
                         prep: "1 hr",
@@ -851,7 +852,8 @@ $(document).ready(function () {
                                 comment: 'Dominacija od \'rane nema sta!'
                             },
                         ],
-                        difficulty: 7
+                        difficulty: 7,
+                        video: "https://www.youtube.com/embed/948mcYdlhRk"
                     },{
                         head: "Dreamy fruit dip",
                         prep: "15 mins",
@@ -882,7 +884,8 @@ $(document).ready(function () {
                                 comment: 'Dominacija od \'rane nema sta!'
                             },
                         ],
-                        difficulty: 3
+                        difficulty: 3,
+                        video: "https://www.youtube.com/embed/Yr7FmnVoLUA"
                     }
                 ];
 
@@ -940,7 +943,8 @@ $(document).ready(function () {
                                 comment: 'Dominacija od \'rane nema sta!'
                             },
                         ],
-                        difficulty: 6
+                        difficulty: 6,
+                        video: "https://www.youtube.com/embed/ewXhHgESReQ"
                     }, 
                     {
                         head: "Stuffed Peppers",
@@ -984,7 +988,8 @@ $(document).ready(function () {
                                 comment: 'Dominacija od \'rane nema sta!'
                             },
                         ],
-                        difficulty: 8
+                        difficulty: 8,
+                        video: "https://www.youtube.com/embed/32F17aNG1ow"
                     }, 
                     {
                         head: "Karadjordje Steak",
@@ -1020,7 +1025,8 @@ $(document).ready(function () {
                                 comment: 'Dominacija od \'rane nema sta!'
                             },
                         ],
-                        difficulty: 3
+                        difficulty: 3,
+                        video: "https://www.youtube.com/embed/6vHEsTPyEM0"
                     }
                 ];
 
@@ -1072,7 +1078,8 @@ $(document).ready(function () {
                                 comment: 'Dominacija od \'rane nema sta!'
                             },
                         ],
-                        difficulty: 5
+                        difficulty: 5,
+                        video: "https://www.youtube.com/embed/0sMMTkeHBlk"
                     },{
                         head: "Apple pie",
                         prep: "1 hr 30 mins",
@@ -1112,7 +1119,8 @@ $(document).ready(function () {
                                 comment: 'Dominacija od \'rane nema sta!'
                             },
                         ],
-                        difficulty: 9
+                        difficulty: 9,
+                        video: "https://www.youtube.com/embed/KbyahTnzbKA"
                     },{
                         head: "Tart Cherry Pie",
                         prep: "2 hrs",
@@ -1159,7 +1167,8 @@ $(document).ready(function () {
                                 comment: 'Dominacija od \'rane nema sta!'
                             },
                         ],
-                        difficulty: 2
+                        difficulty: 2,
+                        video: "https://www.youtube.com/embed/OuLsaGlly_U"
                     }
                 ];
 
@@ -1199,7 +1208,8 @@ $(document).ready(function () {
                                 comment: 'Dominacija od \'rane nema sta!'
                             },
                         ],
-                        difficulty: 7
+                        difficulty: 7,
+                        video: "https://www.youtube.com/embed/McCB1jEIJp8"
                     },
                     {
                         head: "Kajmak",
@@ -1229,7 +1239,8 @@ $(document).ready(function () {
                                 comment: 'Dominacija od \'rane nema sta!'
                             },
                         ],
-                        difficulty: 5
+                        difficulty: 5,
+                        video: "https://www.youtube.com/embed/PArJVCpfZhQ"
                     },
                     {
                         head: "Fruit Salad",
@@ -1270,7 +1281,8 @@ $(document).ready(function () {
                                 comment: 'Dominacija od \'rane nema sta!'
                             },
                         ],
-                        difficulty: 8
+                        difficulty: 8,
+                        video: "https://www.youtube.com/embed/Zp-F68Fa-ps"
                     }
                 ];
 
@@ -1314,7 +1326,8 @@ $(document).ready(function () {
                             comment: 'Dominacija od \'rane nema sta!'
                         },
                     ],
-                    difficulty: 4
+                    difficulty: 4,
+                    video: "https://www.youtube.com/embed/Jwo0LL6fZVM"
                 },{
                     head: "Ruska salata",
                     prep: "1 hr",
@@ -1349,7 +1362,8 @@ $(document).ready(function () {
                             comment: 'Dominacija od \'rane nema sta!'
                         },
                     ],
-                    difficulty: 4
+                    difficulty: 4,
+                    video: "https://www.youtube.com/embed/948mcYdlhRk"
                 },{
                     head: "Vocni umak",
                     prep: "15 minuta",
@@ -1380,7 +1394,8 @@ $(document).ready(function () {
                             comment: 'Dominacija od \'rane nema sta!'
                         },
                     ],
-                    difficulty: 6
+                    difficulty: 6,
+                    video: "https://www.youtube.com/embed/Yr7FmnVoLUA"
                 }
             ];
 
@@ -1438,7 +1453,8 @@ $(document).ready(function () {
                             comment: 'Dominacija od \'rane nema sta!'
                         },
                     ],
-                    difficulty: 9
+                    difficulty: 9,
+                    video: "https://www.youtube.com/embed/ewXhHgESReQ"
                 }, 
                 {
                     head: "Punjena paprika",
@@ -1482,7 +1498,8 @@ $(document).ready(function () {
                             comment: 'Dominacija od \'rane nema sta!'
                         },
                     ],
-                    difficulty: 5
+                    difficulty: 5,
+                    video: "https://www.youtube.com/embed/32F17aNG1ow"
                 }, 
                 {
                     head: "Karadjordjeva snicla",
@@ -1518,7 +1535,8 @@ $(document).ready(function () {
                             comment: 'Dominacija od \'rane nema sta!'
                         },
                     ],
-                    difficulty: 3
+                    difficulty: 3,
+                    video: "https://www.youtube.com/embed/6vHEsTPyEM0"
                 }
             ];
 
@@ -1570,7 +1588,8 @@ $(document).ready(function () {
                             comment: 'Dominacija od \'rane nema sta!'
                         },
                     ],
-                    difficulty: 5
+                    difficulty: 5,
+                    video: "https://www.youtube.com/embed/0sMMTkeHBlk"
                 },{
                     head: "Pita od jabuka",
                     prep: "1 hr 30 mins",
@@ -1610,7 +1629,8 @@ $(document).ready(function () {
                             comment: 'Dominacija od \'rane nema sta!'
                         },
                     ],
-                    difficulty: 3
+                    difficulty: 3,
+                    video: "https://www.youtube.com/embed/KbyahTnzbKA"
                 },{
                     head: "Pita s visnjama",
                     prep: "2 sata",
@@ -1657,7 +1677,8 @@ $(document).ready(function () {
                             comment: 'Dominacija od \'rane nema sta!'
                         },
                     ],
-                    difficulty: 7
+                    difficulty: 7,
+                    video: "https://www.youtube.com/embed/OuLsaGlly_U"
                 }
             ];
 
@@ -1697,7 +1718,8 @@ $(document).ready(function () {
                             comment: 'Dominacija od \'rane nema sta!'
                         },
                     ],
-                    difficulty: 8
+                    difficulty: 8,
+                    video: "https://www.youtube.com/embed/McCB1jEIJp8"
                 },
                 {
                     head: "Kajmak",
@@ -1727,7 +1749,8 @@ $(document).ready(function () {
                             comment: 'Dominacija od \'rane nema sta!'
                         },
                     ],
-                    difficulty: 3
+                    difficulty: 3,
+                    video: "https://www.youtube.com/embed/PArJVCpfZhQ"
                 },
                 {
                     head: "Vocna salata",
@@ -1768,7 +1791,8 @@ $(document).ready(function () {
                             comment: 'Dominacija od \'rane nema sta!'
                         },
                     ],
-                    difficulty: 8
+                    difficulty: 8,
+                    video: "https://www.youtube.com/embed/Zp-F68Fa-ps"
                 }
             ];
 
