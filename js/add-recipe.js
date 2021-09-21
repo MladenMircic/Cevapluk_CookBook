@@ -10,7 +10,7 @@ $(document).ready(function() {
         let portions = $("#portions").val();
         let steps = $("#steps").val();
         let ingredients = $("#ingredients").val();
-        let stars = $("#stars").val();
+        let difficulty = $("#difficulty").val();
 
         if (food_type == '' ||
             food_name == '' || 
@@ -19,8 +19,9 @@ $(document).ready(function() {
             portions == '' || 
             steps == '' || 
             ingredients == '' || 
-            stars == '') {
+            difficulty == '') {
                 localStorage.setItem("failed", 1);
+                return;
             }
 
         let food_type_eng;
@@ -53,8 +54,12 @@ $(document).ready(function() {
         }
         
 
-        let steps_arr = steps.split("\n");
-        let ingredients_arr = ingredients.split("\n");
+        let steps_arr = steps.split("\n").filter(function(value, index, arr) {
+            return value != '';
+        });
+        let ingredients_arr = ingredients.split("\n").filter(function(value, index, arr) {
+            return value != '';
+        });
         
         let new_recipe = {
             head: food_name,
@@ -63,9 +68,10 @@ $(document).ready(function() {
             portions: portions,
             steps: steps_arr,
             ingredients: ingredients_arr,
-            stars: stars,
+            stars: 1,
             comments: [],
-            video: 'https://www.youtube.com/embed/MtN1YnoL46Q'
+            video: 'https://www.youtube.com/embed/MtN1YnoL46Q',
+            difficulty: difficulty
         };
 
         food_type_eng.push(new_recipe);

@@ -29,9 +29,9 @@ $(document).ready(function() {
 
     $(".recipe-comment").click(function() {
         let food_type = $(this).attr("type");
-
         switch (food_type) {
             case 'Appetizer': {
+                alert("radi");
                 if (language == "eng") {
                     appetizer.forEach(food => {
                         if (food.head == $(this).html()) {
@@ -71,6 +71,7 @@ $(document).ready(function() {
                 break;
             }
             case 'Dessert': {
+                alert("radi");
                 if (language == "eng") {
                     dessert.forEach(food => {
                         if (food.head == $(this).html()) {
@@ -90,6 +91,7 @@ $(document).ready(function() {
                 break;
             }
             case 'Snack': {
+                alert("radi");
                 if (language == "eng") {
                     snack.forEach(food => {
                         if (food.head == $(this).html()) {
@@ -190,8 +192,6 @@ $(document).ready(function() {
             }
         }
 
-        localStorage.setItem("my-account", JSON.stringify(my_account));
-
         for (let i = 0; i < appetizer.length; i++) {
             if (appetizer[i].head == name || predjelo[i].head == name) {
                 appetizer.splice(i, 1);
@@ -231,6 +231,27 @@ $(document).ready(function() {
                 break;
             }     
         }
+
+        for (let i = 0; i < my_account.comments.length; i++) {
+            if (my_account.comments[i].head_eng == name) {
+                my_account.comments.splice(i, 1);
+                break;
+            }
+        }
+
+        let comments_on_page = $(".recipe-comment");
+
+        for (let i = 0; i < comments_on_page.length; i++) {
+            let recipe_comment = $(comments_on_page[i]);
+            if (recipe_comment.html() == name) {
+                recipe_comment.closest(".comment").hide(1000, function() {
+                    $(this).remove();
+                });
+                break;
+            }
+        }
+
+        localStorage.setItem("my-account", JSON.stringify(my_account));
 
         $($(this).parent()).hide(1000, function() {
             $(this).remove();
@@ -298,7 +319,7 @@ $(document).ready(function() {
     function list_my_comments() {
         my_account.comments.forEach(comment => {
 
-            let comment_col = $("<div></div>").addClass('col-sm-12 col-lg-6 offset-lg-3')
+            let comment_col = $("<div></div>").addClass('col-sm-12 col-lg-6 offset-lg-3 comment')
                                 .css("margin-bottom", "5%");
             let comment_area = $("<div></div>").addClass("contact-form-area");
             let comment_text = $("<input>").attr("type", "text").addClass("form-control");
@@ -320,6 +341,12 @@ $(document).ready(function() {
             comment_col.append(comment_area);
 
             $(".my-comments").append(comment_col);
+            ScrollReveal().reveal(".my-comments", {
+                distance: "200%",
+                duration: 1000,
+                origin: "bottom",
+                opacity: 0
+            });
         });
     }
 

@@ -11,6 +11,7 @@ $(document).ready(function () {
     let my_account = {};
     let i = 1;
     let rated = false;
+    let is_my_recipe = false;
     let current_rate;
     let language = localStorage.getItem("language");
 
@@ -475,7 +476,7 @@ $(document).ready(function () {
 
                     my_comment.head_eng = main_course[i].head;
                     my_comment.head_srb = glavno_jelo[i].head;
-                    my_comment.type = "Main Course";
+                    my_comment.type = "Main course";
 
                     localStorage.setItem("main_course", JSON.stringify(main_course));
                     localStorage.setItem("glavno_jelo", JSON.stringify(glavno_jelo));
@@ -1912,6 +1913,7 @@ $(document).ready(function () {
         let prep_time = $("<h6></h6>");
         let cook_time = $("<h6></h6>");
         let portions = $("<h6></h6>");
+        let difficulty = $("<h6></h6>");
 
         let rating_div = $("<div></div>").addClass("col-12 col-md-4");
         let recipe_rating = $("<div></div>").addClass("receipe-ratings text-right my-5");
@@ -1947,7 +1949,11 @@ $(document).ready(function () {
         recipe_rating.append(stars);
         rating_div.append(recipe_rating).append(pdf_button_div);
 
-        recipe_duration.append(prep_time).append(cook_time).append(portions);
+        recipe_duration.append(prep_time)
+                        .append(cook_time)
+                        .append(portions)
+                        .append(difficulty);
+                        
         recipe_heading.append(date).append(heading).append(recipe_duration);
         col_recipe_heading_div.append(recipe_heading);
         row_recipe.append(col_recipe_heading_div).append(rating_div);
@@ -2090,49 +2096,66 @@ $(document).ready(function () {
 
         //Rating area
 
+        my_account.recipes.forEach(my_recipe => {
+            if (recipe.head == my_recipe.head) {
+                is_my_recipe = true;
+                return;
+            }
+        })
+
         let rate_recipe = $("<div></div>").css("margin-top", "5%");
         let rate_text = $("<h4></h4>").addClass("text-left rate-text");
         let recipe_ratings = $("<div></div>").addClass("receipe-ratings my-5 text-left");
-        stars = $("<div></div>").addClass("ratings");
-        for (let i = 0; i < 5; i++) {
-            let star = $("<i></i>").addClass("star fa").attr("aria-hidden", "true");
-            if (rated && current_rate > 0)
-                star.addClass("fa-star")
-            else
-                star.addClass("fa-star-o");
-            stars.append(star);
-            current_rate--;
-        }
 
-        recipe_ratings.append(stars);
-        rate_recipe.append(rate_text).append(recipe_ratings);
-        ingredients_col.append(rate_recipe);
+        if (!is_my_recipe) {
+            stars = $("<div></div>").addClass("ratings");
+            for (let i = 0; i < 5; i++) {
+                let star = $("<i></i>").addClass("star fa").attr("aria-hidden", "true");
+                if (rated && current_rate > 0)
+                    star.addClass("fa-star")
+                else
+                    star.addClass("fa-star-o");
+                stars.append(star);
+                current_rate--;
+            }
+    
+            recipe_ratings.append(stars);
+            rate_recipe.append(rate_text).append(recipe_ratings);
+            ingredients_col.append(rate_recipe);
+        }
 
         if (language == "srb") {
             prep_time.html("Priprema: " + recipe.prep);
             cook_time.html("Kuvanje: " + recipe.cook);
             portions.html("Porcije: " + recipe.portions);
+            difficulty.html("Tezina: " + recipe.difficulty);
             leave_comment_text.attr("placeholder", "Ostavi komentar");
             ingredients_text.html("Sastojci");
             leave_comment_submit.html("Posalji");
-            if (!rated)
-                rate_text.html("Oceni ovaj recept");
-            else
-                rate_text.html("Ocenjen");
-            date.html("Januar 05, 2021");
 
+            if (!is_my_recipe) {
+                if (!rated)
+                    rate_text.html("Oceni ovaj recept");
+                else
+                    rate_text.html("Ocenjen");
+            }
+
+            date.html("Januar 05, 2021");
         }
         else {
             prep_time.html("Prep: " + recipe.prep);
             cook_time.html("Cook: " + recipe.cook);
             portions.html("Yields: " + recipe.portions);
+            difficulty.html("Difficulty: " + recipe.difficulty);
             leave_comment_text.attr("placeholder", "Leave a comment");
             ingredients_text.html("Ingredients");
             leave_comment_submit.html("Publish");
-            if (!rated)
-                rate_text.html("Rate this recipe");
-            else
-                rate_text.html("Rated");
+            if (!is_my_recipe) {
+                if (!rated)
+                    rate_text.html("Rate this recipe");
+                else
+                    rate_text.html("Rated");
+            }
             date.html("January 05, 2021");
         }
     }
